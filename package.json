@@ -1,0 +1,46 @@
+{
+	"name": "wizzywizzy",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"generateAssets": "./tools/generate-assets.sh > ./src/assets.ts",
+		"dev": "vite --host",
+		"build": "vite build",
+		"pack": "cd dist; sed -i 's#/assets#assets#' index.html; zip -r WizzyWizzy.zip *; mv WizzyWizzy.zip ..",
+		"lint": "eslint . --ext ts,tsx --max-warnings 0",
+		"typecheck": "tsc",
+		"preview": "vite preview --host"
+	},
+	"dependencies": {
+		"@babel/cli": "^7.25.6",
+		"@babel/core": "^7.25.2",
+		"@babel/preset-react": "^7.24.7",
+		"@babel/preset-typescript": "^7.24.7",
+		"@pixi/react": "8.0.0-beta.14",
+		"@pixi/sound": "^6.0.1",
+		"mobx": "^6.12.0",
+		"mobx-react-lite": "^4.0.5",
+		"pixi.js": "^8.4.0",
+		"prettier": "^3.2.5",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"usehooks-ts": "^3.1.0"
+	},
+	"devDependencies": {
+		"@babel/helper-module-imports": "^7.22.15",
+		"@types/node": "^22.5.4",
+		"@types/react": "^18.3.5",
+		"@types/react-dom": "^18.2.19",
+		"@typescript-eslint/eslint-plugin": "^8.5.0",
+		"@typescript-eslint/parser": "^8.5.0",
+		"@vitejs/plugin-react": "^4.2.1",
+		"eslint": "^8.56.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-react": "^7.34.1",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-refresh": "^0.4.5",
+		"typescript": "^5.2.2",
+		"vite": "^5.1.4"
+	}
+}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, user-scalable=yes"
+		/>
+		<title>Ludum Dare #56</title>
+	</head>
+	<style type="text/css">
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+		}
+		body {
+			display: flex;
+			display: -webkit-flex;
+			-webkit-justify-content: center;
+			justify-content: center;
+			-webkit-align-items: center;
+			align-items: center;
+			background-color: rgb(45 41 63);
+		}
+		#container {
+			display: contents;
+		}
+		canvas {
+			display: block;
+			outline: none;
+			height: 100%;
+			max-height: 56.25vw;
+			width: 100%;
+			max-width: 177.77vh;
+		}
+	</style>
+	<body>
+		<div id="container"></div>
+		<script type="module" src="/src/main.tsx"></script>
+	</body>
+</html>
