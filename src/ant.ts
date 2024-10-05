@@ -1,7 +1,8 @@
 import { Entity } from "./entities";
+import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import type { Target } from "./target";
-import { randomAroundPoint, type Point } from "./utils";
+import { distanceBetween, randomAroundPoint, type Point } from "./utils";
 
 export class Ant extends Entity {
 	position: Point;
@@ -23,7 +24,8 @@ export class Ant extends Entity {
 			this.level = 3;
 		}
 
-		this.speed = [0, 200, 160, 120][this.level];
+		this.speed =
+			[0, 200, 160, 120][this.level] + (Math.random() - 0.5) * 100;
 
 		if (!source) {
 			const x = Math.random() * 1920;
@@ -200,5 +202,33 @@ export class Ant extends Entity {
 
 	win() {
 		this.state = "winning";
+	}
+
+	passedShockwaves = new WeakSet<Shockwave>();
+
+	shockwave(delta: number, shockwaves: Shockwave[]) {
+		if (this.state == "dead") {
+			return;
+		}
+		for (const shockwave of shockwaves) {
+			const { dx, dy } = shockwave.speedAt(this.position);
+
+			// Maybe die
+			const distance = distanceBetween(this.position, shockwave.center);
+			if (
+				!this.passedShockwaves.has(shockwave) &&
+				(dx !== 0 || dy !== 0)
+			) {
+				this.passedShockwaves.add(shockwave);
+				if (Math.random() * distance * this.level < 30) {
+					this.die();
+					return;
+				}
+			}
+
+			const factor = Math.random() / this.level;
+			this.position.x += dx * delta * factor;
+			this.position.y += dy * delta * factor;
+		}
 	}
 }

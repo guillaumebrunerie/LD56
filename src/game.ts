@@ -2,9 +2,10 @@
 import { Ant } from "./ant";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
+import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
-import { randomAroundPoint, relativePos } from "./utils";
+import { positionAwayFrom, randomAroundPoint, relativePos } from "./utils";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -14,13 +15,20 @@ export class Game extends Entity {
 	instabilityLevel = 0;
 	isGameOver = false;
 	isStarting = true;
+	shockwaves: EntityArray<Shockwave>;
 
 	constructor() {
 		super();
 		this.ants = new EntityArray<Ant>();
 		this.targets = new EntityArray<Target>();
 		this.sources = new EntityArray<Source>();
-		this.addChildren(this.ants, this.targets, this.sources);
+		this.shockwaves = new EntityArray<Shockwave>();
+		this.addChildren(
+			this.ants,
+			this.targets,
+			this.sources,
+			this.shockwaves,
+		);
 		this.addTicker((delta) => this.tick(delta));
 	}
 
@@ -58,16 +66,15 @@ export class Game extends Entity {
 		this.sources.add(
 			new Source(randomAroundPoint(relativePos(0.85, 0.25), 100)),
 		);
-		for (let i = 0; i < 1; i++) {
-			this.sources.add(
-				new Source(
-					{
-						x: 100 + Math.random() * (1920 - 200),
-						y: 100 + Math.random() * (1080 - 200),
-					},
-					true,
-				),
+
+		for (let i = 0; i < 5; i++) {
+			const position = positionAwayFrom(
+				this.sources.entities.map((source) => source.pos),
+				200,
 			);
+			if (position) {
+				this.sources.add(new Source(position, true));
+			}
 		}
 
 		// Initial ants
@@ -128,6 +135,15 @@ export class Game extends Entity {
 				this.ants.remove(ant);
 			}
 		}
+		for (const ant of this.ants.entities) {
+			ant.shockwave(delta, this.shockwaves.entities);
+		}
+
+		for (const shockwave of this.shockwaves.entities) {
+			if (shockwave.gone) {
+				this.shockwaves.remove(shockwave);
+			}
+		}
 
 		this.instabilityLevel -= delta / 0.3;
 		if (this.instabilityLevel < 0) {
@@ -149,25 +165,26 @@ export class Game extends Entity {
 		if (this.isGameOver) {
 			return;
 		}
-		for (const ant of this.ants.entities) {
-			if (ant.state === "dead") {
-				continue;
-			}
-			const dx = ant.position.x - x;
-			const dy = ant.position.y - y;
-			const distance = Math.sqrt(dx * dx + dy * dy);
-			const angle = Math.atan2(dy, dx);
-			const moveDistance = Math.max(
-				200 - distance / 2 + (Math.random() - 0.5) * 50,
-				0,
-			);
-			if (Math.random() * distance * ant.level < 10) {
-				ant.die();
-			} else if (Math.random() < 0.5 / ant.level) {
-				ant.position.x += Math.cos(angle) * moveDistance;
-				ant.position.y += Math.sin(angle) * moveDistance;
-			}
-		}
+		this.shockwaves.add(new Shockwave({ x, y }, -300, 100, 5000, 100));
+		// for (const ant of this.ants.entities) {
+		// 	if (ant.state === "dead") {
+		// 		continue;
+		// 	}
+		// 	const dx = ant.position.x - x;
+		// 	const dy = ant.position.y - y;
+		// 	const distance = Math.sqrt(dx * dx + dy * dy);
+		// 	const angle = Math.atan2(dy, dx);
+		// 	const moveDistance = Math.max(
+		// 		200 - distance / 2 + (Math.random() - 0.5) * 50,
+		// 		0,
+		// 	);
+		// 	if (Math.random() * distance * ant.level < 10) {
+		// 		ant.die();
+		// 	} else if (Math.random() < 0.5 / ant.level) {
+		// 		ant.position.x += Math.cos(angle) * moveDistance;
+		// 		ant.position.y += Math.sin(angle) * moveDistance;
+		// 	}
+		// }
 		this.instabilityLevel += 1;
 		if (this.instabilityLevel >= 3) {
 			this.instabilityLevel -= 3;

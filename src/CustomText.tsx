@@ -8,10 +8,9 @@ export const CustomText = ({
 }: {
 	myRef?: Ref<Text>;
 	color?: string;
-} & ComponentProps<"text">) => {
+} & ComponentProps<"pixiText">) => {
 	return (
-		<text
-			//@ts-expect-error pixi-react bug
+		<pixiText
 			ref={myRef}
 			style={
 				new TextStyle({

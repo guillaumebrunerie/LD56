@@ -9,7 +9,7 @@ export class Target extends Entity {
 	onIdle: () => void;
 
 	radiusX = 65;
-	radiusY = 58;
+	radiusY = 57;
 
 	constructor(position: Point, onIdle: () => void) {
 		super();
@@ -75,7 +75,10 @@ export class Target extends Entity {
 
 	isCloseToSource(sources: Source[]) {
 		for (const source of sources) {
-			if (distance2(source.pos, this.position) < 20 * 20) {
+			if (
+				!source.isDestroyed &&
+				distance2(source.pos, this.position) < 5 * 5
+			) {
 				return true;
 			}
 		}

@@ -19,6 +19,8 @@ import type { Target } from "./target";
 import { Circle } from "./Circle";
 import { CustomText } from "./CustomText";
 import { Rectangle } from "./Rectangle";
+import type { Shockwave } from "./shockwave";
+import { Ring } from "./Ring";
 
 export const GameC = ({ game }: { game: Game }) => {
 	return (
@@ -52,6 +54,9 @@ export const GameC = ({ game }: { game: Game }) => {
 			))}
 			{game.sources.entities.map((source, i) => (
 				<SourceHealth key={i} source={source} />
+			))}
+			{game.shockwaves.entities.map((shockwave, i) => (
+				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
 			{game.isGameOver && <GameOverScreen game={game} />}
 		</container>
@@ -219,10 +224,35 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 				y={1080 / 2 + 50}
 				anchor={0.5}
 				text="Restart?"
+				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
 					game.restart();
 				}}
+			/>
+		</container>
+	);
+};
+
+const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
+	return null;
+	return (
+		<container>
+			<Ring
+				x={shockwave.center.x}
+				y={shockwave.center.y}
+				radius={shockwave.innerRadius}
+				strokeWidth={10}
+				color={0xff0000}
+				draw={() => {}}
+			/>
+			<Ring
+				x={shockwave.center.x}
+				y={shockwave.center.y}
+				radius={shockwave.outerRadius}
+				strokeWidth={10}
+				color={0xff0000}
+				draw={() => {}}
 			/>
 		</container>
 	);
