@@ -22,7 +22,7 @@ export class Source extends Entity {
 			return;
 		}
 
-		this.healthCurrent += 30 * delta;
+		this.healthCurrent += 20 * delta;
 		if (this.healthCurrent > this.healthMax) {
 			this.healthCurrent = this.healthMax;
 		}

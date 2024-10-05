@@ -28,8 +28,8 @@ export class Ant extends Entity {
 		);
 		const angle = roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
 		this.destination = {
-			x: 50 * Math.cos(angle),
-			y: 50 * Math.sin(angle),
+			x: 0 * Math.cos(angle),
+			y: 0 * Math.sin(angle),
 		};
 		this.direction = Math.atan2(
 			this.target.position.y - this.destination.y - this.position.y,
@@ -86,9 +86,9 @@ export class Ant extends Entity {
 		};
 	}
 
-	getDistance() {
+	get distance2() {
 		const { dx, dy } = this.deltas;
-		return Math.sqrt(dx * dx + dy * dy);
+		return dx * dx + dy * dy;
 	}
 
 	die() {
@@ -126,13 +126,13 @@ export class Ant extends Entity {
 		}
 
 		// carry when getting close to destination
-		if (this.getDistance() < 10) {
+		if (this.distance2 < 55 * 55) {
 			this.state = "carrying";
 		}
 	}
 
 	carry(_delta: number) {
-		if (this.getDistance() > 15) {
+		if (this.distance2 > 60 * 60) {
 			this.state = "walking";
 		}
 	}
