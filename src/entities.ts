@@ -11,10 +11,10 @@ export class Entity {
 	// 	return 0 == 0;
 	// }
 
-	tick(delta: number) {
+	tick_(delta: number) {
 		this.lt += delta;
 		for (const child of this.children) {
-			child.tick(delta);
+			child.tick_(delta);
 		}
 		for (const ticker of this.tickers) {
 			ticker(delta);

@@ -35,7 +35,7 @@ export class App extends Entity {
 		// Initialize sound and ticker
 		initSound();
 		const tick = action((ticker: Ticker) => {
-			this.tick((ticker.deltaTime / 60) * this.speed);
+			this.tick_((ticker.deltaTime / 60) * this.speed);
 		});
 		Ticker.shared.add(tick);
 		const cleanup = () => {
