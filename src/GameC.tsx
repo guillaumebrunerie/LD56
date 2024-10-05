@@ -91,7 +91,6 @@ const SourceC = ({ source }: { source: Source }) => {
 				}
 				x={source.pos.x}
 				y={source.pos.y}
-				alpha={source.isDestroyed ? 0.5 : 1}
 			/>
 		</container>
 	);
