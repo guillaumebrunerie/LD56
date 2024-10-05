@@ -1,4 +1,5 @@
 import { Entity } from "./entities";
+import type { Source } from "./source";
 import type { Point } from "./utils";
 
 export class Target extends Entity {
@@ -15,9 +16,30 @@ export class Target extends Entity {
 	// 	// nothing
 	// }
 
-	carry(delta: number, force: number, sources: Point[]) {
+	carry(delta: number, force: number, sources: Source[]) {
+		if (sources.length == 0) {
+			return { dx: 0, dy: 0 };
+		}
 		const speed = force * this.speedPerAnt;
-		const destination = sources[0];
+
+		const sortedSources = sources.toSorted((a, b) => {
+			const distance = (source: Source) => {
+				const dx = source.x - this.position.x;
+				const dy = source.y - this.position.y;
+				return dx * dx + dy * dy;
+			};
+			return distance(a) - distance(b);
+		});
+
+		let destinationIndex = 0;
+		while (destinationIndex < sources.length - 1) {
+			if (Math.random() < 0.7) {
+				break;
+			}
+			destinationIndex++;
+		}
+
+		const destination = sortedSources[destinationIndex];
 		const angle = Math.atan2(
 			destination.y - this.position.y,
 			destination.x - this.position.x,

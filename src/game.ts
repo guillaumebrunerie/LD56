@@ -54,7 +54,7 @@ export class Game extends Entity {
 		const { dx, dy } = this.targets.entities[0].carry(
 			delta,
 			carryingForce,
-			this.sources.entities,
+			this.sources.entities.filter((source) => !source.isDestroyed),
 		);
 		for (const ant of this.ants.entities) {
 			if (ant.state === "carrying") {
