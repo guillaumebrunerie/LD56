@@ -167,11 +167,20 @@ const TargetC = ({ target }: { target: Target }) => {
 	const dy =
 		target.state == "idle" ?
 			0
-		:	650 * (1 - Math.pow(target.lt / target.appearDuration, 2));
+		:	400 * (1 - Math.pow(target.lt / target.appearDuration, 2));
+	const alpha =
+		target.state == "idle" ? 1 : target.lt / target.appearDuration;
+	const scale =
+		target.state == "idle" ?
+			1
+		:	(1 - target.lt / target.appearDuration) * 2 + 1;
+
 	return (
 		<sprite
 			anchor={0.5}
 			texture={Target1_lvl1}
+			alpha={alpha}
+			scale={scale}
 			x={target.position.x}
 			y={target.position.y - dy}
 		/>

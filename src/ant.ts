@@ -169,13 +169,17 @@ export class Ant extends Entity {
 		}
 
 		// carry when getting close to destination
-		if (this.distance2 < 55 * 55) {
+		const distance2 =
+			this.target ? this.target.radius * this.target.radius : Infinity;
+		if (this.distance2 < distance2) {
 			this.state = "carrying";
 		}
 	}
 
 	carry(_delta: number) {
-		if (this.distance2 > 60 * 60) {
+		const distance2 =
+			this.target ? Math.pow(this.target.radius + 5, 2) : Infinity;
+		if (this.distance2 > distance2) {
 			this.state = "walking";
 		}
 	}
