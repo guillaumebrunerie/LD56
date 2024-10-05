@@ -121,6 +121,11 @@ export class Ant extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 	}
 
+	get rotation() {
+		const { dx, dy } = this.deltas;
+		return Math.atan2(dy, dx);
+	}
+
 	tick(delta: number) {
 		switch (this.state) {
 			case "appearing": {

@@ -1,17 +1,15 @@
 import type { FederatedPointerEvent } from "pixi.js";
 import { Circle } from "./Circle";
 import type { Ant, Game, Target } from "./game";
-import { Rectangle } from "./Rectangle";
+import { Ant1_Default, Bg, Target1_lvl1 } from "./assets";
 
 export const GameC = ({ game }: { game: Game }) => {
 	return (
 		<container>
-			<Rectangle
+			<sprite
+				texture={Bg}
 				x={0}
 				y={0}
-				width={1920}
-				height={1080}
-				draw={() => {}}
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
 					const { x, y } = e.global;
@@ -36,33 +34,35 @@ export const GameC = ({ game }: { game: Game }) => {
 
 const AntC = ({ ant }: { ant: Ant }) => {
 	return (
-		<Circle
+		<sprite
+			anchor={0.5}
+			texture={Ant1_Default}
 			x={ant.position.x}
 			y={ant.position.y}
-			radius={10}
+			rotation={ant.rotation + Math.PI / 2}
 			alpha={
 				ant.state == "appearing" ? ant.lt / ant.appearDuration
 				: ant.state == "dead" ?
-					1 - ant.lt / ant.dieDuration
+					(1 - ant.lt / ant.dieDuration) / 3
 				:	1
 			}
-			color={
-				ant.state == "dead" ? 0x333333
-				: ant.state == "carrying" ?
-					0xbbbbbb
-				:	0x888888
-			}
+			// color={
+			// 	ant.state == "dead" ? 0x333333
+			// 	: ant.state == "carrying" ?
+			// 		0xbbbbbb
+			// 	:	0x888888
+			// }
 		/>
 	);
 };
 
 const TargetC = ({ target }: { target: Target }) => {
 	return (
-		<Circle
+		<sprite
+			anchor={0.5}
+			texture={Target1_lvl1}
 			x={target.position.x}
 			y={target.position.y}
-			radius={45}
-			color={0xff0000}
 		/>
 	);
 };
