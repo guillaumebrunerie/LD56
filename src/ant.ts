@@ -75,6 +75,9 @@ export class Ant extends Entity {
 			this.target.position.y - this.destination.y - this.position.y,
 			this.target.position.x - this.destination.x - this.position.x,
 		);
+		if (this.isCloseToTarget()) {
+			this.die();
+		}
 	}
 
 	get rotation() {
@@ -127,6 +130,21 @@ export class Ant extends Entity {
 		return dx * dx + dy * dy;
 	}
 
+	isCloseToTarget() {
+		if (!this.target || !this.destination) {
+			return false;
+		}
+		const dx =
+			this.target.position.x - this.destination.x - this.position.x;
+		const dy =
+			this.target.position.y - this.destination.y - this.position.y;
+
+		const dxn = dx / this.target.radiusX;
+		const dyn = dy / this.target.radiusY;
+
+		return dxn * dxn + dyn * dyn < 1;
+	}
+
 	die() {
 		this.state = "dead";
 		this.lt = 0;
@@ -169,17 +187,13 @@ export class Ant extends Entity {
 		}
 
 		// carry when getting close to destination
-		const distance2 =
-			this.target ? this.target.radius * this.target.radius : Infinity;
-		if (this.distance2 < distance2) {
+		if (this.isCloseToTarget()) {
 			this.state = "carrying";
 		}
 	}
 
 	carry(_delta: number) {
-		const distance2 =
-			this.target ? Math.pow(this.target.radius + 5, 2) : Infinity;
-		if (this.distance2 > distance2) {
+		if (!this.isCloseToTarget()) {
 			this.state = "walking";
 		}
 	}

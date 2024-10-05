@@ -11,6 +11,7 @@ import {
 	Source1_Closed_Lvl4,
 	Source1_Open,
 	Target1_lvl1,
+	Target_Shadow,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -153,30 +154,36 @@ const AntC = ({ ant }: { ant: Ant }) => {
 					(1 - ant.lt / ant.dieDuration) / 2
 				:	1
 			}
-			// color={
-			// 	ant.state == "dead" ? 0x333333
-			// 	: ant.state == "carrying" ?
-			// 		0xbbbbbb
-			// 	:	0x888888
-			// }
 		/>
 	);
 };
 
 const TargetC = ({ target }: { target: Target }) => {
-	const dy =
-		target.state == "idle" ?
-			0
-		:	400 * (1 - Math.pow(target.lt / target.appearDuration, 2));
-	const alpha =
-		target.state == "idle" ? 1 : target.lt / target.appearDuration;
-	const scale =
-		target.state == "idle" ?
-			1
-		:	(1 - target.lt / target.appearDuration) * 3 + 1;
+	const nt =
+		target.state == "idle" ? 1
+		: target.lt < target.appearOffset ? 0
+		: Math.pow(
+				(target.lt - target.appearOffset) / target.appearDuration,
+				2,
+			);
+
+	const dy = 800 * (1 - nt);
+	const alpha = nt;
+	const scale = (1 - nt) * 3 + 1;
+
+	const alphaShadow = nt;
+	const scaleShadow = (1 - nt) * 2 + 1;
 
 	return (
 		<container>
+			<sprite
+				anchor={0.5}
+				texture={Target_Shadow}
+				alpha={alphaShadow}
+				scale={scaleShadow}
+				x={target.position.x}
+				y={target.position.y}
+			/>
 			<sprite
 				anchor={0.5}
 				texture={Target1_lvl1}

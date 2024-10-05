@@ -8,7 +8,8 @@ export class Target extends Entity {
 	state: "appearing" | "idle" = "appearing";
 	onIdle: () => void;
 
-	radius = 65;
+	radiusX = 65;
+	radiusY = 58;
 
 	constructor(position: Point, onIdle: () => void) {
 		super();
@@ -17,12 +18,13 @@ export class Target extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 	}
 
+	appearOffset = 0.5;
 	appearDuration = 0.7;
 
 	tick(_delta: number) {
 		switch (this.state) {
 			case "appearing": {
-				if (this.lt >= this.appearDuration) {
+				if (this.lt >= this.appearDuration + this.appearOffset) {
 					this.setIdle();
 				}
 				break;
