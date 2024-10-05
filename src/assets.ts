@@ -1,4 +1,4 @@
-/** Generated on Sat Oct  5 14:04:28 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sat Oct  5 14:06:02 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -10,7 +10,7 @@ import Ant3_Default_ from "../gfx/Ant3_Default.png?texture";
 import Bg_ from "../gfx/Bg.jpg?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
-import Source1_Defualt_ from "../gfx/Source1_Defualt.png?texture";
+import Source1_Default_ from "../gfx/Source1_Default.png?texture";
 import Target1_lvl1_ from "../gfx/Target1_lvl1.png?texture";
 
 /** Spritesheets */
@@ -25,7 +25,7 @@ export const [
 	Bg,
 	SoundOffTxt,
 	SoundOnTxt,
-	Source1_Defualt,
+	Source1_Default,
 	Target1_lvl1,
 	Music,
 ] = await Promise.all([
@@ -35,7 +35,7 @@ export const [
 	Bg_,
 	SoundOffTxt_,
 	SoundOnTxt_,
-	Source1_Defualt_,
+	Source1_Default_,
 	Target1_lvl1_,
 	Music_,
 ]);

@@ -1,12 +1,11 @@
 import type { FederatedPointerEvent, Texture } from "pixi.js";
-import { Circle } from "./Circle";
 import type { Ant, Game, Point, Target } from "./game";
 import {
 	Ant1_Default,
 	Ant2_Default,
 	Ant3_Default,
 	Bg,
-	Source1_Defualt,
+	Source1_Default,
 	Target1_lvl1,
 } from "./assets";
 
@@ -43,7 +42,7 @@ const SourceC = ({ source }: { source: Point }) => {
 	return (
 		<sprite
 			anchor={0.5}
-			texture={Source1_Defualt}
+			texture={Source1_Default}
 			x={source.x}
 			y={source.y}
 		/>
