@@ -152,8 +152,7 @@ export class Game extends Entity {
 		if (crackingSources.length == 0) {
 			return;
 		}
-		const crackingSource =
-			crackingSources[Math.floor(Math.random() * crackingSources.length)];
+		const crackingSource = crackingSources[0];
 		crackingSource.crack();
 	}
 }

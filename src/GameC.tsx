@@ -54,12 +54,11 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
-const sourceTextures = [
+const closedSourceTextures = [
 	Source1_Closed_Lvl1,
 	Source1_Closed_Lvl2,
 	Source1_Closed_Lvl3,
 	Source1_Closed_Lvl4,
-	Source1_Open,
 ];
 
 const SourceC = ({ source }: { source: Source }) => {
@@ -79,9 +78,13 @@ const SourceC = ({ source }: { source: Source }) => {
 			<sprite
 				anchor={0.5}
 				texture={
-					sourceTextures[
-						Math.ceil((source.healthCurrent / source.healthMax) * 4)
-					]
+					source.isDestroyed ?
+						closedSourceTextures[
+							Math.floor(
+								(source.healthCurrent / source.healthMax) * 3,
+							)
+						]
+					:	Source1_Open
 				}
 				x={source.x}
 				y={source.y}
@@ -89,7 +92,7 @@ const SourceC = ({ source }: { source: Source }) => {
 			/>
 			<CustomText
 				anchor={0.5}
-				alpha={0}
+				alpha={source.isDestroyed ? 0 : 1}
 				x={source.x}
 				y={source.y - 70}
 				scale={0.5}
