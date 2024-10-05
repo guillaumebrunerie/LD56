@@ -143,12 +143,16 @@ const AntC = ({ ant }: { ant: Ant }) => {
 };
 
 const TargetC = ({ target }: { target: Target }) => {
+	const dy =
+		target.state == "idle" ?
+			0
+		:	650 * (1 - Math.pow(target.lt / target.appearDuration, 2));
 	return (
 		<sprite
 			anchor={0.5}
 			texture={Target1_lvl1}
 			x={target.position.x}
-			y={target.position.y}
+			y={target.position.y - dy}
 		/>
 	);
 };

@@ -5,16 +5,34 @@ import { distance2, type Point } from "./utils";
 export class Target extends Entity {
 	position: Point;
 	speedPerAnt = 2;
+	state: "appearing" | "idle" = "appearing";
+	onIdle: () => void;
 
-	constructor(position: Point) {
+	constructor(position: Point, onIdle: () => void) {
 		super();
 		this.position = position;
-		// this.addTicker((delta) => this.tick(delta));
+		this.onIdle = onIdle;
+		this.addTicker((delta) => this.tick(delta));
 	}
 
-	// tick(_delta: number) {
-	// 	// nothing
-	// }
+	appearDuration = 2;
+
+	tick(_delta: number) {
+		switch (this.state) {
+			case "appearing": {
+				if (this.lt >= this.appearDuration) {
+					this.setIdle();
+				}
+				break;
+			}
+		}
+	}
+
+	setIdle() {
+		this.lt = 0;
+		this.state = "idle";
+		this.onIdle();
+	}
 
 	carry(delta: number, force: number, sources: Source[]) {
 		if (sources.length == 0) {

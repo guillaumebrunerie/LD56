@@ -59,6 +59,24 @@ export class Ant extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 	}
 
+	setTarget(target: Target) {
+		this.target = target;
+		// destination, point towards the center
+		const roughDirection = Math.atan2(
+			this.target.position.y - this.position.y,
+			this.target.position.x - this.position.x,
+		);
+		const angle = roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
+		this.destination = {
+			x: 0 * Math.cos(angle),
+			y: 0 * Math.sin(angle),
+		};
+		this.direction = Math.atan2(
+			this.target.position.y - this.destination.y - this.position.y,
+			this.target.position.x - this.destination.x - this.position.x,
+		);
+	}
+
 	get rotation() {
 		const { dx, dy } = this.deltas;
 		return Math.atan2(dy, dx);
@@ -127,7 +145,7 @@ export class Ant extends Entity {
 		if (ok) {
 			this.direction = Math.atan2(dy, dx);
 		}
-		const speed = ok ? this.speed : this.speed / 2;
+		const speed = ok ? this.speed : this.speed / 3;
 
 		this.position.x += Math.cos(this.direction) * delta * speed;
 		this.position.y += Math.sin(this.direction) * delta * speed;

@@ -13,6 +13,7 @@ export class Game extends Entity {
 	antValue = 0;
 	instabilityLevel = 0;
 	isGameOver = false;
+	isStarting = true;
 
 	constructor() {
 		super();
@@ -27,6 +28,7 @@ export class Game extends Entity {
 		this.antValue = 0;
 		this.instabilityLevel = 0;
 		this.isGameOver = false;
+		this.isStarting = true;
 		this.ants.clear();
 		this.targets.clear();
 		this.sources.clear();
@@ -40,7 +42,9 @@ export class Game extends Entity {
 	start() {
 		// void Music.play({ loop: true, volume: 0.5 });
 		this.targets.add(
-			new Target(randomAroundPoint(relativePos(0.5, 0.5), 100)),
+			new Target(randomAroundPoint(relativePos(0.5, 0.5), 100), () =>
+				this.onTargetIdle(),
+			),
 		);
 		this.sources.add(
 			new Source(randomAroundPoint(relativePos(0.15, 0.25), 100)),
@@ -66,10 +70,17 @@ export class Game extends Entity {
 			);
 		}
 
-		// // Initial ants
-		// for (let i = 0; i < 50; i++) {
-		// 	this.ants.add(new Ant(null, this.targets.entities));
-		// }
+		// Initial ants
+		for (let i = 0; i < 50; i++) {
+			this.ants.add(new Ant(null, this.targets.entities));
+		}
+	}
+
+	onTargetIdle() {
+		for (const ant of this.ants.entities) {
+			ant.setTarget(this.targets.entities[0]);
+		}
+		this.isStarting = false;
 	}
 
 	get carryingForce() {
@@ -88,15 +99,18 @@ export class Game extends Entity {
 			return;
 		}
 
-		this.antValue += delta * 2;
-		for (; this.antValue >= 1; this.antValue--) {
-			for (const source of this.sources.entities) {
-				if (source.isDestroyed) {
-					continue;
+		if (!this.isStarting) {
+			this.antValue += delta * 2;
+			for (; this.antValue >= 1; this.antValue--) {
+				for (const source of this.sources.entities) {
+					if (source.isDestroyed) {
+						continue;
+					}
+					this.ants.add(new Ant(source, this.targets.entities));
 				}
-				this.ants.add(new Ant(source, this.targets.entities));
 			}
 		}
+
 		const carryingForce = this.carryingForce;
 		const { dx, dy } = this.targets.entities[0].carry(
 			delta,
