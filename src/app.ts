@@ -8,6 +8,7 @@ declare global {
 	interface Window {
 		app: App;
 		appR: App;
+		cleanup?: () => void;
 	}
 }
 
@@ -25,11 +26,10 @@ export class App extends Entity {
 		// Put debugging informating in the window
 		if (import.meta.env.DEV) {
 			window.appR = this;
-			if (!window.app) {
-				Object.defineProperty(window, "app", {
-					get: () => JSON.parse(JSON.stringify(this)) as App,
-				});
-			}
+			Object.defineProperty(window, "app", {
+				get: () => JSON.parse(JSON.stringify(this)) as App,
+				configurable: true,
+			});
 		}
 
 		// Initialize sound and ticker
@@ -38,14 +38,13 @@ export class App extends Entity {
 			this.tick_((ticker.deltaTime / 60) * this.speed);
 		});
 		Ticker.shared.add(tick);
-		const cleanup = () => {
+		window.cleanup?.();
+		window.cleanup = () => {
 			Ticker.shared.remove(tick);
 			closeSound();
 		};
 
 		// Start game
 		this.game.start();
-
-		return cleanup;
 	}
 }
