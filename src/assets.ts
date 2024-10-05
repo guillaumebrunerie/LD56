@@ -1,4 +1,4 @@
-/** Generated on Sat Oct  5 15:14:56 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sat Oct  5 17:42:56 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -17,6 +17,7 @@ import Source1_Closed_Lvl4_ from "../gfx/Source1_Closed_Lvl4.png?texture";
 import Source1_Default_ from "../gfx/Source1_Default.png?texture";
 import Source1_Open_ from "../gfx/Source1_Open.png?texture";
 import Target1_lvl1_ from "../gfx/Target1_lvl1.png?texture";
+import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 
 /** Spritesheets */
 
@@ -37,6 +38,7 @@ export const [
 	Source1_Default,
 	Source1_Open,
 	Target1_lvl1,
+	Target_Shadow,
 	Music,
 ] = await Promise.all([
 	Ant1_Default_,
@@ -52,5 +54,6 @@ export const [
 	Source1_Default_,
 	Source1_Open_,
 	Target1_lvl1_,
+	Target_Shadow_,
 	Music_,
 ]);

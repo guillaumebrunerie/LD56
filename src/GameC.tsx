@@ -173,17 +173,19 @@ const TargetC = ({ target }: { target: Target }) => {
 	const scale =
 		target.state == "idle" ?
 			1
-		:	(1 - target.lt / target.appearDuration) * 2 + 1;
+		:	(1 - target.lt / target.appearDuration) * 3 + 1;
 
 	return (
-		<sprite
-			anchor={0.5}
-			texture={Target1_lvl1}
-			alpha={alpha}
-			scale={scale}
-			x={target.position.x}
-			y={target.position.y - dy}
-		/>
+		<container>
+			<sprite
+				anchor={0.5}
+				texture={Target1_lvl1}
+				alpha={alpha}
+				scale={scale}
+				x={target.position.x}
+				y={target.position.y - dy}
+			/>
+		</container>
 	);
 };
 
