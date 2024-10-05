@@ -1,4 +1,4 @@
-/** Generated on Sat Oct  5 14:06:02 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sat Oct  5 15:14:56 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -10,7 +10,12 @@ import Ant3_Default_ from "../gfx/Ant3_Default.png?texture";
 import Bg_ from "../gfx/Bg.jpg?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
+import Source1_Closed_Lvl1_ from "../gfx/Source1_Closed_Lvl1.png?texture";
+import Source1_Closed_Lvl2_ from "../gfx/Source1_Closed_Lvl2.png?texture";
+import Source1_Closed_Lvl3_ from "../gfx/Source1_Closed_Lvl3.png?texture";
+import Source1_Closed_Lvl4_ from "../gfx/Source1_Closed_Lvl4.png?texture";
 import Source1_Default_ from "../gfx/Source1_Default.png?texture";
+import Source1_Open_ from "../gfx/Source1_Open.png?texture";
 import Target1_lvl1_ from "../gfx/Target1_lvl1.png?texture";
 
 /** Spritesheets */
@@ -25,7 +30,12 @@ export const [
 	Bg,
 	SoundOffTxt,
 	SoundOnTxt,
+	Source1_Closed_Lvl1,
+	Source1_Closed_Lvl2,
+	Source1_Closed_Lvl3,
+	Source1_Closed_Lvl4,
 	Source1_Default,
+	Source1_Open,
 	Target1_lvl1,
 	Music,
 ] = await Promise.all([
@@ -35,7 +45,12 @@ export const [
 	Bg_,
 	SoundOffTxt_,
 	SoundOnTxt_,
+	Source1_Closed_Lvl1_,
+	Source1_Closed_Lvl2_,
+	Source1_Closed_Lvl3_,
+	Source1_Closed_Lvl4_,
 	Source1_Default_,
+	Source1_Open_,
 	Target1_lvl1_,
 	Music_,
 ]);

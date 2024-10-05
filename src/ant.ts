@@ -15,7 +15,6 @@ export class Ant extends Entity {
 		super();
 		this.state = "appearing";
 		this.position = { x, y };
-		this.speed = 200;
 		this.target = target;
 		// destination, point towards the center
 		const angle = Math.random() * Math.PI * 2;
@@ -34,6 +33,8 @@ export class Ant extends Entity {
 		if (Math.random() < 0.05) {
 			this.level = 3;
 		}
+
+		this.speed = [0, 200, 160, 120][this.level];
 
 		this.addTicker((delta) => this.tick(delta));
 	}

@@ -5,7 +5,7 @@ import {
 	Ant2_Default,
 	Ant3_Default,
 	Bg,
-	Source1_Default,
+	Source1_Open,
 	Target1_lvl1,
 } from "./assets";
 import type { Source } from "./source";
@@ -59,7 +59,7 @@ const SourceC = ({ source }: { source: Source }) => {
 			/>
 			<sprite
 				anchor={0.5}
-				texture={Source1_Default}
+				texture={Source1_Open}
 				x={source.x}
 				y={source.y}
 				alpha={source.isDestroyed ? 0.5 : 1}

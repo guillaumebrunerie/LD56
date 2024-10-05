@@ -30,8 +30,14 @@ export class Game extends Entity {
 	}
 
 	carryingForce() {
-		return this.ants.entities.filter((ant) => ant.state === "carrying")
-			.length;
+		let force = 0;
+		for (const ant of this.ants.entities) {
+			if (ant.state !== "carrying") {
+				continue;
+			}
+			force += ant.level * ant.level;
+		}
+		return force;
 	}
 
 	tick(delta: number) {
