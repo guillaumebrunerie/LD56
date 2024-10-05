@@ -100,6 +100,7 @@ export class Ant extends Entity {
 	direction: number;
 	speed: number;
 	state: "appearing" | "walking" | "carrying" | "dead";
+	level: number;
 
 	constructor(x: number, y: number, target: Target) {
 		super();
@@ -117,6 +118,13 @@ export class Ant extends Entity {
 			this.target.position.y - this.destination.y - this.position.y,
 			this.target.position.x - this.destination.x - this.position.x,
 		);
+		this.level = 1;
+		if (Math.random() < 0.2) {
+			this.level = 2;
+		}
+		if (Math.random() < 0.05) {
+			this.level = 3;
+		}
 
 		this.addTicker((delta) => this.tick(delta));
 	}

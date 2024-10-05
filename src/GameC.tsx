@@ -1,7 +1,13 @@
-import type { FederatedPointerEvent } from "pixi.js";
+import type { FederatedPointerEvent, Texture } from "pixi.js";
 import { Circle } from "./Circle";
 import type { Ant, Game, Target } from "./game";
-import { Ant1_Default, Bg, Target1_lvl1 } from "./assets";
+import {
+	Ant1_Default,
+	Ant2_Default,
+	Ant3_Default,
+	Bg,
+	Target1_lvl1,
+} from "./assets";
 
 export const GameC = ({ game }: { game: Game }) => {
 	return (
@@ -32,11 +38,17 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
+const antTexture: Record<number, Texture> = {
+	1: Ant1_Default,
+	2: Ant2_Default,
+	3: Ant3_Default,
+};
+
 const AntC = ({ ant }: { ant: Ant }) => {
 	return (
 		<sprite
 			anchor={0.5}
-			texture={Ant1_Default}
+			texture={antTexture[ant.level]}
 			x={ant.position.x}
 			y={ant.position.y}
 			rotation={ant.rotation + Math.PI / 2}
