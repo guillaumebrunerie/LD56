@@ -11,3 +11,9 @@ export type Point = {
 	x: number;
 	y: number;
 };
+
+export const distance2 = (p1: Point, p2: Point) => {
+	const dx = p2.x - p1.x;
+	const dy = p2.y - p1.y;
+	return dx * dx + dy * dy;
+};

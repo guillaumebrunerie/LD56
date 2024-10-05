@@ -1,6 +1,6 @@
 import { Entity } from "./entities";
 import type { Source } from "./source";
-import type { Point } from "./utils";
+import { distance2, type Point } from "./utils";
 
 export class Target extends Entity {
 	position: Point;
@@ -49,5 +49,14 @@ export class Target extends Entity {
 		this.position.x += dx;
 		this.position.y += dy;
 		return { dx, dy };
+	}
+
+	isCloseToSource(sources: Source[]) {
+		for (const source of sources) {
+			if (distance2(source, this.position) < 20 * 20) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

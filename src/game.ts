@@ -11,6 +11,7 @@ export class Game extends Entity {
 	sources: EntityArray<Source>;
 	antValue = 0;
 	instabilityLevel = 0;
+	isGameOver = false;
 
 	constructor() {
 		super();
@@ -19,6 +20,20 @@ export class Game extends Entity {
 		this.sources = new EntityArray<Source>();
 		this.addChildren(this.ants, this.targets, this.sources);
 		this.addTicker((delta) => this.tick(delta));
+	}
+
+	reset() {
+		this.antValue = 0;
+		this.instabilityLevel = 0;
+		this.isGameOver = false;
+		this.ants.clear();
+		this.targets.clear();
+		this.sources.clear();
+	}
+
+	restart() {
+		this.reset();
+		this.start();
 	}
 
 	start() {
@@ -39,7 +54,7 @@ export class Game extends Entity {
 		}
 	}
 
-	carryingForce() {
+	get carryingForce() {
 		let force = 0;
 		for (const ant of this.ants.entities) {
 			if (ant.state !== "carrying") {
@@ -51,6 +66,10 @@ export class Game extends Entity {
 	}
 
 	tick(delta: number) {
+		if (this.isGameOver) {
+			return;
+		}
+
 		this.antValue += delta * 2;
 		for (; this.antValue >= 1; this.antValue--) {
 			for (const source of this.sources.entities) {
@@ -66,7 +85,7 @@ export class Game extends Entity {
 				);
 			}
 		}
-		const carryingForce = this.carryingForce();
+		const carryingForce = this.carryingForce;
 		const { dx, dy } = this.targets.entities[0].carry(
 			delta,
 			carryingForce,
@@ -87,6 +106,16 @@ export class Game extends Entity {
 		this.instabilityLevel -= delta / 0.3;
 		if (this.instabilityLevel < 0) {
 			this.instabilityLevel = 0;
+		}
+		if (this.targets.entities[0].isCloseToSource(this.sources.entities)) {
+			this.gameOver();
+		}
+	}
+
+	gameOver() {
+		this.isGameOver = true;
+		for (const ant of this.ants.entities) {
+			ant.win();
 		}
 	}
 

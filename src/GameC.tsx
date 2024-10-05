@@ -17,6 +17,7 @@ import type { Ant } from "./ant";
 import type { Target } from "./target";
 import { Circle } from "./Circle";
 import { CustomText } from "./CustomText";
+import { Rectangle } from "./Rectangle";
 
 export const GameC = ({ game }: { game: Game }) => {
 	return (
@@ -48,6 +49,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.targets.entities.map((target, i) => (
 				<TargetC key={i} target={target} />
 			))}
+			{game.isGameOver && <GameOverScreen game={game} />}
 		</container>
 	);
 };
@@ -135,5 +137,37 @@ const TargetC = ({ target }: { target: Target }) => {
 			x={target.position.x}
 			y={target.position.y}
 		/>
+	);
+};
+
+const GameOverScreen = ({ game }: { game: Game }) => {
+	return (
+		<container>
+			<Rectangle
+				x={0}
+				y={0}
+				width={1920}
+				height={1080}
+				draw={() => {}}
+				alpha={0.3}
+				color={0}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 - 50}
+				anchor={0.5}
+				text="Game over!"
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 50}
+				anchor={0.5}
+				text="Restart?"
+				eventMode="static"
+				onPointerDown={() => {
+					game.restart();
+				}}
+			/>
+		</container>
 	);
 };

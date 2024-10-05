@@ -5,6 +5,7 @@ type RectangleProps = ComponentProps<"graphics"> & {
 	y: number;
 	width: number;
 	height: number;
+	color?: number;
 	alpha?: number;
 };
 
@@ -15,6 +16,7 @@ export const Rectangle = ({
 	y,
 	width,
 	height,
+	color = 0x222222,
 	alpha = 1,
 	...rest
 }: RectangleProps) => {
@@ -22,9 +24,9 @@ export const Rectangle = ({
 		(g) => {
 			g.clear();
 			g.rect(x, y, width, height);
-			g.fill({ color: 0x222222, alpha });
+			g.fill({ color, alpha });
 		},
-		[x, y, width, height, alpha],
+		[x, y, width, height, color, alpha],
 	);
 
 	return <graphics {...rest} draw={draw} />;

@@ -8,7 +8,7 @@ export class Ant extends Entity {
 	target: Target;
 	direction: number;
 	speed: number;
-	state: "appearing" | "walking" | "carrying" | "dead";
+	state: "appearing" | "walking" | "carrying" | "dead" | "winning";
 	level: number;
 
 	constructor(x: number, y: number, target: Target) {
@@ -62,9 +62,9 @@ export class Ant extends Entity {
 				this.carry(delta);
 				return;
 			}
-			case "dead": {
+			case "dead":
+			case "winning":
 				return;
-			}
 		}
 	}
 
@@ -130,5 +130,9 @@ export class Ant extends Entity {
 		if (this.getDistance() > 15) {
 			this.state = "walking";
 		}
+	}
+
+	win() {
+		this.state = "winning";
 	}
 }
