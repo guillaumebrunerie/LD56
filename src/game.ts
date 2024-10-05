@@ -120,6 +120,9 @@ export class Game extends Entity {
 	}
 
 	shockwave(x: number, y: number) {
+		if (this.isGameOver) {
+			return;
+		}
 		for (const ant of this.ants.entities) {
 			if (ant.state === "dead") {
 				continue;
