@@ -10,6 +10,7 @@ export class Game extends Entity {
 	targets: EntityArray<Target>;
 	sources: EntityArray<Source>;
 	antValue = 0;
+	instabilityLevel = 0;
 
 	constructor() {
 		super();
@@ -27,6 +28,15 @@ export class Game extends Entity {
 		this.sources.add(new Source((1920 / 6) * 5, 1080 / 4));
 		this.sources.add(new Source(1920 / 6, (1080 / 4) * 3));
 		this.sources.add(new Source((1920 / 6) * 5, (1080 / 4) * 3));
+		for (let i = 0; i < 5; i++) {
+			this.sources.add(
+				new Source(
+					100 + Math.random() * (1920 - 200),
+					100 + Math.random() * (1080 - 200),
+					true,
+				),
+			);
+		}
 	}
 
 	carryingForce() {
@@ -73,6 +83,11 @@ export class Game extends Entity {
 				this.ants.remove(ant);
 			}
 		}
+
+		this.instabilityLevel -= delta / 0.3;
+		if (this.instabilityLevel < 0) {
+			this.instabilityLevel = 0;
+		}
 	}
 
 	shockwave(x: number, y: number) {
@@ -88,7 +103,7 @@ export class Game extends Entity {
 				200 - distance / 2 + (Math.random() - 0.5) * 50,
 				0,
 			);
-			if (Math.random() * distance < 10) {
+			if (Math.random() * distance * ant.level < 10) {
 				ant.die();
 				continue;
 				// this.ants.remove(ant);
@@ -97,5 +112,22 @@ export class Game extends Entity {
 			ant.position.x += Math.cos(angle) * moveDistance;
 			ant.position.y += Math.sin(angle) * moveDistance;
 		}
+		this.instabilityLevel += 1;
+		if (this.instabilityLevel >= 3) {
+			this.instabilityLevel -= 3;
+			this.crack();
+		}
+	}
+
+	crack() {
+		const crackingSources = this.sources.entities.filter(
+			(source) => source.isDestroyed,
+		);
+		if (crackingSources.length == 0) {
+			return;
+		}
+		const crackingSource =
+			crackingSources[Math.floor(Math.random() * crackingSources.length)];
+		crackingSource.crack();
 	}
 }

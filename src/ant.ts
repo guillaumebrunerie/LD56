@@ -17,7 +17,11 @@ export class Ant extends Entity {
 		this.position = { x, y };
 		this.target = target;
 		// destination, point towards the center
-		const angle = Math.random() * Math.PI * 2;
+		const roughDirection = Math.atan2(
+			this.target.position.y - this.position.y,
+			this.target.position.x - this.position.x,
+		);
+		const angle = roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
 		this.destination = {
 			x: 50 * Math.cos(angle),
 			y: 50 * Math.sin(angle),

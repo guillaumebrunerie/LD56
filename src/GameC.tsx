@@ -5,6 +5,10 @@ import {
 	Ant2_Default,
 	Ant3_Default,
 	Bg,
+	Source1_Closed_Lvl1,
+	Source1_Closed_Lvl2,
+	Source1_Closed_Lvl3,
+	Source1_Closed_Lvl4,
 	Source1_Open,
 	Target1_lvl1,
 } from "./assets";
@@ -27,9 +31,14 @@ export const GameC = ({ game }: { game: Game }) => {
 					game.shockwave(x, y);
 				}}
 			/>
-			{game.sources.entities.map((source, i) => (
-				<SourceC key={i} source={source} />
-			))}
+			{game.sources.entities.map(
+				(source, i) =>
+					source.isDestroyed && <SourceC key={i} source={source} />,
+			)}
+			{game.sources.entities.map(
+				(source, i) =>
+					!source.isDestroyed && <SourceC key={i} source={source} />,
+			)}
 			{game.ants.entities.map(
 				(ant, i) => ant.state == "dead" && <AntC key={i} ant={ant} />,
 			)}
@@ -42,6 +51,14 @@ export const GameC = ({ game }: { game: Game }) => {
 		</container>
 	);
 };
+
+const sourceTextures = [
+	Source1_Closed_Lvl1,
+	Source1_Closed_Lvl2,
+	Source1_Closed_Lvl3,
+	Source1_Closed_Lvl4,
+	Source1_Open,
+];
 
 const SourceC = ({ source }: { source: Source }) => {
 	return (
@@ -59,13 +76,18 @@ const SourceC = ({ source }: { source: Source }) => {
 			/>
 			<sprite
 				anchor={0.5}
-				texture={Source1_Open}
+				texture={
+					sourceTextures[
+						Math.ceil((source.healthCurrent / source.healthMax) * 4)
+					]
+				}
 				x={source.x}
 				y={source.y}
 				alpha={source.isDestroyed ? 0.5 : 1}
 			/>
 			<CustomText
 				anchor={0.5}
+				alpha={0}
 				x={source.x}
 				y={source.y - 70}
 				scale={0.5}
