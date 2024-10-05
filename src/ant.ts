@@ -201,7 +201,9 @@ export class Ant extends Entity {
 	}
 
 	win() {
-		this.state = "winning";
+		if (this.state !== "dead") {
+			this.state = "winning";
+		}
 	}
 
 	passedShockwaves = new WeakSet<Shockwave>();
@@ -220,7 +222,15 @@ export class Ant extends Entity {
 				(dx !== 0 || dy !== 0)
 			) {
 				this.passedShockwaves.add(shockwave);
-				if (Math.random() < 30 / distance / this.level / this.level) {
+				if (
+					Math.random() <
+					(shockwave.strength /
+						distance /
+						distance /
+						this.level /
+						this.level) *
+						3
+				) {
 					this.die();
 					return;
 				}

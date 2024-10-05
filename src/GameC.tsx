@@ -1,9 +1,13 @@
 import type { FederatedPointerEvent, Texture } from "pixi.js";
 import type { Game } from "./game";
 import {
+	Ant1_Dead,
 	Ant1_Default,
+	Ant2_Dead,
 	Ant2_Default,
+	Ant3_Dead,
 	Ant3_Default,
+	Ant_BloodStain,
 	Bg,
 	Source1_Closed_Lvl1,
 	Source1_Closed_Lvl2,
@@ -149,21 +153,42 @@ const antTexture: Record<number, Texture> = {
 	3: Ant3_Default,
 };
 
+const antDeadTexture: Record<number, Texture> = {
+	1: Ant1_Dead,
+	2: Ant2_Dead,
+	3: Ant3_Dead,
+};
+
 const AntC = ({ ant }: { ant: Ant }) => {
+	const alpha =
+		ant.state == "appearing" ? ant.lt / ant.appearDuration
+		: ant.state == "dead" ? 1 - ant.lt / ant.dieDuration
+		: 1;
+
 	return (
-		<sprite
-			anchor={0.5}
-			texture={antTexture[ant.level]}
-			x={ant.position.x}
-			y={ant.position.y}
-			rotation={ant.direction + Math.PI / 2}
-			alpha={
-				ant.state == "appearing" ? ant.lt / ant.appearDuration
-				: ant.state == "dead" ?
-					(1 - ant.lt / ant.dieDuration) / 2
-				:	1
-			}
-		/>
+		<container>
+			{ant.state == "dead" && (
+				<sprite
+					anchor={0.5}
+					texture={Ant_BloodStain}
+					alpha={alpha}
+					x={ant.position.x}
+					y={ant.position.y}
+				/>
+			)}
+			<sprite
+				anchor={0.5}
+				texture={
+					(ant.state == "dead" ? antDeadTexture : antTexture)[
+						ant.level
+					]
+				}
+				x={ant.position.x}
+				y={ant.position.y}
+				rotation={ant.direction + Math.PI / 2}
+				alpha={alpha}
+			/>
+		</container>
 	);
 };
 
