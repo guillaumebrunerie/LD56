@@ -100,16 +100,37 @@ const SourceHealth = ({ source }: { source: Source }) => {
 	if (source.isDestroyed) {
 		return null;
 	}
+	const width = 100;
+	const height = 8;
+	const dy = 70;
 	return (
-		<CustomText
-			anchor={0.5}
-			alpha={source.isDestroyed ? 0 : 1}
-			x={source.pos.x}
-			y={source.pos.y - 70}
-			scale={0.5}
-			text={`${source.healthCurrent.toFixed(0)} / ${source.healthMax.toFixed(0)}`}
-		/>
+		<container>
+			<Rectangle
+				x={source.pos.x - width / 2}
+				y={source.pos.y - height / 2 - dy}
+				width={100}
+				height={height}
+				color={0xff0000}
+			/>
+			<Rectangle
+				x={source.pos.x - width / 2}
+				y={source.pos.y - height / 2 - dy}
+				width={(100 * source.healthCurrent) / source.healthMax}
+				height={height}
+				color={0x00ff00}
+			/>
+		</container>
 	);
+	// return (
+	// 	<CustomText
+	// 		anchor={0.5}
+	// 		alpha={source.isDestroyed ? 0 : 1}
+	// 		x={source.pos.x}
+	// 		y={source.pos.y - 70}
+	// 		scale={0.5}
+	// 		text={`${source.healthCurrent.toFixed(0)} / ${source.healthMax.toFixed(0)}`}
+	// 	/>
+	// );
 };
 
 const antTexture: Record<number, Texture> = {
