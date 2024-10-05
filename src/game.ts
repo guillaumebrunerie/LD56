@@ -2,7 +2,7 @@
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 
-type Point = {
+export type Point = {
 	x: number;
 	y: number;
 };

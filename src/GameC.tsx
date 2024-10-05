@@ -1,11 +1,12 @@
 import type { FederatedPointerEvent, Texture } from "pixi.js";
 import { Circle } from "./Circle";
-import type { Ant, Game, Target } from "./game";
+import type { Ant, Game, Point, Target } from "./game";
 import {
 	Ant1_Default,
 	Ant2_Default,
 	Ant3_Default,
 	Bg,
+	Source1_Defualt,
 	Target1_lvl1,
 } from "./assets";
 
@@ -22,6 +23,9 @@ export const GameC = ({ game }: { game: Game }) => {
 					game.shockwave(x, y);
 				}}
 			/>
+			{game.sources.map((source, i) => (
+				<SourceC key={i} source={source} />
+			))}
 			{game.ants.entities.map(
 				(ant, i) => ant.state == "dead" && <AntC key={i} ant={ant} />,
 			)}
@@ -31,10 +35,18 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.targets.entities.map((target, i) => (
 				<TargetC key={i} target={target} />
 			))}
-			{game.sources.map(({ x, y }, i) => (
-				<Circle key={i} x={x} y={y} radius={20} color={0x0000ff} />
-			))}
 		</container>
+	);
+};
+
+const SourceC = ({ source }: { source: Point }) => {
+	return (
+		<sprite
+			anchor={0.5}
+			texture={Source1_Defualt}
+			x={source.x}
+			y={source.y}
+		/>
 	);
 };
 
