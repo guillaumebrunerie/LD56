@@ -1,5 +1,5 @@
-// import { Music } from "./assets";
 import { Ant } from "./ant";
+import { Music } from "./assets";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 import { Shockwave } from "./shockwave";
@@ -48,7 +48,7 @@ export class Game extends Entity {
 	}
 
 	start() {
-		// void Music.play({ loop: true, volume: 0.5 });
+		void Music.play({ loop: true, volume: 0.5 });
 		this.targets.add(
 			new Target(randomAroundPoint(relativePos(0.5, 0.5), 100), () =>
 				this.onTargetIdle(),
