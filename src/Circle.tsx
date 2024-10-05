@@ -1,6 +1,6 @@
 import { type ComponentProps, useCallback } from "react";
 
-type CircleProps = Omit<ComponentProps<"graphics">, "draw"> & {
+type CircleProps = ComponentProps<"graphics"> & {
 	x: number;
 	y: number;
 	radius: number;

@@ -1,5 +1,5 @@
 import type { FederatedPointerEvent, Texture } from "pixi.js";
-import type { Ant, Game, Point, Target } from "./game";
+import type { Game } from "./game";
 import {
 	Ant1_Default,
 	Ant2_Default,
@@ -8,6 +8,11 @@ import {
 	Source1_Default,
 	Target1_lvl1,
 } from "./assets";
+import type { Source } from "./source";
+import type { Ant } from "./ant";
+import type { Target } from "./target";
+import { Circle } from "./Circle";
+import { CustomText } from "./CustomText";
 
 export const GameC = ({ game }: { game: Game }) => {
 	return (
@@ -22,7 +27,7 @@ export const GameC = ({ game }: { game: Game }) => {
 					game.shockwave(x, y);
 				}}
 			/>
-			{game.sources.map((source, i) => (
+			{game.sources.entities.map((source, i) => (
 				<SourceC key={i} source={source} />
 			))}
 			{game.ants.entities.map(
@@ -38,14 +43,35 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
-const SourceC = ({ source }: { source: Point }) => {
+const SourceC = ({ source }: { source: Source }) => {
 	return (
-		<sprite
-			anchor={0.5}
-			texture={Source1_Default}
-			x={source.x}
-			y={source.y}
-		/>
+		<container>
+			<Circle
+				x={source.x}
+				y={source.y}
+				radius={50}
+				alpha={0}
+				draw={() => {}}
+				eventMode="static"
+				onPointerDown={() => {
+					source.hit();
+				}}
+			/>
+			<sprite
+				anchor={0.5}
+				texture={Source1_Default}
+				x={source.x}
+				y={source.y}
+				alpha={source.isDestroyed ? 0.5 : 1}
+			/>
+			<CustomText
+				anchor={0.5}
+				x={source.x}
+				y={source.y - 70}
+				scale={0.5}
+				text={`${source.healthCurrent.toFixed(0)} / ${source.healthMax.toFixed(0)}`}
+			/>
+		</container>
 	);
 };
 
@@ -66,7 +92,7 @@ const AntC = ({ ant }: { ant: Ant }) => {
 			alpha={
 				ant.state == "appearing" ? ant.lt / ant.appearDuration
 				: ant.state == "dead" ?
-					(1 - ant.lt / ant.dieDuration) / 3
+					(1 - ant.lt / ant.dieDuration) / 2
 				:	1
 			}
 			// color={

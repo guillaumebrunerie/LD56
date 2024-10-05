@@ -45,7 +45,7 @@ export const AppC = () => {
 			{/* 	}} */}
 			{/* /> */}
 			<GameC game={app.game} />
-			<SoundButton x={0} y={0} />
+			{/* <SoundButton x={0} y={0} /> */}
 		</container>
 	);
 };
