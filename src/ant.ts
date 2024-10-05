@@ -1,6 +1,7 @@
 import { Entity } from "./entities";
+import type { Source } from "./source";
 import type { Target } from "./target";
-import type { Point } from "./utils";
+import { randomAroundPoint, type Point } from "./utils";
 
 export class Ant extends Entity {
 	position: Point;
@@ -11,8 +12,12 @@ export class Ant extends Entity {
 	state: "appearing" | "walking" | "carrying" | "dead" | "winning";
 	level: number;
 
-	constructor(x: number, y: number, target: Target) {
+	constructor(source: Source, targets: Target[]) {
 		super();
+
+		const { x, y } = randomAroundPoint(source, 20);
+		const target = targets[0];
+
 		this.state = "appearing";
 		this.position = { x, y };
 		this.target = target;

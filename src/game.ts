@@ -76,13 +76,7 @@ export class Game extends Entity {
 				if (source.isDestroyed) {
 					continue;
 				}
-				this.ants.add(
-					new Ant(
-						source.x + Math.random() * 100 - 50,
-						source.y + Math.random() * 100 - 50,
-						this.targets.entities[0],
-					),
-				);
+				this.ants.add(new Ant(source, this.targets.entities));
 			}
 		}
 		const carryingForce = this.carryingForce;

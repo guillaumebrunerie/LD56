@@ -17,3 +17,12 @@ export const distance2 = (p1: Point, p2: Point) => {
 	const dy = p2.y - p1.y;
 	return dx * dx + dy * dy;
 };
+
+export const randomAroundPoint = (p: Point, r: number): Point => {
+	const d = Math.random() * r;
+	const angle = Math.random() * Math.PI * 2;
+	return {
+		x: p.x + d * Math.cos(angle),
+		y: p.y + d * Math.sin(angle),
+	};
+};
