@@ -4,7 +4,7 @@ import type { Point } from "./utils";
 
 export class Target extends Entity {
 	position: Point;
-	speedPerAnt = 1;
+	speedPerAnt = 2;
 
 	constructor(x: number, y: number) {
 		super();
