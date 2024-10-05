@@ -11,11 +11,12 @@ export class Game extends Entity {
 	ants: EntityArray<Ant>;
 	targets: EntityArray<Target>;
 	sources: EntityArray<Source>;
+	shockwaves: EntityArray<Shockwave>;
 	antValue = 0;
 	instabilityLevel = 0;
 	isGameOver = false;
 	isStarting = true;
-	shockwaves: EntityArray<Shockwave>;
+	shockwaveCooldown = 0;
 
 	constructor() {
 		super();
@@ -149,6 +150,12 @@ export class Game extends Entity {
 		if (this.instabilityLevel < 0) {
 			this.instabilityLevel = 0;
 		}
+
+		this.shockwaveCooldown -= delta;
+		if (this.shockwaveCooldown < 0) {
+			this.shockwaveCooldown = 0;
+		}
+
 		if (this.targets.entities[0].isCloseToSource(this.sources.entities)) {
 			this.gameOver();
 		}
@@ -161,11 +168,17 @@ export class Game extends Entity {
 		}
 	}
 
+	shockwaveDelay = 0.5;
 	shockwave(x: number, y: number) {
 		if (this.isGameOver) {
 			return;
 		}
-		this.shockwaves.add(new Shockwave({ x, y }, -300, 100, 5000, 100));
+		const strength =
+			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
+		this.shockwaveCooldown = this.shockwaveDelay;
+		this.shockwaves.add(
+			new Shockwave({ x, y }, -300, 100, 5000, 100 * strength),
+		);
 		// for (const ant of this.ants.entities) {
 		// 	if (ant.state === "dead") {
 		// 		continue;

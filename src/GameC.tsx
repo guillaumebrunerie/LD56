@@ -73,17 +73,19 @@ const closedSourceTextures = [
 const SourceC = ({ source }: { source: Source }) => {
 	return (
 		<container>
-			<Circle
-				x={source.pos.x}
-				y={source.pos.y}
-				radius={50}
-				alpha={0}
-				draw={() => {}}
-				eventMode="static"
-				onPointerDown={() => {
-					source.hit();
-				}}
-			/>
+			{!source.isDestroyed && (
+				<Circle
+					x={source.pos.x}
+					y={source.pos.y}
+					radius={50}
+					alpha={0}
+					draw={() => {}}
+					eventMode="static"
+					onPointerDown={() => {
+						source.hit();
+					}}
+				/>
+			)}
 			<sprite
 				anchor={0.5}
 				texture={
@@ -117,6 +119,7 @@ const SourceHealth = ({ source }: { source: Source }) => {
 				width={100}
 				height={height}
 				color={0xff0000}
+				draw={() => {}}
 			/>
 			<Rectangle
 				x={source.pos.x - width / 2}
@@ -124,6 +127,7 @@ const SourceHealth = ({ source }: { source: Source }) => {
 				width={(100 * source.healthCurrent) / source.healthMax}
 				height={height}
 				color={0x00ff00}
+				draw={() => {}}
 			/>
 		</container>
 	);

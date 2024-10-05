@@ -220,7 +220,7 @@ export class Ant extends Entity {
 				(dx !== 0 || dy !== 0)
 			) {
 				this.passedShockwaves.add(shockwave);
-				if (Math.random() * distance * this.level < 30) {
+				if (Math.random() < 30 / distance / this.level / this.level) {
 					this.die();
 					return;
 				}
