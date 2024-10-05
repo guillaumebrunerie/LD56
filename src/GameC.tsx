@@ -49,6 +49,9 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.targets.entities.map((target, i) => (
 				<TargetC key={i} target={target} />
 			))}
+			{game.sources.entities.map((source, i) => (
+				<SourceHealth key={i} source={source} />
+			))}
 			{game.isGameOver && <GameOverScreen game={game} />}
 		</container>
 	);
@@ -65,8 +68,8 @@ const SourceC = ({ source }: { source: Source }) => {
 	return (
 		<container>
 			<Circle
-				x={source.x}
-				y={source.y}
+				x={source.pos.x}
+				y={source.pos.y}
 				radius={50}
 				alpha={0}
 				draw={() => {}}
@@ -86,19 +89,27 @@ const SourceC = ({ source }: { source: Source }) => {
 						]
 					:	Source1_Open
 				}
-				x={source.x}
-				y={source.y}
+				x={source.pos.x}
+				y={source.pos.y}
 				alpha={source.isDestroyed ? 0.5 : 1}
 			/>
-			<CustomText
-				anchor={0.5}
-				alpha={source.isDestroyed ? 0 : 1}
-				x={source.x}
-				y={source.y - 70}
-				scale={0.5}
-				text={`${source.healthCurrent.toFixed(0)} / ${source.healthMax.toFixed(0)}`}
-			/>
 		</container>
+	);
+};
+
+const SourceHealth = ({ source }: { source: Source }) => {
+	if (source.isDestroyed) {
+		return null;
+	}
+	return (
+		<CustomText
+			anchor={0.5}
+			alpha={source.isDestroyed ? 0 : 1}
+			x={source.pos.x}
+			y={source.pos.y - 70}
+			scale={0.5}
+			text={`${source.healthCurrent.toFixed(0)} / ${source.healthMax.toFixed(0)}`}
+		/>
 	);
 };
 

@@ -6,9 +6,9 @@ export class Target extends Entity {
 	position: Point;
 	speedPerAnt = 2;
 
-	constructor(x: number, y: number) {
+	constructor(position: Point) {
 		super();
-		this.position = { x, y };
+		this.position = position;
 		// this.addTicker((delta) => this.tick(delta));
 	}
 
@@ -24,8 +24,8 @@ export class Target extends Entity {
 
 		const sortedSources = sources.toSorted((a, b) => {
 			const distance = (source: Source) => {
-				const dx = source.x - this.position.x;
-				const dy = source.y - this.position.y;
+				const dx = source.pos.x - this.position.x;
+				const dy = source.pos.y - this.position.y;
 				return dx * dx + dy * dy;
 			};
 			return distance(a) - distance(b);
@@ -41,8 +41,8 @@ export class Target extends Entity {
 
 		const destination = sortedSources[destinationIndex];
 		const angle = Math.atan2(
-			destination.y - this.position.y,
-			destination.x - this.position.x,
+			destination.pos.y - this.position.y,
+			destination.pos.x - this.position.x,
 		);
 		const dx = Math.cos(angle) * speed * delta;
 		const dy = Math.sin(angle) * speed * delta;
@@ -53,7 +53,7 @@ export class Target extends Entity {
 
 	isCloseToSource(sources: Source[]) {
 		for (const source of sources) {
-			if (distance2(source, this.position) < 20 * 20) {
+			if (distance2(source.pos, this.position) < 20 * 20) {
 				return true;
 			}
 		}

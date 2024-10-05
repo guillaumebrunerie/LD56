@@ -1,16 +1,15 @@
 import { Entity } from "./entities";
+import type { Point } from "./utils";
 
 export class Source extends Entity {
-	x: number;
-	y: number;
+	pos: Point;
 	healthCurrent = 100;
 	healthMax = 100;
 	isDestroyed = false;
 
-	constructor(x: number, y: number, destroyed = false) {
+	constructor(pos: Point, destroyed = false) {
 		super();
-		this.x = x;
-		this.y = y;
+		this.pos = pos;
 		this.addTicker((delta) => this.tick(delta));
 		if (destroyed) {
 			this.destroy();
@@ -40,7 +39,7 @@ export class Source extends Entity {
 	}
 
 	crack() {
-		this.healthCurrent += 20;
+		this.healthCurrent += 25;
 		if (this.healthCurrent > this.healthMax) {
 			this.healthCurrent = this.healthMax;
 			this.isDestroyed = false;

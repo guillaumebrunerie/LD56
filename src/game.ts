@@ -4,6 +4,7 @@ import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 import { Source } from "./source";
 import { Target } from "./target";
+import { randomAroundPoint, relativePos } from "./utils";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -38,16 +39,28 @@ export class Game extends Entity {
 
 	start() {
 		// void Music.play({ loop: true, volume: 0.5 });
-		this.targets.add(new Target(1920 / 2, 1080 / 2));
-		this.sources.add(new Source(1920 / 6, 1080 / 4));
-		this.sources.add(new Source((1920 / 6) * 5, 1080 / 4));
-		this.sources.add(new Source(1920 / 6, (1080 / 4) * 3));
-		this.sources.add(new Source((1920 / 6) * 5, (1080 / 4) * 3));
-		for (let i = 0; i < 5; i++) {
+		this.targets.add(
+			new Target(randomAroundPoint(relativePos(0.5, 0.5), 100)),
+		);
+		this.sources.add(
+			new Source(randomAroundPoint(relativePos(0.15, 0.25), 100)),
+		);
+		this.sources.add(
+			new Source(randomAroundPoint(relativePos(0.15, 0.75), 100)),
+		);
+		this.sources.add(
+			new Source(randomAroundPoint(relativePos(0.85, 0.75), 100)),
+		);
+		this.sources.add(
+			new Source(randomAroundPoint(relativePos(0.85, 0.25), 100)),
+		);
+		for (let i = 0; i < 1; i++) {
 			this.sources.add(
 				new Source(
-					100 + Math.random() * (1920 - 200),
-					100 + Math.random() * (1080 - 200),
+					{
+						x: 100 + Math.random() * (1920 - 200),
+						y: 100 + Math.random() * (1080 - 200),
+					},
 					true,
 				),
 			);
@@ -131,12 +144,10 @@ export class Game extends Entity {
 			);
 			if (Math.random() * distance * ant.level < 10) {
 				ant.die();
-				continue;
-				// this.ants.remove(ant);
+			} else if (Math.random() < 0.5 / ant.level) {
+				ant.position.x += Math.cos(angle) * moveDistance;
+				ant.position.y += Math.sin(angle) * moveDistance;
 			}
-			// move back
-			ant.position.x += Math.cos(angle) * moveDistance;
-			ant.position.y += Math.sin(angle) * moveDistance;
 		}
 		this.instabilityLevel += 1;
 		if (this.instabilityLevel >= 3) {

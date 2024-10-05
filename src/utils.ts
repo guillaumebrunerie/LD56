@@ -26,3 +26,8 @@ export const randomAroundPoint = (p: Point, r: number): Point => {
 		y: p.y + d * Math.sin(angle),
 	};
 };
+
+export const relativePos = (nx: number, ny: number): Point => ({
+	x: 1920 * nx,
+	y: 1080 * ny,
+});

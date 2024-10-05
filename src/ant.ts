@@ -15,7 +15,7 @@ export class Ant extends Entity {
 	constructor(source: Source, targets: Target[]) {
 		super();
 
-		const { x, y } = randomAroundPoint(source, 20);
+		const { x, y } = randomAroundPoint(source.pos, 20);
 		const target = targets[0];
 
 		this.state = "appearing";
