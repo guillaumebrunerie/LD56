@@ -126,7 +126,7 @@ const AntC = ({ ant }: { ant: Ant }) => {
 			texture={antTexture[ant.level]}
 			x={ant.position.x}
 			y={ant.position.y}
-			rotation={ant.rotation + Math.PI / 2}
+			rotation={ant.direction + Math.PI / 2}
 			alpha={
 				ant.state == "appearing" ? ant.lt / ant.appearDuration
 				: ant.state == "dead" ?

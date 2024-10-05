@@ -65,6 +65,11 @@ export class Game extends Entity {
 				),
 			);
 		}
+
+		// // Initial ants
+		// for (let i = 0; i < 50; i++) {
+		// 	this.ants.add(new Ant(null, this.targets.entities));
+		// }
 	}
 
 	get carryingForce() {
