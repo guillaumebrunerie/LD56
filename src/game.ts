@@ -7,7 +7,7 @@ import { LevelSelector } from "./levelSelector";
 import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
-import { closest, randomAroundPoint } from "./utils";
+import { none, randomAroundPoint } from "./utils";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -16,7 +16,6 @@ export class Game extends Entity {
 	shockwaves: EntityArray<Shockwave>;
 	levelSelector: LevelSelector;
 	antValue = 0;
-	instabilityLevel = 0;
 	shockwaveCooldown = 0;
 	level = 0;
 
@@ -47,7 +46,6 @@ export class Game extends Entity {
 
 	reset() {
 		this.antValue = 0;
-		this.instabilityLevel = 0;
 		this.ants.clear();
 		this.targets.clear();
 		this.sources.clear();
@@ -98,13 +96,13 @@ export class Game extends Entity {
 
 		// Initial ants
 		for (let i = 0; i < levelData.initialAnts; i++) {
-			this.ants.add(new Ant(null, this.targets.entities));
+			this.ants.add(new Ant());
 		}
 	}
 
 	onTargetIdle(target: Target) {
 		for (const ant of this.ants.entities) {
-			ant.setTarget(closest(ant.pos, this.targets.entities));
+			ant.pickTarget(this.targets.entities, this.sources.entities);
 		}
 		this.shockwaveCooldown = 0;
 		this.shockwave(target.pos.x, target.pos.y);
@@ -120,6 +118,23 @@ export class Game extends Entity {
 			force += ant.level * ant.level;
 		}
 		return force;
+	}
+
+	healingForce(source: Source) {
+		const healing = [none, 5, 15, 30];
+		const destroyedFactor = 0.2;
+		let force = 0;
+		for (const ant of this.ants.entities) {
+			if (ant.state !== "carrying" || ant.target != source) {
+				continue;
+			}
+			force += healing[ant.level];
+		}
+		if (source.isDestroyed) {
+			return force * destroyedFactor;
+		} else {
+			return force;
+		}
 	}
 
 	pause() {
@@ -148,7 +163,10 @@ export class Game extends Entity {
 					}
 					const ant = new Ant(source);
 					this.ants.add(ant);
-					ant.setTarget(closest(ant.pos, this.targets.entities));
+					ant.pickTarget(
+						this.targets.entities,
+						this.sources.entities,
+					);
 				}
 			}
 		}
@@ -167,10 +185,15 @@ export class Game extends Entity {
 			}
 			ant.shockwave(delta, this.shockwaves.entities);
 			ant.moveAwayIfTooClose();
+			if (this.state == "game") {
+				ant.pickTarget(this.targets.entities, this.sources.entities);
+			}
 		}
 
 		for (const source of this.sources.entities) {
 			source.shockwave(delta, this.shockwaves.entities);
+			const healingForce = this.healingForce(source);
+			source.heal(delta, healingForce);
 		}
 
 		for (const target of this.targets.entities) {
@@ -181,11 +204,6 @@ export class Game extends Entity {
 			if (shockwave.gone) {
 				this.shockwaves.remove(shockwave);
 			}
-		}
-
-		this.instabilityLevel -= delta / 0.3;
-		if (this.instabilityLevel < 0) {
-			this.instabilityLevel = 0;
 		}
 
 		this.shockwaveCooldown -= delta;
@@ -229,21 +247,5 @@ export class Game extends Entity {
 			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
 		this.shockwaveCooldown = this.shockwaveDelay;
 		this.shockwaves.add(new Shockwave({ x, y }, -300, 100, 5000, strength));
-		this.instabilityLevel += 1;
-		if (this.instabilityLevel >= 3) {
-			this.instabilityLevel -= 3;
-			this.crack();
-		}
-	}
-
-	crack() {
-		const crackingSources = this.sources.entities.filter(
-			(source) => source.isDestroyed,
-		);
-		if (crackingSources.length == 0) {
-			return;
-		}
-		const crackingSource = crackingSources[0];
-		crackingSource.crack();
 	}
 }

@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import type { Target } from "./target";
+import type { Source } from "./source";
 
 export const mod = (a: number, b: number) => (b + (a % b)) % b;
 
@@ -51,9 +52,9 @@ export const positionAwayFrom = (
 	return null;
 };
 
-export const closest = (point: Point, things: Target[]) => {
+export const closest = (point: Point, things: (Target | Source)[]) => {
 	let min = Infinity;
-	let closest: Target | null = null;
+	let closest: Target | Source | null = null;
 	for (const thing of things) {
 		const d = distance2(point, thing.pos);
 		if (d < min) {
@@ -79,3 +80,9 @@ export const distanceToNearestIncrement = (
 	);
 	return nearestIncrement - rotation;
 };
+
+export const pick = <T>(array: T[]) => {
+	return array[Math.floor(Math.random() * array.length)];
+};
+
+export const none = 42;

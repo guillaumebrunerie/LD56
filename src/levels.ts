@@ -3,8 +3,10 @@ export const levels = [
 		level: 1,
 		name: "The cake is a lie",
 		initialAnts: 10,
-		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
-		sources: [{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 }],
+		targets: [
+			{ id: 1, pos: { x: (1920 * 2) / 3, y: 1080 * 0.5 }, delta: 100 },
+		],
+		sources: [{ pos: { x: (1920 * 1) / 3, y: 1080 * 0.5 }, delta: 100 }],
 	},
 	{
 		level: 2,
@@ -31,7 +33,25 @@ export const levels = [
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
 		],
 	},
-	{ level: 4, name: "Houston, we\nhave a problem" },
-	{ level: 5, name: "E.T... Phone... Home..." },
-	{ level: 6, name: "BBBB" },
+	{
+		level: 4,
+		name: "Houston, we\nhave a problem",
+		initialAnts: 100,
+		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		sources: [],
+	},
+	{
+		level: 5,
+		name: "E.T... Phone... Home...",
+		initialAnts: 100,
+		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		sources: [],
+	},
+	{
+		level: 6,
+		name: "BBBB",
+		initialAnts: 100,
+		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		sources: [],
+	},
 ];

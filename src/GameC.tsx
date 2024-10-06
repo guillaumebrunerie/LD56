@@ -33,7 +33,6 @@ import {
 import type { Source } from "./source";
 import type { Ant } from "./ant";
 import type { Target } from "./target";
-import { Circle } from "./Circle";
 import { CustomText } from "./CustomText";
 import { Rectangle } from "./Rectangle";
 import type { Shockwave } from "./shockwave";
@@ -317,42 +316,27 @@ const closedSourceTextures = [
 
 const SourceC = ({ source }: { source: Source }) => {
 	return (
-		<container>
-			{!source.isDestroyed && false && (
-				<Circle
-					x={source.pos.x}
-					y={source.pos.y}
-					radius={50}
-					alpha={0}
-					draw={() => {}}
-					eventMode="static"
-					onPointerDown={() => {
-						source.hit();
-					}}
-				/>
-			)}
-			<sprite
-				anchor={0.5}
-				texture={
-					source.isDestroyed ?
-						closedSourceTextures[
-							Math.floor(
-								(source.healthCurrent / source.healthMax) * 3,
-							)
-						]
-					:	Source1_Open
-				}
-				x={source.pos.x}
-				y={source.pos.y}
-			/>
-		</container>
+		<sprite
+			anchor={0.5}
+			texture={
+				source.isDestroyed ?
+					closedSourceTextures[
+						Math.floor(
+							(source.healthCurrent / source.healthMax) * 3,
+						)
+					]
+				:	Source1_Open
+			}
+			x={source.pos.x}
+			y={source.pos.y}
+		/>
 	);
 };
 
 const SourceHealth = ({ source }: { source: Source }) => {
-	if (source.isDestroyed) {
-		return null;
-	}
+	// if (source.isDestroyed) {
+	// 	return null;
+	// }
 	const width = 100;
 	const height = 8;
 	const dy = 70;
@@ -363,7 +347,7 @@ const SourceHealth = ({ source }: { source: Source }) => {
 				y={source.pos.y - height / 2 - dy}
 				width={100}
 				height={height}
-				color={0xff0000}
+				color={source.isDestroyed ? 0xdddddd : 0xff0000}
 				draw={() => {}}
 			/>
 			<Rectangle
@@ -371,7 +355,7 @@ const SourceHealth = ({ source }: { source: Source }) => {
 				y={source.pos.y - height / 2 - dy}
 				width={(100 * source.healthCurrent) / source.healthMax}
 				height={height}
-				color={0x00ff00}
+				color={source.isDestroyed ? 0x00d4ff : 0x00ff00}
 				draw={() => {}}
 			/>
 		</container>

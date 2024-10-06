@@ -2,7 +2,7 @@ import { Entity } from "./entities";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import type { Target } from "./target";
-import { randomAroundPoint, type Point } from "./utils";
+import { pick, randomAroundPoint, type Point } from "./utils";
 
 export class Ant extends Entity {
 	pos: Point;
@@ -19,7 +19,7 @@ export class Ant extends Entity {
 		| "stunned";
 	level: number;
 
-	constructor(source: Source | null) {
+	constructor(source?: Source) {
 		super();
 
 		this.level = 1;
@@ -49,7 +49,26 @@ export class Ant extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 	}
 
-	setTarget(target: Target) {
+	pickTarget(targets: Target[], sources: Source[]) {
+		const hasSource = sources.some((source) => !source.isDestroyed);
+		const toChooseFrom = [
+			...targets.filter(() => hasSource),
+			...sources.filter(
+				(source) =>
+					source.isDestroyed ||
+					source.healthCurrent < (source.healthMax * 3) / 4,
+			),
+		];
+		if (this.target && toChooseFrom.includes(this.target)) {
+			return; // All good
+		}
+		if (toChooseFrom.length == 0) {
+			return;
+		}
+		this.setTarget(pick(toChooseFrom));
+	}
+
+	setTarget(target: Target | Source) {
 		this.target = target;
 		// destination, point towards the center
 		const roughDirection = Math.atan2(
@@ -221,7 +240,7 @@ export class Ant extends Entity {
 			) {
 				this.passedShockwaves.add(shockwave);
 				this.stun(nearStrength);
-				const dieProbability = [0, 0.5, 0.3, 0.2];
+				const dieProbability = [0, 0.6, 0.55, 0.5];
 				if (Math.random() < dieProbability[this.level] * nearStrength) {
 					this.die();
 					return;

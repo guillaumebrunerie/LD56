@@ -15,39 +15,8 @@ export class Source extends Entity {
 	constructor(pos: Point, destroyed = false) {
 		super();
 		this.pos = pos;
-		this.addTicker((delta) => this.tick(delta));
 		if (destroyed) {
 			this.destroy();
-		}
-	}
-
-	tick(delta: number) {
-		if (this.isDestroyed) {
-			return;
-		}
-
-		// this.healthCurrent += 20 * delta;
-		// if (this.healthCurrent > this.healthMax) {
-		// 	this.healthCurrent = this.healthMax;
-		// }
-	}
-
-	hit() {
-		if (this.isDestroyed) {
-			return;
-		}
-		this.healthCurrent -= 15;
-		if (this.healthCurrent <= 0) {
-			this.healthCurrent = 0;
-			this.destroy();
-		}
-	}
-
-	crack() {
-		this.healthCurrent += 25;
-		if (this.healthCurrent > this.healthMax) {
-			this.healthCurrent = this.healthMax;
-			this.isDestroyed = false;
 		}
 	}
 
@@ -57,10 +26,7 @@ export class Source extends Entity {
 	}
 
 	shockwave(delta: number, shockwaves: Shockwave[]) {
-		if (this.isDestroyed) {
-			return;
-		}
-		const damage = 0.1;
+		const damage = this.isDestroyed ? 0.05 : 0.05;
 		for (const shockwave of shockwaves) {
 			const { strength } = shockwave.speedAt(this.pos);
 			this.healthCurrent -= strength * shockwave.speed * delta * damage;
@@ -68,6 +34,14 @@ export class Source extends Entity {
 		if (this.healthCurrent <= 0) {
 			this.healthCurrent = 0;
 			this.destroy();
+		}
+	}
+
+	heal(delta: number, healingForce: number) {
+		this.healthCurrent += healingForce * delta;
+		if (this.healthCurrent > this.healthMax) {
+			this.healthCurrent = this.healthMax;
+			this.isDestroyed = false;
 		}
 	}
 }

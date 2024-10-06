@@ -4,9 +4,10 @@ import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
 export const levelAngle = 2 * Math.PI * 0.21;
+const initialLevel = 1;
 
 export class LevelSelector extends Entity {
-	rotation = 0;
+	rotation = -levelAngle * (initialLevel - 1);
 	speed = 0;
 	damping = 2;
 	maxDamping = 100;

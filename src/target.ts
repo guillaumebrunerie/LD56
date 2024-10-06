@@ -86,12 +86,12 @@ export class Target extends Entity {
 		return false;
 	}
 
-	resistance = 0.1;
+	shockwaveSpeed = 5;
 	shockwave(delta: number, shockwaves: Shockwave[]) {
 		for (const shockwave of shockwaves) {
 			const { dx, dy } = shockwave.speedAt(this.pos);
 
-			const factor = Math.random() / this.resistance;
+			const factor = Math.random() * this.shockwaveSpeed;
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;
 		}

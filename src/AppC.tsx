@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { action } from "mobx";
-import { SoundButton } from "./SoundButton";
 import { App } from "./app";
 import { GameC } from "./GameC";
 
@@ -30,22 +29,5 @@ export const AppC = () => {
 		}
 	});
 
-	return (
-		<container>
-			{/* <sprite */}
-			{/* 	texture={Bg} */}
-			{/* 	x={0} */}
-			{/* 	y={0} */}
-			{/* 	eventMode="static" */}
-			{/* 	onPointerDown={(e: FederatedPointerEvent) => { */}
-			{/* 		const { x, y } = e.global; */}
-			{/* 		if (e.ctrlKey) { */}
-			{/* 			console.log(`${Math.round(x)}, ${Math.round(y)}`); */}
-			{/* 		} */}
-			{/* 	}} */}
-			{/* /> */}
-			<GameC game={app.game} />
-			{/* <SoundButton x={0} y={0} /> */}
-		</container>
-	);
+	return <GameC game={app.game} />;
 };
