@@ -43,5 +43,7 @@ export class App extends Entity {
 			Ticker.shared.remove(tick);
 			closeSound();
 		};
+
+		this.game.init();
 	}
 }

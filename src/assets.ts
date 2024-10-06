@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 21:54:36 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 23:41:20 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -57,12 +57,15 @@ import AntDie3_ from "../audio/AntDie3.mp3?sound";
 import AntDie4_ from "../audio/AntDie4.mp3?sound";
 import AntHappy_ from "../audio/AntHappy.mp3?sound";
 import AntsWalking_ from "../audio/AntsWalking.mp3?sound";
+import Click_ from "../audio/Click.mp3?sound";
 import CompleteLevel_ from "../audio/CompleteLevel.mp3?sound";
 import LoseGame_ from "../audio/LoseGame.mp3?sound";
 import Music_ from "../audio/Music.mp3?sound";
+import MusicMenu_ from "../audio/MusicMenu.mp3?sound";
 import ShockwaveSound_ from "../audio/ShockwaveSound.mp3?sound";
 import SourceDestroyed_ from "../audio/SourceDestroyed.mp3?sound";
 import StartLevel_ from "../audio/StartLevel.mp3?sound";
+import TargetEnd_ from "../audio/TargetEnd.mp3?sound";
 import TargetFall_ from "../audio/TargetFall.mp3?sound";
 import TextFall1_ from "../audio/TextFall1.mp3?sound";
 import TextFall2_ from "../audio/TextFall2.mp3?sound";
@@ -128,12 +131,15 @@ export const [
 	AntDie4,
 	AntHappy,
 	AntsWalking,
+	Click,
 	CompleteLevel,
 	LoseGame,
 	Music,
+	MusicMenu,
 	ShockwaveSound,
 	SourceDestroyed,
 	StartLevel,
+	TargetEnd,
 	TargetFall,
 	TextFall1,
 	TextFall2,
@@ -196,12 +202,15 @@ export const [
 	AntDie4_,
 	AntHappy_,
 	AntsWalking_,
+	Click_,
 	CompleteLevel_,
 	LoseGame_,
 	Music_,
+	MusicMenu_,
 	ShockwaveSound_,
 	SourceDestroyed_,
 	StartLevel_,
+	TargetEnd_,
 	TargetFall_,
 	TextFall1_,
 	TextFall2_,

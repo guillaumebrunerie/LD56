@@ -5,6 +5,7 @@ import {
 	BtnGameTxt,
 	BtnLevelTxt,
 	BtnOverTxt,
+	Click,
 } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
@@ -33,6 +34,7 @@ export const PauseScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
+					void Click.play();
 					game.resume();
 				}}
 			/>
@@ -82,6 +84,7 @@ const RestartButton = ({ game }: { game: Game }) => {
 				},
 			}}
 			onPointerDown={() => {
+				void Click.play();
 				game.restart();
 			}}
 		/>
@@ -99,6 +102,7 @@ const NextLevelButton = ({ game }: { game: Game }) => {
 			eventMode="static"
 			style={{ fontFamily: "Heroes Legend", fill: textColor }}
 			onPointerDown={() => {
+				void Click.play();
 				game.nextLevel();
 			}}
 		/>
@@ -123,6 +127,7 @@ const MainMenuButton = ({ game }: { game: Game }) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
+				void Click.play();
 				game.backToMainMenu();
 			}}
 		/>

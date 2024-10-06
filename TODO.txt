@@ -1,6 +1,7 @@
 - Sound triggers
 - Different targets
 
+- Handle pause during game starting
 - Draw polygon for ants
 - Level selection screen: better rotation for short movements
 - Ants on the moon

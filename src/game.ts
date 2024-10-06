@@ -1,5 +1,5 @@
 import { Ant } from "./ant";
-import { Music } from "./assets";
+import { Music, MusicMenu, ShockwaveSound, StartLevel } from "./assets";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 import { levels } from "./levels";
@@ -44,6 +44,11 @@ export class Game extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 	}
 
+	init() {
+		MusicMenu.singleInstance = true;
+		void MusicMenu.play({ loop: true, volume: 0.5 });
+	}
+
 	reset() {
 		this.antValue = 0;
 		this.ants.clear();
@@ -55,6 +60,7 @@ export class Game extends Entity {
 	backToMainMenu() {
 		this.reset();
 		this.state = "levelSelect";
+		void MusicMenu.resume();
 	}
 
 	nextLevel() {
@@ -68,10 +74,15 @@ export class Game extends Entity {
 	}
 
 	startLevel(level: number) {
+		void MusicMenu.pause();
+		void StartLevel.play({ volume: 0.5 });
 		this.level = level;
 		this.state = "gameStarting";
 
-		void Music.play({ loop: true, volume: 0.5 });
+		setTimeout(() => {
+			Music.singleInstance = true;
+			void Music.play({ loop: true, volume: 0.5 });
+		}, 700);
 
 		const levelData = levels.find((l) => l.level == level);
 		if (!levelData) {
@@ -138,6 +149,7 @@ export class Game extends Entity {
 	}
 
 	pause() {
+		void Music.pause();
 		if (this.state == "game") {
 			this.state = "pause";
 		} else {
@@ -146,6 +158,7 @@ export class Game extends Entity {
 	}
 
 	resume() {
+		void Music.resume();
 		this.state = "game";
 	}
 
@@ -254,6 +267,7 @@ export class Game extends Entity {
 		}
 		const strength =
 			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
+		void ShockwaveSound.play({ volume: 0.3 * strength });
 		this.shockwaveCooldown = this.shockwaveDelay;
 		this.shockwaves.add(new Shockwave({ x, y }, -300, 100, 5000, strength));
 	}

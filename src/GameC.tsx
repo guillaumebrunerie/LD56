@@ -29,6 +29,7 @@ import {
 	MenuMoon_Shadow2,
 	Target1End,
 	PauseBtn,
+	Click,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -114,8 +115,10 @@ const PauseButton = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
+					void Click.play();
 					game.pause();
 				}}
+				draw={() => {}}
 			/>
 			<sprite texture={PauseBtn} anchor={0.5} />
 		</container>
