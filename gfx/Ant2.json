@@ -78,10 +78,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.1",
-	"image": "Ant2Walk.png",
+	"image": "Ant2.png",
 	"format": "RGBA8888",
 	"size": {"w":104,"h":122},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:4c9c27c90d560c95ce19c0e457701ab5:30e9e08a570240d21596630493dd9bf8:ecac088e75a55f2709a1d258bc6dedbf$"
+	"smartupdate": "$TexturePacker:SmartUpdate:20084513a50eb2d81af42b4e260cd0e3:30e9e08a570240d21596630493dd9bf8:25a229a2fc04bc9620cf519f1c6ac589$"
 }
 }
