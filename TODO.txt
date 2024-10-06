@@ -1,2 +1,7 @@
 - Ants regenerate life of sources instead of it happening automatically
-- Level selection screen: better rotation
+- Balance all levels
+- Level selection screen: better rotation for short movements
+- Fix Target1End animation timing (should happen before)
+- Pause + pause menu
+- More targets
+- Powerups

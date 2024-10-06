@@ -8,7 +8,7 @@ export const levels = [
 	},
 	{
 		level: 2,
-		name: "XXXX",
+		name: "Cheeeese!",
 		initialAnts: 20,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [
@@ -18,7 +18,7 @@ export const levels = [
 	},
 	{
 		level: 3,
-		name: "YYYY",
+		name: "What’s this? What’s this?\nThere’s color everywhere!",
 		initialAnts: 50,
 		targets: [
 			{ id: 1, pos: { x: 1920 * 0.4, y: 1080 * 0.5 }, delta: 100 },

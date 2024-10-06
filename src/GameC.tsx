@@ -227,16 +227,16 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 					text={levelText}
 				/>
 			</container>
-			<container y={230}>
+			<container y={200}>
 				<CustomText
-					anchor={0.5}
+					anchor={{ x: 0.5, y: 0 }}
 					x={5}
 					y={5}
 					style={{ fill: "#222", fontSize: 40 }}
 					text={name}
 				/>
 				<CustomText
-					anchor={0.5}
+					anchor={{ x: 0.5, y: 0 }}
 					style={{ fill: "#ffdefc", fontSize: 40 }}
 					text={name}
 				/>

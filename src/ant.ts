@@ -254,7 +254,6 @@ export class Ant extends Entity {
 
 	stunDuration = [0, 0.5, 0.4, 0.3];
 	stun(strength: number) {
-		console.log(strength);
 		this.state = "stunned";
 		this.stunnedCooldown = this.stunDuration[this.level] * strength;
 	}

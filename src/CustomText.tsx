@@ -18,7 +18,7 @@ export const CustomText = ({
 					fontSize: 50,
 					fontWeight: "800",
 					letterSpacing: 4,
-					lineHeight: 80,
+					lineHeight: 50,
 					stroke: {
 						width: 3,
 						color: "black",
