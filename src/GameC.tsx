@@ -55,6 +55,12 @@ export const GameC = ({ game }: { game: Game }) => {
 			)}
 			{game.ants.entities.map(
 				(ant, i) =>
+					ant.state == "dead" && (
+						<DeadAntBloodStainC key={i} ant={ant} />
+					),
+			)}
+			{game.ants.entities.map(
+				(ant, i) =>
 					ant.state == "dead" && <DeadAntC key={i} ant={ant} />,
 			)}
 			{game.ants.entities.map(
@@ -236,23 +242,28 @@ const DeadAntC = ({ ant }: { ant: Ant }) => {
 	const alpha = 1 - ant.lt / ant.dieDuration;
 
 	return (
-		<container>
-			<sprite
-				anchor={0.5}
-				texture={Ant_BloodStain}
-				alpha={alpha}
-				x={ant.pos.x}
-				y={ant.pos.y}
-			/>
-			<sprite
-				anchor={0.5}
-				texture={antDeadTexture[ant.level]}
-				x={ant.pos.x}
-				y={ant.pos.y}
-				rotation={ant.direction + Math.PI / 2}
-				alpha={alpha}
-			/>
-		</container>
+		<sprite
+			anchor={0.5}
+			texture={antDeadTexture[ant.level]}
+			x={ant.pos.x}
+			y={ant.pos.y}
+			rotation={ant.direction + Math.PI / 2}
+			alpha={alpha}
+		/>
+	);
+};
+
+const DeadAntBloodStainC = ({ ant }: { ant: Ant }) => {
+	const alpha = 1 - ant.lt / ant.dieDuration;
+
+	return (
+		<sprite
+			anchor={0.5}
+			texture={Ant_BloodStain}
+			alpha={alpha}
+			x={ant.pos.x}
+			y={ant.pos.y}
+		/>
 	);
 };
 
@@ -337,8 +348,8 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 				texture={getFrame(ShockwaveA, 50, shockwave.lt, "remove")}
 				x={shockwave.center.x}
 				y={shockwave.center.y}
-				scale={(shockwave.strength / 100) * 1.8}
-				alpha={shockwave.strength / 100}
+				scale={(shockwave.strength / 100) * 1 + 0.5}
+				alpha={(shockwave.strength / 100) * 0.7 + 0.3}
 			/>
 			<Ring
 				x={shockwave.center.x}
