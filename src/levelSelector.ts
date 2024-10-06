@@ -9,9 +9,6 @@ const initialLevel = 1;
 export class LevelSelector extends Entity {
 	rotation = -levelAngle * (initialLevel - 1);
 	speed = 0;
-	damping = 2;
-	maxDamping = 100;
-	maxSpeed = 2;
 	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
 
@@ -38,15 +35,6 @@ export class LevelSelector extends Entity {
 			0,
 			this.speed,
 		);
-		// const damping =
-		// 	Math.abs(this.speed) > this.maxSpeed ?
-		// 		this.maxDamping
-		// 	:	this.damping;
-		// if (this.speed > 0) {
-		// 	this.speed = Math.max(0, this.speed - delta * damping);
-		// } else if (this.speed < 0) {
-		// 	this.speed = Math.min(0, this.speed + delta * damping);
-		// }
 		this.speed = dangle * 10;
 		this.rotation += delta * this.speed;
 	}
@@ -82,15 +70,9 @@ export class LevelSelector extends Entity {
 			return;
 		}
 		this.touchPoint = null;
-		this.speed = // Math.max(
-			// -this.maxSpeed,
-			// Math.min(
-			// 	this.maxSpeed,
+		this.speed =
 			(this.rotation - this.lastSnapshot.rotation) /
 			(this.lt - this.lastSnapshot.lt);
-		// 	),
-		// );
-		console.log(this.speed);
 		this.nextSnapshot = { lt: this.lt, rotation: this.rotation };
 	}
 }

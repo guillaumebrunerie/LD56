@@ -1,11 +1,11 @@
 - Handle pause during game starting
+- Ants on the moon
 - Different targets
+- Transition between level select and game
 
 - Power ups
 - Design and balance all levels
 
-- Ants on the moon
-- Transition between level select and game
 - Animate game over posting
 - Animate level complete posting
 - Draw polygon for ants

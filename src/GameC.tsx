@@ -95,7 +95,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.shockwaves.entities.map((shockwave, i) => (
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
-			<PauseButton game={game} />
+			{game.state == "game" && <PauseButton game={game} />}
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
 			{game.state == "pause" && <PauseScreen game={game} />}
@@ -508,6 +508,7 @@ const DeadAntBloodStainC = ({ ant }: { ant: Ant }) => {
 		<sprite
 			anchor={0.5}
 			texture={Ant_BloodStain}
+			blendMode="overlay"
 			alpha={alpha}
 			x={ant.pos.x}
 			y={ant.pos.y}
