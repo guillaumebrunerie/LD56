@@ -1,4 +1,8 @@
-import type { FederatedPointerEvent, Texture } from "pixi.js";
+import {
+	ColorMatrixFilter,
+	type FederatedPointerEvent,
+	type Texture,
+} from "pixi.js";
 import type { Game } from "./game";
 import {
 	Ant1_Dead,
@@ -48,7 +52,12 @@ export const GameC = ({ game }: { game: Game }) => {
 					!source.isDestroyed && <SourceC key={i} source={source} />,
 			)}
 			{game.ants.entities.map(
-				(ant, i) => ant.state == "dead" && <AntC key={i} ant={ant} />,
+				(ant, i) =>
+					ant.state == "dead" && <DeadAntC key={i} ant={ant} />,
+			)}
+			{game.ants.entities.map(
+				(ant, i) =>
+					ant.state != "dead" && <AntShadowC key={i} ant={ant} />,
 			)}
 			{game.ants.entities.map(
 				(ant, i) => ant.state != "dead" && <AntC key={i} ant={ant} />,
@@ -160,31 +169,83 @@ const antDeadTexture: Record<number, Texture> = {
 };
 
 const AntC = ({ ant }: { ant: Ant }) => {
-	const alpha =
-		ant.state == "appearing" ? ant.lt / ant.appearDuration
-		: ant.state == "dead" ? 1 - ant.lt / ant.dieDuration
-		: 1;
+	const alpha = ant.state == "appearing" ? ant.lt / ant.appearDuration : 1;
 
 	return (
 		<container>
-			{ant.state == "dead" && (
-				<sprite
-					anchor={0.5}
-					texture={Ant_BloodStain}
-					alpha={alpha}
-					x={ant.position.x}
-					y={ant.position.y}
-				/>
-			)}
 			<sprite
 				anchor={0.5}
-				texture={
-					(ant.state == "dead" ? antDeadTexture : antTexture)[
-						ant.level
-					]
-				}
-				x={ant.position.x}
-				y={ant.position.y}
+				texture={antTexture[ant.level]}
+				x={ant.pos.x}
+				y={ant.pos.y}
+				rotation={ant.direction + Math.PI / 2}
+				alpha={alpha}
+			/>
+		</container>
+	);
+};
+
+const darkFilter = new ColorMatrixFilter();
+darkFilter.matrix = [
+	0,
+	0,
+	0,
+	0,
+	0x10 / 256,
+	0,
+	0,
+	0,
+	0,
+	0x10 / 256,
+	0,
+	0,
+	0,
+	0,
+	0x10 / 256,
+	0,
+	0,
+	0,
+	1,
+	0,
+];
+const shadowDx = 1;
+const shadowDy = 2;
+
+const AntShadowC = ({ ant }: { ant: Ant }) => {
+	const alpha = ant.state == "appearing" ? ant.lt / ant.appearDuration : 1;
+
+	return (
+		<container>
+			<sprite
+				filters={[darkFilter]}
+				anchor={0.5}
+				texture={antTexture[ant.level]}
+				x={ant.pos.x + shadowDx}
+				y={ant.pos.y + shadowDy}
+				rotation={ant.direction + Math.PI / 2}
+				alpha={alpha * 0.9}
+			/>
+		</container>
+	);
+};
+
+const DeadAntC = ({ ant }: { ant: Ant }) => {
+	const alpha = 1 - ant.lt / ant.dieDuration;
+
+	return (
+		<container>
+			<sprite
+				anchor={0.5}
+				texture={Ant_BloodStain}
+				alpha={alpha}
+				x={ant.pos.x}
+				y={ant.pos.y}
+			/>
+			<sprite
+				anchor={0.5}
+				texture={antDeadTexture[ant.level]}
+				x={ant.pos.x}
+				y={ant.pos.y}
 				rotation={ant.direction + Math.PI / 2}
 				alpha={alpha}
 			/>

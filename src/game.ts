@@ -88,6 +88,8 @@ export class Game extends Entity {
 		for (const ant of this.ants.entities) {
 			ant.setTarget(this.targets.entities[0]);
 		}
+		const p = this.targets.entities[0].position;
+		this.shockwave(p.x, p.y);
 		this.isStarting = false;
 	}
 
@@ -120,28 +122,31 @@ export class Game extends Entity {
 		}
 
 		const carryingForce = this.carryingForce;
-		const { dx, dy } = this.targets.entities[0].carry(
+		this.targets.entities[0].carry(
 			delta,
 			carryingForce,
 			this.sources.entities.filter((source) => !source.isDestroyed),
 		);
-		for (const ant of this.ants.entities) {
-			if (ant.state === "carrying") {
-				ant.position.x += dx;
-				ant.position.y += dy;
-			}
-		}
+		// for (const ant of this.ants.entities) {
+		// 	if (ant.state === "carrying") {
+		// 		ant.position.x += dx;
+		// 		ant.position.y += dy;
+		// 	}
+		// }
 		for (const ant of this.ants.entities) {
 			if (ant.gone) {
 				this.ants.remove(ant);
 			}
-		}
-		for (const ant of this.ants.entities) {
 			ant.shockwave(delta, this.shockwaves.entities);
+			ant.moveAwayIfTooClose(this.targets.entities);
 		}
 
 		for (const source of this.sources.entities) {
 			source.shockwave(delta, this.shockwaves.entities);
+		}
+
+		for (const target of this.targets.entities) {
+			target.shockwave(delta, this.shockwaves.entities);
 		}
 
 		for (const shockwave of this.shockwaves.entities) {
