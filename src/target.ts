@@ -86,7 +86,7 @@ export class Target extends Entity {
 		return false;
 	}
 
-	resistance = 10;
+	resistance = 0.1;
 	shockwave(delta: number, shockwaves: Shockwave[]) {
 		for (const shockwave of shockwaves) {
 			const { dx, dy } = shockwave.speedAt(this.position);

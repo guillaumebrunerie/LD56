@@ -1,6 +1,6 @@
 export const levels = [
 	{
-		level: 1,
+		level: 3,
 		name: "The cake is a lie",
 		initialAnts: 10,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
@@ -17,7 +17,7 @@ export const levels = [
 		],
 	},
 	{
-		level: 3,
+		level: 1,
 		name: "YYYY",
 		initialAnts: 50,
 		targets: [

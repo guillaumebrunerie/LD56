@@ -40,12 +40,15 @@ export class Shockwave extends Entity {
 			this.outerRadius < 0 ||
 			distance2 > this.outerRadius * this.outerRadius
 		) {
-			return { dx: 0, dy: 0, strength: 0 };
+			return { dx: 0, dy: 0, strength: 0, nearStrength: 0 };
 		} else {
 			return {
 				dx: (dx / distance2) * this.strength * this.speed,
 				dy: (dy / distance2) * this.strength * this.speed,
-				strength: (this.strength * this.speed) / Math.sqrt(distance2),
+				strength:
+					(this.strength * this.minDistance) / Math.sqrt(distance2),
+				nearStrength:
+					(this.strength * this.minDistance ** 2) / distance2,
 			};
 		}
 	}

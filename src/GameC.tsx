@@ -567,8 +567,8 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 				texture={getFrame(ShockwaveA, 50, shockwave.lt, "remove")}
 				x={shockwave.center.x}
 				y={shockwave.center.y}
-				scale={(shockwave.strength / 100) * 1 + 0.5}
-				alpha={(shockwave.strength / 100) * 0.7 + 0.3}
+				scale={shockwave.strength + 0.5}
+				alpha={shockwave.strength * 0.7 + 0.3}
 			/>
 			<Ring
 				x={shockwave.center.x}

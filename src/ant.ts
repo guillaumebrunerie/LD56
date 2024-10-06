@@ -230,38 +230,34 @@ export class Ant extends Entity {
 			return;
 		}
 		for (const shockwave of shockwaves) {
-			const { dx, dy, strength } = shockwave.speedAt(this.pos);
+			const { dx, dy, strength, nearStrength } = shockwave.speedAt(
+				this.pos,
+			);
 
 			// Maybe die
-			const distance = Math.max(
-				this.minDistanceShockwave,
-				distanceBetween(this.pos, shockwave.center),
-			);
 			if (
 				!this.passedShockwaves.has(shockwave) &&
 				(dx !== 0 || dy !== 0)
 			) {
 				this.passedShockwaves.add(shockwave);
-				this.stun(strength);
-				if (
-					Math.random() <
-					(shockwave.strength / distance / distance / this.level) * 5
-				) {
+				this.stun(nearStrength);
+				const dieProbability = [0, 0.5, 0.3, 0.2];
+				if (Math.random() < dieProbability[this.level] * nearStrength) {
 					this.die();
 					return;
 				}
 			}
 
-			const factor = Math.random() / this.level;
+			const factor = [0, 100, 50, 25][this.level] * Math.random();
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;
 		}
 	}
 
-	stunnedDelay = 0.005;
+	stunDuration = [0, 0.7, 0.5, 0.3];
 	stun(strength: number) {
 		this.state = "stunned";
-		this.stunnedCooldown = (this.stunnedDelay * strength) / 100;
+		this.stunnedCooldown = this.stunDuration[this.level] * strength;
 	}
 
 	moveAwayIfTooClose() {

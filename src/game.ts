@@ -208,9 +208,7 @@ export class Game extends Entity {
 		const strength =
 			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
 		this.shockwaveCooldown = this.shockwaveDelay;
-		this.shockwaves.add(
-			new Shockwave({ x, y }, -300, 100, 5000, 100 * strength),
-		);
+		this.shockwaves.add(new Shockwave({ x, y }, -300, 100, 5000, strength));
 		this.instabilityLevel += 1;
 		if (this.instabilityLevel >= 3) {
 			this.instabilityLevel -= 3;
