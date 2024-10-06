@@ -6,11 +6,11 @@ import {
 import type { Game } from "./game";
 import {
 	Ant1_Dead,
-	Ant1_Default,
+	Ant1Walk,
 	Ant2_Dead,
-	Ant2_Default,
+	Ant2Walk,
 	Ant3_Dead,
-	Ant3_Default,
+	Ant3Walk,
 	Ant_BloodStain,
 	Bg,
 	Source1_Closed_Lvl1,
@@ -29,6 +29,7 @@ import { CustomText } from "./CustomText";
 import { Rectangle } from "./Rectangle";
 import type { Shockwave } from "./shockwave";
 import { Ring } from "./Ring";
+import { getFrame } from "./Animation";
 
 export const GameC = ({ game }: { game: Game }) => {
 	return (
@@ -156,10 +157,10 @@ const SourceHealth = ({ source }: { source: Source }) => {
 	// );
 };
 
-const antTexture: Record<number, Texture> = {
-	1: Ant1_Default,
-	2: Ant2_Default,
-	3: Ant3_Default,
+const antWalk: Record<number, Texture[]> = {
+	1: Ant1Walk,
+	2: Ant2Walk,
+	3: Ant3Walk,
 };
 
 const antDeadTexture: Record<number, Texture> = {
@@ -175,7 +176,7 @@ const AntC = ({ ant }: { ant: Ant }) => {
 		<container>
 			<sprite
 				anchor={0.5}
-				texture={antTexture[ant.level]}
+				texture={getFrame(antWalk[ant.level], 20, ant.lt)}
 				x={ant.pos.x}
 				y={ant.pos.y}
 				rotation={ant.direction + Math.PI / 2}
@@ -219,7 +220,7 @@ const AntShadowC = ({ ant }: { ant: Ant }) => {
 			<sprite
 				filters={[darkFilter]}
 				anchor={0.5}
-				texture={antTexture[ant.level]}
+				texture={getFrame(antWalk[ant.level], 20, ant.lt)}
 				x={ant.pos.x + shadowDx}
 				y={ant.pos.y + shadowDy}
 				rotation={ant.direction + Math.PI / 2}

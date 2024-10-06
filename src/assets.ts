@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 01:24:56 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 10:24:55 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -24,6 +24,9 @@ import Target1_lvl1_ from "../gfx/Target1_lvl1.png?texture";
 import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 
 /** Spritesheets */
+import Ant1Walk_ from "../gfx/Ant1Walk.png?spritesheet";
+import Ant2Walk_ from "../gfx/Ant2Walk.png?spritesheet";
+import Ant3Walk_ from "../gfx/Ant3Walk.png?spritesheet";
 
 /** Sounds */
 import Music_ from "../audio/Music.mp3?sound";
@@ -47,6 +50,12 @@ export const [
 	Source1_Open,
 	Target1_lvl1,
 	Target_Shadow,
+	Ant1WalkSheet,
+	{ animations: { Ant1Walk } },
+	Ant2WalkSheet,
+	{ animations: { Ant2Walk } },
+	Ant3WalkSheet,
+	{ animations: { Ant3Walk } },
 	Music,
 ] = await Promise.all([
 	Ant1_Dead_,
@@ -67,5 +76,11 @@ export const [
 	Source1_Open_,
 	Target1_lvl1_,
 	Target_Shadow_,
+	Ant1Walk_,
+	Ant1Walk_,
+	Ant2Walk_,
+	Ant2Walk_,
+	Ant3Walk_,
+	Ant3Walk_,
 	Music_,
 ]);
