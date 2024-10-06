@@ -26,7 +26,6 @@ import {
 	MenuMoonSky,
 	MenuMoon,
 	MenuMoonGlow,
-	MenuMoon_Shadow,
 	MenuMoon_Shadow2,
 	Target1End,
 } from "./assets";
@@ -193,6 +192,8 @@ type LevelCardProps = {
 	mainRotation: number;
 };
 
+const angleThreshold = 0.1;
+
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const levelText = `LEVEL ${level}`;
 	const angle = (level - 1) * levelAngle;
@@ -216,8 +217,20 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 				cursor="pointer"
 				draw={() => {}}
 				eventMode="static"
-				onPointerTap={() => {
-					game.startLevel(level);
+				onPointerDown={(e: FederatedPointerEvent) => {
+					game.levelSelector.touchStart({ ...e.global });
+				}}
+				onPointerUp={() => {
+					game.levelSelector.touchEnd();
+					if (
+						Math.abs(mainRotation + (level - 1) * levelAngle) <
+						angleThreshold
+					) {
+						game.startLevel(level);
+					}
+				}}
+				onPointerUpOutside={() => {
+					game.levelSelector.touchEnd();
 				}}
 			/>
 			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
