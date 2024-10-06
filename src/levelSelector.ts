@@ -76,6 +76,9 @@ export class LevelSelector extends Entity {
 	}
 
 	touchEnd() {
+		if (!this.touchPoint) {
+			return;
+		}
 		this.touchPoint = null;
 		this.speed = // Math.max(
 			// -this.maxSpeed,

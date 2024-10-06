@@ -182,7 +182,7 @@ export class Game extends Entity {
 			this.gameOver();
 		}
 		if (
-			this.ants.entities.length == 0 &&
+			this.ants.entities.every((ant) => ant.state == "dead") &&
 			this.sources.entities.every((source) => source.isDestroyed) &&
 			this.state == "game"
 		) {

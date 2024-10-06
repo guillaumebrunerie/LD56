@@ -14,7 +14,7 @@ export const CustomText = ({
 			ref={myRef}
 			style={
 				new TextStyle({
-					fontFamily: "Comix Loud",
+					fontFamily: "Laffayette Comic Pro",
 					fontSize: 50,
 					// fontWeight: "800",
 					letterSpacing: 4,

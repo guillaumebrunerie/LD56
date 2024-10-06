@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 19:09:18 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 19:45:03 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -44,6 +44,7 @@ import Music_ from "../audio/Music.mp3?sound";
 
 /** Fonts */
 import Comix_Loud_ from "../fonts/Comix_Loud.ttf?font";
+import Heroes_Legend_ from "../fonts/Heroes_Legend.ttf?font";
 import Laffayette_Comic_Pro_ from "../fonts/Laffayette_Comic_Pro.ttf?font";
 
 export const [
@@ -86,6 +87,7 @@ export const [
 	{ animations: { Target1End } },
 	Music,
 	Comix_Loud,
+	Heroes_Legend,
 	Laffayette_Comic_Pro,
 ] = await Promise.all([
 	Ant1_Dead_,
@@ -127,5 +129,6 @@ export const [
 	Target1End_,
 	Music_,
 	Comix_Loud_,
+	Heroes_Legend_,
 	Laffayette_Comic_Pro_,
 ]);

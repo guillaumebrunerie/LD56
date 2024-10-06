@@ -40,6 +40,7 @@ import { Ring } from "./Ring";
 import { getFrame } from "./Animation";
 import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
+import { useRef } from "react";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.state == "levelSelect") {
@@ -199,6 +200,7 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const angle = (level - 1) * levelAngle;
 	const minAngle = -mainRotation + levelAngle - Math.PI;
 	const maxAngle = -mainRotation + levelAngle + Math.PI;
+	const isDownRef = useRef(false);
 	if (level * levelAngle < minAngle || level * levelAngle > maxAngle) {
 		return null;
 	}
@@ -218,19 +220,23 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 				draw={() => {}}
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
+					isDownRef.current = true;
 					game.levelSelector.touchStart({ ...e.global });
 				}}
 				onPointerUp={() => {
 					game.levelSelector.touchEnd();
 					if (
+						isDownRef.current &&
 						Math.abs(mainRotation + (level - 1) * levelAngle) <
-						angleThreshold
+							angleThreshold
 					) {
 						game.startLevel(level);
 					}
+					isDownRef.current = false;
 				}}
 				onPointerUpOutside={() => {
 					game.levelSelector.touchEnd();
+					isDownRef.current = false;
 				}}
 			/>
 			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
@@ -240,12 +246,20 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 					anchor={0.5}
 					x={0}
 					y={5}
-					style={{ fill: "#222", fontSize: 36 }}
+					style={{
+						fill: "#222",
+						fontSize: 36,
+						fontFamily: "Comix Loud",
+					}}
 					text={levelText}
 				/>
 				<CustomText
 					anchor={0.5}
-					style={{ fill: "#ff75f1", fontSize: 36 }}
+					style={{
+						fill: "#ff75f1",
+						fontSize: 36,
+						fontFamily: "Comix Loud",
+					}}
 					text={levelText}
 				/>
 			</container>
@@ -471,7 +485,7 @@ const TargetC = ({ target }: { target: Target }) => {
 	const alpha = nt;
 	const scale = (1 - nt) * 3 + 1;
 
-	const alphaShadow = nt;
+	const alphaShadow = target.state == "disappearing" ? 0 : nt;
 	const scaleShadow = (1 - nt) * 2 + 1;
 
 	return (
@@ -517,6 +531,7 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 				y={1080 / 2 - 50}
 				anchor={0.5}
 				text="Game over!"
+				style={{ fontFamily: "Heroes Legend" }}
 			/>
 			<CustomText
 				x={1920 / 2}
@@ -525,6 +540,7 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 				text="Restart?"
 				cursor="pointer"
 				eventMode="static"
+				style={{ fontFamily: "Heroes Legend" }}
 				onPointerDown={() => {
 					game.restart();
 				}}
@@ -533,7 +549,8 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 				x={1920 / 2}
 				y={1080 / 2 + 150}
 				anchor={0.5}
-				text="Back to main menu"
+				text="Main menu"
+				style={{ fontFamily: "Heroes Legend" }}
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
@@ -561,12 +578,14 @@ const WinScreen = ({ game }: { game: Game }) => {
 				y={1080 / 2 - 50}
 				anchor={0.5}
 				text="You win!"
+				style={{ fontFamily: "Heroes Legend" }}
 			/>
 			<CustomText
 				x={1920 / 2}
 				y={1080 / 2 + 50}
 				anchor={0.5}
 				text="Next level?"
+				style={{ fontFamily: "Heroes Legend" }}
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
@@ -577,7 +596,8 @@ const WinScreen = ({ game }: { game: Game }) => {
 				x={1920 / 2}
 				y={1080 / 2 + 150}
 				anchor={0.5}
-				text="Back to main menu"
+				text="Main menu"
+				style={{ fontFamily: "Heroes Legend" }}
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
