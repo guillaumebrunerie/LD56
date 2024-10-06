@@ -40,6 +40,7 @@ import type { Shockwave } from "./shockwave";
 import { Ring } from "./Ring";
 import { getFrame } from "./Animation";
 import { levels } from "./levels";
+import { levelAngle } from "./levelSelector";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.state == "levelSelect") {
@@ -185,17 +186,17 @@ type LevelCardProps = {
 
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const levelText = `Level ${level}`;
-	const angle = (level * Math.PI) / 2 + Math.PI;
-	const minAngle = -mainRotation / (Math.PI / 2) - 0.5;
-	const maxAngle = -mainRotation / (Math.PI / 2) + 2.5;
-	if (level < minAngle || level > maxAngle) {
+	const angle = (level - 1) * levelAngle;
+	const minAngle = -mainRotation + levelAngle - Math.PI / 2;
+	const maxAngle = -mainRotation + levelAngle + Math.PI / 2;
+	if (level * levelAngle < minAngle || level * levelAngle > maxAngle) {
 		return null;
 	}
 	return (
 		<container
-			x={800 * Math.cos(angle)}
-			y={800 * Math.sin(angle)}
-			rotation={angle + Math.PI / 2}
+			x={800 * Math.sin(angle)}
+			y={-800 * Math.cos(angle)}
+			rotation={angle}
 		>
 			<Rectangle
 				x={-220}

@@ -67,14 +67,15 @@ export const closest = (point: Point, things: Target[]) => {
 	return closest;
 };
 
-export const distanceToNearest90 = (
+export const distanceToNearestIncrement = (
 	rotation: number,
+	increment: number,
 	min: number,
 	max: number,
 ) => {
-	const nearest90 = Math.min(
+	const nearestIncrement = Math.min(
 		max,
-		Math.max(min, Math.round(rotation / (Math.PI / 2)) * (Math.PI / 2)),
+		Math.max(min, Math.round(rotation / increment) * increment),
 	);
-	return nearest90 - rotation;
+	return nearestIncrement - rotation;
 };
