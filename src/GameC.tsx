@@ -38,6 +38,7 @@ import { Rectangle } from "./Rectangle";
 import type { Shockwave } from "./shockwave";
 import { Ring } from "./Ring";
 import { getFrame } from "./Animation";
+import { levels } from "./levels";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.screen == "levelSelect") {
@@ -95,17 +96,6 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
-// Laffayette Comic Pro
-
-const levels = [
-	{ level: 1, label: "The cake is a lie" },
-	{ level: 2, label: "XXXX" },
-	{ level: 3, label: "YYYY" },
-	{ level: 4, label: "ZZZZ" },
-	{ level: 5, label: "AAAA" },
-	{ level: 6, label: "BBBB" },
-];
-
 const LevelSelectScreen = ({ game }: { game: Game }) => {
 	return (
 		<container>
@@ -151,12 +141,12 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				y={game.levelSelector.center.y}
 				rotation={game.levelSelector.rotation}
 			>
-				{levels.map(({ level, label }) => (
+				{levels.map(({ level, name }) => (
 					<LevelCard
 						game={game}
 						key={level}
 						level={level}
-						label={label}
+						name={name}
 						mainRotation={game.levelSelector.rotation}
 					/>
 				))}
@@ -187,11 +177,11 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 type LevelCardProps = {
 	game: Game;
 	level: number;
-	label: string;
+	name: string;
 	mainRotation: number;
 };
 
-const LevelCard = ({ game, level, label, mainRotation }: LevelCardProps) => {
+const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const levelText = `Level ${level}`;
 	const angle = (level * Math.PI) / 2 + Math.PI;
 	const minAngle = -mainRotation / (Math.PI / 2) - 0.5;
@@ -214,7 +204,7 @@ const LevelCard = ({ game, level, label, mainRotation }: LevelCardProps) => {
 				cursor="pointer"
 				draw={() => {}}
 				eventMode="static"
-				onClick={() => {
+				onPointerTap={() => {
 					game.startLevel(level);
 				}}
 			/>
@@ -240,12 +230,12 @@ const LevelCard = ({ game, level, label, mainRotation }: LevelCardProps) => {
 					x={5}
 					y={5}
 					style={{ fill: "#222", fontSize: 40 }}
-					text={label}
+					text={name}
 				/>
 				<CustomText
 					anchor={0.5}
 					style={{ fill: "#ffdefc", fontSize: 40 }}
-					text={label}
+					text={name}
 				/>
 			</container>
 		</container>

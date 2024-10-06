@@ -21,3 +21,8 @@ declare module "*.mp3?sound" {
 	const sound: Promise<Sound>;
 	export default sound;
 }
+
+declare module "*.ttf?font" {
+	const font: never;
+	export default font;
+}

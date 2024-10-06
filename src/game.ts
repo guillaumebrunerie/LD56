@@ -2,11 +2,12 @@ import { Ant } from "./ant";
 import { Music } from "./assets";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
+import { levels } from "./levels";
 import { LevelSelector } from "./levelSelector";
 import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
-import { closest, randomAroundPoint, relativePos } from "./utils";
+import { closest, randomAroundPoint } from "./utils";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -20,6 +21,7 @@ export class Game extends Entity {
 	isStarting = true;
 	shockwaveCooldown = 0;
 	screen: "levelSelect" | "game" = "levelSelect";
+	level = 0;
 
 	constructor() {
 		super();
@@ -50,53 +52,38 @@ export class Game extends Entity {
 
 	restart() {
 		this.reset();
-		this.start();
+		this.startLevel(this.level);
 	}
 
 	startLevel(level: number) {
-		this.start();
-	}
-
-	start() {
+		this.level = level;
 		this.screen = "game";
-		void Music.play({ loop: true, volume: 0.5 });
-		this.targets.add(
-			new Target(
-				randomAroundPoint(relativePos(0.4, 0.5), 100),
-				(target) => this.onTargetIdle(target),
-			),
-		);
-		this.targets.add(
-			new Target(
-				randomAroundPoint(relativePos(0.6, 0.5), 100),
-				(target) => this.onTargetIdle(target),
-			),
-		);
-		this.sources.add(
-			new Source(randomAroundPoint(relativePos(0.15, 0.25), 100)),
-		);
-		this.sources.add(
-			new Source(randomAroundPoint(relativePos(0.15, 0.75), 100)),
-		);
-		this.sources.add(
-			new Source(randomAroundPoint(relativePos(0.85, 0.75), 100)),
-		);
-		this.sources.add(
-			new Source(randomAroundPoint(relativePos(0.85, 0.25), 100)),
-		);
 
-		// for (let i = 0; i < 5; i++) {
-		// 	const position = positionAwayFrom(
-		// 		this.sources.entities.map((source) => source.pos),
-		// 		200,
-		// 	);
-		// 	if (position) {
-		// 		this.sources.add(new Source(position, true));
-		// 	}
-		// }
+		void Music.play({ loop: true, volume: 0.5 });
+
+		const levelData = levels.find((l) => l.level == level);
+		if (!levelData) {
+			console.error("level not found");
+			return;
+		}
+
+		for (const targetData of levelData.targets) {
+			this.targets.add(
+				new Target(
+					randomAroundPoint(targetData.pos, targetData.delta),
+					(target) => this.onTargetIdle(target),
+				),
+			);
+		}
+
+		for (const sourceData of levelData.sources) {
+			this.sources.add(
+				new Source(randomAroundPoint(sourceData.pos, sourceData.delta)),
+			);
+		}
 
 		// Initial ants
-		for (let i = 0; i < 50; i++) {
+		for (let i = 0; i < levelData.initialAnts; i++) {
 			this.ants.add(new Ant(null, this.targets.entities));
 		}
 	}
