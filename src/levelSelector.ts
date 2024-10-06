@@ -36,6 +36,7 @@ export class LevelSelector extends Entity {
 			levelAngle,
 			-levelAngle * (levels.length - 1),
 			0,
+			this.speed,
 		);
 		// const damping =
 		// 	Math.abs(this.speed) > this.maxSpeed ?
@@ -89,7 +90,7 @@ export class LevelSelector extends Entity {
 			(this.lt - this.lastSnapshot.lt);
 		// 	),
 		// );
-		// console.log(this.speed);
+		console.log(this.speed);
 		this.nextSnapshot = { lt: this.lt, rotation: this.rotation };
 	}
 }

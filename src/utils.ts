@@ -73,11 +73,17 @@ export const distanceToNearestIncrement = (
 	increment: number,
 	min: number,
 	max: number,
+	speed: number,
 ) => {
-	const nearestIncrement = Math.min(
-		max,
-		Math.max(min, Math.round(rotation / increment) * increment),
-	);
+	const threshold = 2.5;
+
+	let base = Math.round(rotation / increment);
+	if (speed > threshold) {
+		base = Math.ceil(rotation / increment);
+	} else if (speed < -threshold) {
+		base = Math.floor(rotation / increment);
+	}
+	const nearestIncrement = Math.min(max, Math.max(min, base * increment));
 	return nearestIncrement - rotation;
 };
 
