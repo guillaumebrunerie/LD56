@@ -28,6 +28,7 @@ import {
 	MenuMoonGlow,
 	MenuMoon_Shadow,
 	MenuMoon_Shadow2,
+	Target1End,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -41,7 +42,7 @@ import { getFrame } from "./Animation";
 import { levels } from "./levels";
 
 export const GameC = ({ game }: { game: Game }) => {
-	if (game.screen == "levelSelect") {
+	if (game.state == "levelSelect") {
 		return <LevelSelectScreen game={game} />;
 	}
 
@@ -91,7 +92,8 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.shockwaves.entities.map((shockwave, i) => (
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
-			{game.isGameOver && <GameOverScreen game={game} />}
+			{game.state == "gameover" && <GameOverScreen game={game} />}
+			{game.state == "win" && <WinScreen game={game} />}
 		</container>
 	);
 };
@@ -427,7 +429,7 @@ const DeadAntBloodStainC = ({ ant }: { ant: Ant }) => {
 
 const TargetC = ({ target }: { target: Target }) => {
 	const nt =
-		target.state == "idle" ? 1
+		target.state == "idle" || target.state == "disappearing" ? 1
 		: target.lt < target.appearOffset ? 0
 		: Math.pow(
 				(target.lt - target.appearOffset) / target.appearDuration,
@@ -453,7 +455,11 @@ const TargetC = ({ target }: { target: Target }) => {
 			/>
 			<sprite
 				anchor={0.5}
-				texture={Target1}
+				texture={
+					target.state == "disappearing" ?
+						getFrame(Target1End, 20, target.lt, "remove")
+					:	Target1
+				}
 				alpha={alpha}
 				scale={scale}
 				x={target.position.x}
@@ -490,6 +496,61 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 				eventMode="static"
 				onPointerDown={() => {
 					game.restart();
+				}}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 150}
+				anchor={0.5}
+				text="Back to main menu"
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					game.backToMainMenu();
+				}}
+			/>
+		</container>
+	);
+};
+
+const WinScreen = ({ game }: { game: Game }) => {
+	return (
+		<container>
+			<Rectangle
+				x={0}
+				y={0}
+				width={1920}
+				height={1080}
+				draw={() => {}}
+				alpha={0.3}
+				color={0}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 - 50}
+				anchor={0.5}
+				text="You win!"
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 50}
+				anchor={0.5}
+				text="Next level?"
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					game.nextLevel();
+				}}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 150}
+				anchor={0.5}
+				text="Back to main menu"
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					game.backToMainMenu();
 				}}
 			/>
 		</container>

@@ -74,15 +74,25 @@ export const [
 	Target1_Shadow,
 	Target_Shadow,
 	Ant1Sheet,
-	{ animations: { Ant1 } },
+	{
+		animations: { Ant1 },
+	},
 	Ant2Sheet,
-	{ animations: { Ant2 } },
+	{
+		animations: { Ant2 },
+	},
 	Ant3Sheet,
-	{ animations: { Ant3 } },
+	{
+		animations: { Ant3 },
+	},
 	ShockwaveSheet,
-	{ animations: { Shockwave } },
+	{
+		animations: { Shockwave },
+	},
 	Target1EndSheet,
-	{ animations: { Target1End } },
+	{
+		animations: { Target1End },
+	},
 	Music,
 	Laffayette_Comic_Pro,
 ] = await Promise.all([

@@ -17,11 +17,11 @@ export class Game extends Entity {
 	levelSelector: LevelSelector;
 	antValue = 0;
 	instabilityLevel = 0;
-	isGameOver = false;
-	isStarting = true;
 	shockwaveCooldown = 0;
-	screen: "levelSelect" | "game" = "levelSelect";
 	level = 0;
+
+	state: "levelSelect" | "gameStarting" | "game" | "gameover" | "win" =
+		"levelSelect";
 
 	constructor() {
 		super();
@@ -43,11 +43,19 @@ export class Game extends Entity {
 	reset() {
 		this.antValue = 0;
 		this.instabilityLevel = 0;
-		this.isGameOver = false;
-		this.isStarting = true;
 		this.ants.clear();
 		this.targets.clear();
 		this.sources.clear();
+	}
+
+	backToMainMenu() {
+		this.reset();
+		this.state = "levelSelect";
+	}
+
+	nextLevel() {
+		this.level++;
+		this.restart();
 	}
 
 	restart() {
@@ -57,7 +65,7 @@ export class Game extends Entity {
 
 	startLevel(level: number) {
 		this.level = level;
-		this.screen = "game";
+		this.state = "gameStarting";
 
 		void Music.play({ loop: true, volume: 0.5 });
 
@@ -94,7 +102,7 @@ export class Game extends Entity {
 		}
 		this.shockwaveCooldown = 0;
 		this.shockwave(target.position.x, target.position.y);
-		this.isStarting = false;
+		this.state = "game";
 	}
 
 	carryingForce(target: Target) {
@@ -109,11 +117,11 @@ export class Game extends Entity {
 	}
 
 	tick(delta: number) {
-		if (this.isGameOver) {
+		if (this.state == "gameover") {
 			return;
 		}
 
-		if (!this.isStarting) {
+		if (this.state == "game") {
 			this.antValue += delta * 2;
 			for (; this.antValue >= 1; this.antValue--) {
 				for (const source of this.sources.entities) {
@@ -165,25 +173,36 @@ export class Game extends Entity {
 			this.shockwaveCooldown = 0;
 		}
 
-		if (
-			this.targets.entities.some((target) =>
-				target.isCloseToSource(this.sources.entities),
-			)
-		) {
+		const gameOverTarget = this.targets.entities.find((target) =>
+			target.isCloseToSource(this.sources.entities),
+		);
+		if (gameOverTarget) {
+			gameOverTarget.disappear();
 			this.gameOver();
+		}
+		if (
+			this.ants.entities.length == 0 &&
+			this.sources.entities.every((source) => source.isDestroyed) &&
+			this.state == "game"
+		) {
+			this.win();
 		}
 	}
 
 	gameOver() {
-		this.isGameOver = true;
+		this.state = "gameover";
 		for (const ant of this.ants.entities) {
 			ant.win();
 		}
 	}
 
+	win() {
+		this.state = "win";
+	}
+
 	shockwaveDelay = 0.7;
 	shockwave(x: number, y: number) {
-		if (this.isGameOver) {
+		if (this.state == "gameover" || this.state == "win") {
 			return;
 		}
 		const strength =

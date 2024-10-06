@@ -96,4 +96,9 @@ export class Target extends Entity {
 			this.position.y += dy * delta * factor;
 		}
 	}
+
+	disappear() {
+		this.lt = 0;
+		this.state = "disappearing";
+	}
 }
