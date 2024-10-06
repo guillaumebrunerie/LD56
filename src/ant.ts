@@ -28,6 +28,8 @@ export class Ant extends Entity {
 		| "winning"
 		| "stunned";
 	level: number;
+	circularEdge = false;
+	edgeRadius = 0;
 
 	constructor(source?: Source) {
 		super();
@@ -56,6 +58,17 @@ export class Ant extends Entity {
 			this.state = "appearing";
 			this.pos = { x, y };
 		}
+	}
+
+	initCircle(radius: number) {
+		const { x, y } = randomAroundPoint({ x: 0, y: 0 }, radius);
+		this.pos = { x, y };
+		this.destination = null;
+		this.target = null;
+		this.direction = Math.random() * Math.PI * 2;
+		this.state = "walking";
+		this.circularEdge = true;
+		this.edgeRadius = radius;
 	}
 
 	pickTarget(targets: Target[], sources: Source[]) {
@@ -202,21 +215,27 @@ export class Ant extends Entity {
 		this.pos.y += Math.sin(this.direction) * delta * speed;
 
 		// stop at the edge
-		if (this.pos.x < 0) {
-			this.pos.x = 0;
-			this.direction = Math.PI - this.direction;
-		}
-		if (this.pos.x > 1920) {
-			this.pos.x = 1920;
-			this.direction = Math.PI - this.direction;
-		}
-		if (this.pos.y < 0) {
-			this.pos.y = 0;
-			this.direction = -this.direction;
-		}
-		if (this.pos.y > 1080) {
-			this.pos.y = 1080;
-			this.direction = -this.direction;
+		if (this.circularEdge) {
+			if (this.pos.x ** 2 + this.pos.y ** 2 > this.edgeRadius ** 2) {
+				this.direction = this.direction + Math.PI;
+			}
+		} else {
+			if (this.pos.x < 0) {
+				this.pos.x = 0;
+				this.direction = Math.PI - this.direction;
+			}
+			if (this.pos.x > 1920) {
+				this.pos.x = 1920;
+				this.direction = Math.PI - this.direction;
+			}
+			if (this.pos.y < 0) {
+				this.pos.y = 0;
+				this.direction = -this.direction;
+			}
+			if (this.pos.y > 1080) {
+				this.pos.y = 1080;
+				this.direction = -this.direction;
+			}
 		}
 
 		// carry when getting close to destination

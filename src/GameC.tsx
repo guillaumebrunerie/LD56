@@ -188,6 +188,12 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				rotation={game.levelSelector.rotation}
 			>
 				<sprite anchor={0.5} scale={2} texture={MenuMoon} />
+				{game.levelSelector.ants.entities.map((ant, i) => (
+					<AntShadowC key={i} ant={ant} />
+				))}
+				{game.levelSelector.ants.entities.map((ant, i) => (
+					<AntC key={i} ant={ant} />
+				))}
 			</container>
 			<sprite
 				anchor={0.5}
