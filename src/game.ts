@@ -177,7 +177,7 @@ export class Game extends Entity {
 		}
 	}
 
-	shockwaveDelay = 0.5;
+	shockwaveDelay = 0.7;
 	shockwave(x: number, y: number) {
 		if (this.isGameOver) {
 			return;

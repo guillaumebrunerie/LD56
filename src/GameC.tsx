@@ -20,6 +20,7 @@ import {
 	Source1_Open,
 	Target1_lvl1,
 	Target_Shadow,
+	Shockwave as ShockwaveA,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -327,15 +328,25 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 };
 
 const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
-	return null;
+	// return null;
+	const ringsAlpha = 0;
 	return (
 		<container>
+			<sprite
+				anchor={0.5}
+				texture={getFrame(ShockwaveA, 50, shockwave.lt, "remove")}
+				x={shockwave.center.x}
+				y={shockwave.center.y}
+				scale={(shockwave.strength / 100) * 1.8}
+				alpha={shockwave.strength / 100}
+			/>
 			<Ring
 				x={shockwave.center.x}
 				y={shockwave.center.y}
 				radius={shockwave.innerRadius}
 				strokeWidth={10}
 				color={0xff0000}
+				alpha={ringsAlpha}
 				draw={() => {}}
 			/>
 			<Ring
@@ -344,6 +355,7 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 				radius={shockwave.outerRadius}
 				strokeWidth={10}
 				color={0xff0000}
+				alpha={ringsAlpha}
 				draw={() => {}}
 			/>
 		</container>
