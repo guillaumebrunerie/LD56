@@ -20,8 +20,13 @@ export class Game extends Entity {
 	shockwaveCooldown = 0;
 	level = 0;
 
-	state: "levelSelect" | "gameStarting" | "game" | "gameover" | "win" =
-		"levelSelect";
+	state:
+		| "levelSelect"
+		| "gameStarting"
+		| "game"
+		| "gameover"
+		| "win"
+		| "pause" = "levelSelect";
 
 	constructor() {
 		super();
@@ -117,8 +122,20 @@ export class Game extends Entity {
 		return force;
 	}
 
+	pause() {
+		if (this.state == "game") {
+			this.state = "pause";
+		} else {
+			console.error("Cannot pause?");
+		}
+	}
+
+	resume() {
+		this.state = "game";
+	}
+
 	tick(delta: number) {
-		if (this.state == "gameover") {
+		if (this.state == "gameover" || this.state == "pause") {
 			return;
 		}
 

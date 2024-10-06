@@ -28,6 +28,7 @@ import {
 	MenuMoonGlow,
 	MenuMoon_Shadow2,
 	Target1End,
+	PauseBtn,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -93,9 +94,27 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.shockwaves.entities.map((shockwave, i) => (
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
+			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
+			{game.state == "pause" && <PauseScreen game={game} />}
 		</container>
+	);
+};
+
+const PauseButton = ({ game }: { game: Game }) => {
+	return (
+		<sprite
+			texture={PauseBtn}
+			anchor={0.5}
+			x={1920 - 50}
+			y={50}
+			cursor="pointer"
+			eventMode="static"
+			onPointerDown={() => {
+				game.pause();
+			}}
+		/>
 	);
 };
 
@@ -509,6 +528,65 @@ const TargetC = ({ target }: { target: Target }) => {
 				scale={scale}
 				x={target.pos.x}
 				y={target.pos.y - dy}
+			/>
+		</container>
+	);
+};
+
+const PauseScreen = ({ game }: { game: Game }) => {
+	return (
+		<container>
+			<Rectangle
+				x={0}
+				y={0}
+				width={1920}
+				height={1080}
+				draw={() => {}}
+				alpha={0.3}
+				color={0}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 - 50}
+				anchor={0.5}
+				text="Pause..."
+				style={{ fontFamily: "Heroes Legend" }}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 50}
+				anchor={0.5}
+				text="Resume"
+				cursor="pointer"
+				eventMode="static"
+				style={{ fontFamily: "Heroes Legend" }}
+				onPointerDown={() => {
+					game.resume();
+				}}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 150}
+				anchor={0.5}
+				text="Restart?"
+				cursor="pointer"
+				eventMode="static"
+				style={{ fontFamily: "Heroes Legend" }}
+				onPointerDown={() => {
+					game.restart();
+				}}
+			/>
+			<CustomText
+				x={1920 / 2}
+				y={1080 / 2 + 250}
+				anchor={0.5}
+				text="Main menu"
+				style={{ fontFamily: "Heroes Legend" }}
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					game.backToMainMenu();
+				}}
 			/>
 		</container>
 	);

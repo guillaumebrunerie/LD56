@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 19:45:03 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 20:00:42 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -17,6 +17,7 @@ import MenuMoonGlow_ from "../gfx/MenuMoonGlow.png?texture";
 import MenuMoonSky_ from "../gfx/MenuMoonSky.jpg?texture";
 import MenuMoon_Shadow_ from "../gfx/MenuMoon_Shadow.png?texture";
 import MenuMoon_Shadow2_ from "../gfx/MenuMoon_Shadow2.png?texture";
+import PauseBtn_ from "../gfx/PauseBtn.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
 import Source1_Closed_Lvl1_ from "../gfx/Source1_Closed_Lvl1.png?texture";
@@ -61,6 +62,7 @@ export const [
 	MenuMoonSky,
 	MenuMoon_Shadow,
 	MenuMoon_Shadow2,
+	PauseBtn,
 	SoundOffTxt,
 	SoundOnTxt,
 	Source1_Closed_Lvl1,
@@ -103,6 +105,7 @@ export const [
 	MenuMoonSky_,
 	MenuMoon_Shadow_,
 	MenuMoon_Shadow2_,
+	PauseBtn_,
 	SoundOffTxt_,
 	SoundOnTxt_,
 	Source1_Closed_Lvl1_,
