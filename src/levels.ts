@@ -12,7 +12,7 @@ export const levels = [
 		level: 2,
 		name: "My sandwich?\nMY SANDWICH?",
 		initialAnts: 20,
-		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		targets: [{ id: 1, pos: { x: 1920 * 0.4, y: 1080 * 0.6 }, delta: 100 }],
 		sources: [
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },

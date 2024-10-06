@@ -180,6 +180,7 @@ export class Game extends Entity {
 			);
 		}
 		for (const ant of this.ants.entities) {
+			ant.tick(delta);
 			if (ant.gone) {
 				this.ants.remove(ant);
 			}

@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 20:00:42 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 21:54:36 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -12,6 +12,11 @@ import Ant3_Dead_ from "../gfx/Ant3_Dead.png?texture";
 import Ant3_Default_ from "../gfx/Ant3_Default.png?texture";
 import Ant_BloodStain_ from "../gfx/Ant_BloodStain.png?texture";
 import Bg_ from "../gfx/Bg.jpg?texture";
+import BtnCompleteTxt_ from "../gfx/BtnCompleteTxt.png?texture";
+import BtnGamePausedTxt_ from "../gfx/BtnGamePausedTxt.png?texture";
+import BtnGameTxt_ from "../gfx/BtnGameTxt.png?texture";
+import BtnLevelTxt_ from "../gfx/BtnLevelTxt.png?texture";
+import BtnOverTxt_ from "../gfx/BtnOverTxt.png?texture";
 import MenuMoon_ from "../gfx/MenuMoon.png?texture";
 import MenuMoonGlow_ from "../gfx/MenuMoonGlow.png?texture";
 import MenuMoonSky_ from "../gfx/MenuMoonSky.jpg?texture";
@@ -38,10 +43,29 @@ import Ant1_ from "../gfx/Ant1.png?spritesheet";
 import Ant2_ from "../gfx/Ant2.png?spritesheet";
 import Ant3_ from "../gfx/Ant3.png?spritesheet";
 import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
+import SmokeFx_ from "../gfx/SmokeFx.png?spritesheet";
 import Target1End_ from "../gfx/Target1End.png?spritesheet";
 
 /** Sounds */
+import AntCrushed1_ from "../audio/AntCrushed1.mp3?sound";
+import AntCrushed2_ from "../audio/AntCrushed2.mp3?sound";
+import AntCrushed3_ from "../audio/AntCrushed3.mp3?sound";
+import AntCrushed4_ from "../audio/AntCrushed4.mp3?sound";
+import AntDie1_ from "../audio/AntDie1.mp3?sound";
+import AntDie2_ from "../audio/AntDie2.mp3?sound";
+import AntDie3_ from "../audio/AntDie3.mp3?sound";
+import AntDie4_ from "../audio/AntDie4.mp3?sound";
+import AntHappy_ from "../audio/AntHappy.mp3?sound";
+import AntsWalking_ from "../audio/AntsWalking.mp3?sound";
+import CompleteLevel_ from "../audio/CompleteLevel.mp3?sound";
+import LoseGame_ from "../audio/LoseGame.mp3?sound";
 import Music_ from "../audio/Music.mp3?sound";
+import ShockwaveSound_ from "../audio/ShockwaveSound.mp3?sound";
+import SourceDestroyed_ from "../audio/SourceDestroyed.mp3?sound";
+import StartLevel_ from "../audio/StartLevel.mp3?sound";
+import TargetFall_ from "../audio/TargetFall.mp3?sound";
+import TextFall1_ from "../audio/TextFall1.mp3?sound";
+import TextFall2_ from "../audio/TextFall2.mp3?sound";
 
 /** Fonts */
 import Comix_Loud_ from "../fonts/Comix_Loud.ttf?font";
@@ -57,6 +81,11 @@ export const [
 	Ant3_Default,
 	Ant_BloodStain,
 	Bg,
+	BtnCompleteTxt,
+	BtnGamePausedTxt,
+	BtnGameTxt,
+	BtnLevelTxt,
+	BtnOverTxt,
 	MenuMoon,
 	MenuMoonGlow,
 	MenuMoonSky,
@@ -85,9 +114,29 @@ export const [
 	{ animations: { Ant3 } },
 	ShockwaveSheet,
 	{ animations: { Shockwave } },
+	SmokeFxSheet,
+	{ animations: { SmokeFx } },
 	Target1EndSheet,
 	{ animations: { Target1End } },
+	AntCrushed1,
+	AntCrushed2,
+	AntCrushed3,
+	AntCrushed4,
+	AntDie1,
+	AntDie2,
+	AntDie3,
+	AntDie4,
+	AntHappy,
+	AntsWalking,
+	CompleteLevel,
+	LoseGame,
 	Music,
+	ShockwaveSound,
+	SourceDestroyed,
+	StartLevel,
+	TargetFall,
+	TextFall1,
+	TextFall2,
 	Comix_Loud,
 	Heroes_Legend,
 	Laffayette_Comic_Pro,
@@ -100,6 +149,11 @@ export const [
 	Ant3_Default_,
 	Ant_BloodStain_,
 	Bg_,
+	BtnCompleteTxt_,
+	BtnGamePausedTxt_,
+	BtnGameTxt_,
+	BtnLevelTxt_,
+	BtnOverTxt_,
 	MenuMoon_,
 	MenuMoonGlow_,
 	MenuMoonSky_,
@@ -128,9 +182,29 @@ export const [
 	Ant3_,
 	Shockwave_,
 	Shockwave_,
+	SmokeFx_,
+	SmokeFx_,
 	Target1End_,
 	Target1End_,
+	AntCrushed1_,
+	AntCrushed2_,
+	AntCrushed3_,
+	AntCrushed4_,
+	AntDie1_,
+	AntDie2_,
+	AntDie3_,
+	AntDie4_,
+	AntHappy_,
+	AntsWalking_,
+	CompleteLevel_,
+	LoseGame_,
 	Music_,
+	ShockwaveSound_,
+	SourceDestroyed_,
+	StartLevel_,
+	TargetFall_,
+	TextFall1_,
+	TextFall2_,
 	Comix_Loud_,
 	Heroes_Legend_,
 	Laffayette_Comic_Pro_,

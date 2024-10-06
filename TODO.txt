@@ -1,12 +1,16 @@
 - Pause + pause menu
 - Game over / level complete screens
-- Balance levels 1 and 2
 - Fix Target1End animation timing (should happen before)
-- Level selection screen: better rotation for short movements
 - Different targets
-- Finger
+- Sounds
+
+- Balance levels 1 and 2
+- Push
 - Balance levels 3 and 4
 - Bomb
 - Balance levels 5 and 6
-- Transition between level select and game
+
 - Draw polygon for ants
+- Level selection screen: better rotation for short movements
+- Ants on the moon
+- Transition between level select and game

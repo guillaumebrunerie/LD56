@@ -46,7 +46,6 @@ export class Ant extends Entity {
 			this.state = "appearing";
 			this.pos = { x, y };
 		}
-		this.addTicker((delta) => this.tick(delta));
 	}
 
 	pickTarget(targets: Target[], sources: Source[]) {

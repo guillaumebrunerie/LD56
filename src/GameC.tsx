@@ -119,6 +119,7 @@ const PauseButton = ({ game }: { game: Game }) => {
 };
 
 const LevelSelectScreen = ({ game }: { game: Game }) => {
+	const skyScale = 1.6;
 	return (
 		<container>
 			<Rectangle
@@ -142,7 +143,38 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 					game.levelSelector.touchEnd();
 				}}
 			/>
-			<sprite scale={2} texture={MenuMoonSky} x={0} y={0} />
+			<sprite
+				anchor={0}
+				scale={skyScale}
+				texture={MenuMoonSky}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
+				rotation={game.lt * 0.01}
+			/>
+			<sprite
+				anchor={0}
+				scale={skyScale}
+				texture={MenuMoonSky}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
+				rotation={game.lt * 0.01 + Math.PI / 2}
+			/>
+			<sprite
+				anchor={0}
+				scale={skyScale}
+				texture={MenuMoonSky}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
+				rotation={game.lt * 0.01 + Math.PI}
+			/>
+			<sprite
+				anchor={0}
+				scale={skyScale}
+				texture={MenuMoonSky}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
+				rotation={game.lt * 0.01 + (Math.PI * 3) / 2}
+			/>
 			<container
 				x={game.levelSelector.center.x}
 				y={game.levelSelector.center.y}
