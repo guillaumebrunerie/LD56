@@ -1,7 +1,6 @@
-- Ants regenerate life of sources instead of it happening automatically
+- Pause + pause menu
 - Game over / level complete screens
 - Balance levels 1 and 2
-- Pause + pause menu
 - Fix Target1End animation timing (should happen before)
 - Level selection screen: better rotation for short movements
 - Different targets
@@ -9,3 +8,5 @@
 - Balance levels 3 and 4
 - Bomb
 - Balance levels 5 and 6
+- Transition between level select and game
+- Draw polygon for ants

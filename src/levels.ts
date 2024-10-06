@@ -1,7 +1,7 @@
 export const levels = [
 	{
 		level: 1,
-		name: "The cake is a lie",
+		name: "Everyone knows the moon\nis made of cheese",
 		initialAnts: 10,
 		targets: [
 			{ id: 1, pos: { x: (1920 * 2) / 3, y: 1080 * 0.5 }, delta: 100 },
@@ -10,7 +10,7 @@ export const levels = [
 	},
 	{
 		level: 2,
-		name: "Everyone knows the moon\nis made of cheese",
+		name: "My sandwich?\nMY SANDWICH?",
 		initialAnts: 20,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [
@@ -20,7 +20,7 @@ export const levels = [
 	},
 	{
 		level: 3,
-		name: "What’s this? What’s this?\nThere’s color everywhere!",
+		name: "What’s this? What’s this?\nThere’s crawlers everywhere!",
 		initialAnts: 50,
 		targets: [
 			{ id: 1, pos: { x: 1920 * 0.4, y: 1080 * 0.5 }, delta: 100 },
@@ -35,23 +35,30 @@ export const levels = [
 	},
 	{
 		level: 4,
-		name: "Houston, we\nhave a problem",
+		name: "The cake is a lie",
 		initialAnts: 100,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [],
 	},
 	{
 		level: 5,
-		name: "E.T... Phone... Home...",
+		name: "Houston, we\nhave a problem",
 		initialAnts: 100,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [],
 	},
 	{
 		level: 6,
-		name: "BBBB",
+		name: "Cowabunga!",
 		initialAnts: 100,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [],
 	},
+	// {
+	// 	level: 6,
+	// 	name: "E.T... Phone... Home...",
+	// 	initialAnts: 100,
+	// 	targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+	// 	sources: [],
+	// },
 ];
