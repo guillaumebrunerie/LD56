@@ -1,5 +1,11 @@
 import { BackdropBlurFilter } from "pixi-filters";
-import { BtnGamePausedTxt, BtnGameTxt, BtnOverTxt } from "./assets";
+import {
+	BtnCompleteTxt,
+	BtnGamePausedTxt,
+	BtnGameTxt,
+	BtnLevelTxt,
+	BtnOverTxt,
+} from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
 import { Rectangle } from "./Rectangle";
@@ -158,12 +164,12 @@ export const WinScreen = ({ game }: { game: Game }) => {
 				alpha={0.3}
 				color={0}
 			/>
-			<CustomText
-				x={1920 / 2}
-				y={1080 / 2 - 50}
+			<sprite texture={BtnLevelTxt} anchor={0.5} x={1920 / 2} y={280} />
+			<sprite
+				texture={BtnCompleteTxt}
 				anchor={0.5}
-				text="You win!"
-				style={{ fontFamily: "Heroes Legend" }}
+				x={1920 / 2}
+				y={450}
 			/>
 			<NextLevelButton game={game} />
 			<MainMenuButton game={game} />

@@ -1,7 +1,5 @@
-- Fix ants appearing dead
-- Level complete posting
-- Different targets
 - Sound triggers
+- Different targets
 
 - Draw polygon for ants
 - Level selection screen: better rotation for short movements
