@@ -20,6 +20,7 @@ import {
 	Source1_Open,
 	Target1_lvl1,
 	Target_Shadow,
+	Shockwave as ShockwaveA,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -327,9 +328,14 @@ const GameOverScreen = ({ game }: { game: Game }) => {
 };
 
 const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
-	return null;
+	// return null;
 	return (
 		<container>
+			<sprite
+				texture={ShockwaveA}
+				x={shockwave.center.x}
+				y={shockwave.center.y}
+			/>
 			<Ring
 				x={shockwave.center.x}
 				y={shockwave.center.y}
