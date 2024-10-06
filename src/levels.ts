@@ -8,7 +8,7 @@ export const levels = [
 	},
 	{
 		level: 2,
-		name: "Cheeeese!",
+		name: "Everyone knows the moon\nis made of cheese",
 		initialAnts: 20,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [
@@ -31,7 +31,7 @@ export const levels = [
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
 		],
 	},
-	{ level: 4, name: "ZZZZ" },
-	{ level: 5, name: "AAAA" },
+	{ level: 4, name: "Houston, we\nhave a problem" },
+	{ level: 5, name: "E.T... Phone... Home..." },
 	{ level: 6, name: "BBBB" },
 ];
