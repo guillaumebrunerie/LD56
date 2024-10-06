@@ -6,6 +6,8 @@ export const initSound = () => {
 };
 
 export const closeSound = () => {
+	sound.stopAll();
+	sound.removeAll();
 	sound.close();
 };
 

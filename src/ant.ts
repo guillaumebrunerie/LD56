@@ -10,7 +10,13 @@ export class Ant extends Entity {
 	target: Target | null;
 	direction: number;
 	speed: number;
-	state: "appearing" | "walking" | "carrying" | "dead" | "winning";
+	state:
+		| "appearing"
+		| "walking"
+		| "carrying"
+		| "dead"
+		| "winning"
+		| "stunned";
 	level: number;
 
 	constructor(source: Source | null, targets: Target[]) {
@@ -87,6 +93,7 @@ export class Ant extends Entity {
 		return Math.atan2(dy, dx);
 	}
 
+	stunnedCooldown = 0;
 	tick(delta: number) {
 		switch (this.state) {
 			case "appearing": {
@@ -99,6 +106,14 @@ export class Ant extends Entity {
 			}
 			case "carrying": {
 				this.carry(delta);
+				return;
+			}
+			case "stunned": {
+				this.stunnedCooldown -= delta;
+				if (this.stunnedCooldown < 0) {
+					this.stunnedCooldown = 0;
+					this.state = "walking";
+				}
 				return;
 			}
 			case "dead":
@@ -215,7 +230,7 @@ export class Ant extends Entity {
 			return;
 		}
 		for (const shockwave of shockwaves) {
-			const { dx, dy } = shockwave.speedAt(this.pos);
+			const { dx, dy, strength } = shockwave.speedAt(this.pos);
 
 			// Maybe die
 			const distance = Math.max(
@@ -227,6 +242,7 @@ export class Ant extends Entity {
 				(dx !== 0 || dy !== 0)
 			) {
 				this.passedShockwaves.add(shockwave);
+				this.stun(strength);
 				if (
 					Math.random() <
 					(shockwave.strength / distance / distance / this.level) * 5
@@ -240,6 +256,12 @@ export class Ant extends Entity {
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;
 		}
+	}
+
+	stunnedDelay = 0.005;
+	stun(strength: number) {
+		this.state = "stunned";
+		this.stunnedCooldown = (this.stunnedDelay * strength) / 100;
 	}
 
 	moveAwayIfTooClose() {
