@@ -100,7 +100,14 @@ const NextLevelButton = ({ game }: { game: Game }) => {
 			text="Next level"
 			cursor="pointer"
 			eventMode="static"
-			style={{ fontFamily: "Heroes Legend", fill: textColor }}
+			style={{
+				fontFamily: "Heroes Legend",
+				fill: textColor,
+				dropShadow: {
+					angle: 90,
+					distance: 6,
+				},
+			}}
 			onPointerDown={() => {
 				void Click.play();
 				game.nextLevel();
