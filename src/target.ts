@@ -7,12 +7,12 @@ export class Target extends Entity {
 	position: Point;
 	speedPerAnt = 2;
 	state: "appearing" | "idle" = "appearing";
-	onIdle: () => void;
+	onIdle: (target: this) => void;
 
 	radiusX = 65;
 	radiusY = 57;
 
-	constructor(position: Point, onIdle: () => void) {
+	constructor(position: Point, onIdle: (target: Target) => void) {
 		super();
 		this.position = position;
 		this.onIdle = onIdle;
@@ -36,7 +36,7 @@ export class Target extends Entity {
 	setIdle() {
 		this.lt = 0;
 		this.state = "idle";
-		this.onIdle();
+		this.onIdle(this);
 	}
 
 	carry(delta: number, force: number, sources: Source[]) {

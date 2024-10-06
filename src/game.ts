@@ -5,7 +5,7 @@ import { EntityArray } from "./entitiesArray";
 import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
-import { positionAwayFrom, randomAroundPoint, relativePos } from "./utils";
+import { randomAroundPoint, relativePos } from "./utils";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -51,8 +51,15 @@ export class Game extends Entity {
 	start() {
 		void Music.play({ loop: true, volume: 0.5 });
 		this.targets.add(
-			new Target(randomAroundPoint(relativePos(0.5, 0.5), 100), () =>
-				this.onTargetIdle(),
+			new Target(
+				randomAroundPoint(relativePos(0.4, 0.5), 100),
+				(target) => this.onTargetIdle(target),
+			),
+		);
+		this.targets.add(
+			new Target(
+				randomAroundPoint(relativePos(0.6, 0.5), 100),
+				(target) => this.onTargetIdle(target),
 			),
 		);
 		this.sources.add(
@@ -84,19 +91,23 @@ export class Game extends Entity {
 		}
 	}
 
-	onTargetIdle() {
+	onTargetIdle(target: Target) {
 		for (const ant of this.ants.entities) {
-			ant.setTarget(this.targets.entities[0]);
+			ant.setTarget(
+				this.targets.entities[
+					Math.floor(Math.random() * this.targets.entities.length)
+				],
+			);
 		}
-		const p = this.targets.entities[0].position;
-		this.shockwave(p.x, p.y);
+		this.shockwaveCooldown = 0;
+		this.shockwave(target.position.x, target.position.y);
 		this.isStarting = false;
 	}
 
-	get carryingForce() {
+	carryingForce(target: Target) {
 		let force = 0;
 		for (const ant of this.ants.entities) {
-			if (ant.state !== "carrying") {
+			if (ant.state !== "carrying" || ant.target != target) {
 				continue;
 			}
 			force += ant.level * ant.level;
@@ -121,24 +132,20 @@ export class Game extends Entity {
 			}
 		}
 
-		const carryingForce = this.carryingForce;
-		this.targets.entities[0].carry(
-			delta,
-			carryingForce,
-			this.sources.entities.filter((source) => !source.isDestroyed),
-		);
-		// for (const ant of this.ants.entities) {
-		// 	if (ant.state === "carrying") {
-		// 		ant.position.x += dx;
-		// 		ant.position.y += dy;
-		// 	}
-		// }
+		for (const target of this.targets.entities) {
+			const carryingForce = this.carryingForce(target);
+			target.carry(
+				delta,
+				carryingForce,
+				this.sources.entities.filter((source) => !source.isDestroyed),
+			);
+		}
 		for (const ant of this.ants.entities) {
 			if (ant.gone) {
 				this.ants.remove(ant);
 			}
 			ant.shockwave(delta, this.shockwaves.entities);
-			ant.moveAwayIfTooClose(this.targets.entities);
+			ant.moveAwayIfTooClose();
 		}
 
 		for (const source of this.sources.entities) {
@@ -165,7 +172,11 @@ export class Game extends Entity {
 			this.shockwaveCooldown = 0;
 		}
 
-		if (this.targets.entities[0].isCloseToSource(this.sources.entities)) {
+		if (
+			this.targets.entities.some((target) =>
+				target.isCloseToSource(this.sources.entities),
+			)
+		) {
 			this.gameOver();
 		}
 	}
@@ -184,29 +195,11 @@ export class Game extends Entity {
 		}
 		const strength =
 			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
+		console.log({ strength });
 		this.shockwaveCooldown = this.shockwaveDelay;
 		this.shockwaves.add(
 			new Shockwave({ x, y }, -300, 100, 5000, 100 * strength),
 		);
-		// for (const ant of this.ants.entities) {
-		// 	if (ant.state === "dead") {
-		// 		continue;
-		// 	}
-		// 	const dx = ant.position.x - x;
-		// 	const dy = ant.position.y - y;
-		// 	const distance = Math.sqrt(dx * dx + dy * dy);
-		// 	const angle = Math.atan2(dy, dx);
-		// 	const moveDistance = Math.max(
-		// 		200 - distance / 2 + (Math.random() - 0.5) * 50,
-		// 		0,
-		// 	);
-		// 	if (Math.random() * distance * ant.level < 10) {
-		// 		ant.die();
-		// 	} else if (Math.random() < 0.5 / ant.level) {
-		// 		ant.position.x += Math.cos(angle) * moveDistance;
-		// 		ant.position.y += Math.sin(angle) * moveDistance;
-		// 	}
-		// }
 		this.instabilityLevel += 1;
 		if (this.instabilityLevel >= 3) {
 			this.instabilityLevel -= 3;
