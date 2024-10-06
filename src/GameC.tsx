@@ -1,3 +1,5 @@
+import "pixi.js/advanced-blend-modes";
+
 import {
 	ColorMatrixFilter,
 	type FederatedPointerEvent,
@@ -21,6 +23,11 @@ import {
 	Target1_lvl1,
 	Target_Shadow,
 	Shockwave as ShockwaveA,
+	MenuMoonSky,
+	MenuMoon,
+	MenuMoonGlow,
+	MenuMoon_Shadow,
+	MenuMoon_Shadow2,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -33,7 +40,9 @@ import { Ring } from "./Ring";
 import { getFrame } from "./Animation";
 
 export const GameC = ({ game }: { game: Game }) => {
-	// return <LevelSelectScreen game={game} />;
+	if (game.screen == "levelSelect") {
+		return <LevelSelectScreen game={game} />;
+	}
 
 	return (
 		<container>
@@ -86,6 +95,17 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
+// Laffayette Comic Pro
+
+const levels = [
+	{ level: 1, label: "The cake is a lie" },
+	{ level: 2, label: "XXXX" },
+	{ level: 3, label: "YYYY" },
+	{ level: 4, label: "ZZZZ" },
+	{ level: 5, label: "AAAA" },
+	{ level: 6, label: "BBBB" },
+];
+
 const LevelSelectScreen = ({ game }: { game: Game }) => {
 	return (
 		<container>
@@ -110,13 +130,124 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 					game.levelSelector.touchEnd();
 				}}
 			/>
-			<sprite
-				anchor={0.5}
-				texture={Bg}
+			<sprite scale={2} texture={MenuMoonSky} x={0} y={0} />
+			<container
 				x={game.levelSelector.center.x}
 				y={game.levelSelector.center.y}
 				rotation={game.levelSelector.rotation}
+			>
+				<sprite anchor={0.5} scale={2} texture={MenuMoon} />
+			</container>
+			<sprite
+				anchor={0.5}
+				scale={2}
+				texture={MenuMoonGlow}
+				blendMode="add"
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
 			/>
+			<container
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
+				rotation={game.levelSelector.rotation}
+			>
+				{levels.map(({ level, label }) => (
+					<LevelCard
+						game={game}
+						key={level}
+						level={level}
+						label={label}
+						mainRotation={game.levelSelector.rotation}
+					/>
+				))}
+			</container>
+			<sprite
+				anchor={0.5}
+				scale={2}
+				texture={MenuMoon_Shadow2}
+				blendMode="multiply"
+				alpha={0.85}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y - 100}
+			/>
+			{/* <sprite */}
+			{/* 	anchor={0.5} */}
+			{/* 	scale={2} */}
+			{/* 	texture={MenuMoon_Shadow} */}
+			{/* 	// blendMode="color-burn" */}
+			{/* 	tint={"#0000FF"} */}
+			{/* 	alpha={0} */}
+			{/* 	x={game.levelSelector.center.x} */}
+			{/* 	y={game.levelSelector.center.y - 100} */}
+			{/* /> */}
+		</container>
+	);
+};
+
+type LevelCardProps = {
+	game: Game;
+	level: number;
+	label: string;
+	mainRotation: number;
+};
+
+const LevelCard = ({ game, level, label, mainRotation }: LevelCardProps) => {
+	const levelText = `Level ${level}`;
+	const angle = (level * Math.PI) / 2 + Math.PI;
+	const minAngle = -mainRotation / (Math.PI / 2) - 0.5;
+	const maxAngle = -mainRotation / (Math.PI / 2) + 2.5;
+	if (level < minAngle || level > maxAngle) {
+		return null;
+	}
+	return (
+		<container
+			x={800 * Math.cos(angle)}
+			y={800 * Math.sin(angle)}
+			rotation={angle + Math.PI / 2}
+		>
+			<Rectangle
+				x={-220}
+				y={-150}
+				width={440}
+				height={420}
+				alpha={0}
+				cursor="pointer"
+				draw={() => {}}
+				eventMode="static"
+				onClick={() => {
+					game.startLevel(level);
+				}}
+			/>
+			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
+			<sprite anchor={0.5} scale={2} texture={Target1_lvl1} />
+			<container y={150}>
+				<CustomText
+					anchor={0.5}
+					x={5}
+					y={5}
+					style={{ fill: "#222" }}
+					text={levelText}
+				/>
+				<CustomText
+					anchor={0.5}
+					style={{ fill: "#ff75f1" }}
+					text={levelText}
+				/>
+			</container>
+			<container y={230}>
+				<CustomText
+					anchor={0.5}
+					x={5}
+					y={5}
+					style={{ fill: "#222", fontSize: 40 }}
+					text={label}
+				/>
+				<CustomText
+					anchor={0.5}
+					style={{ fill: "#ffdefc", fontSize: 40 }}
+					text={label}
+				/>
+			</container>
 		</container>
 	);
 };

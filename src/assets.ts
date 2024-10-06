@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 10:43:44 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 15:27:46 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -12,6 +12,11 @@ import Ant3_Dead_ from "../gfx/Ant3_Dead.png?texture";
 import Ant3_Default_ from "../gfx/Ant3_Default.png?texture";
 import Ant_BloodStain_ from "../gfx/Ant_BloodStain.png?texture";
 import Bg_ from "../gfx/Bg.jpg?texture";
+import MenuMoon_ from "../gfx/MenuMoon.png?texture";
+import MenuMoonGlow_ from "../gfx/MenuMoonGlow.png?texture";
+import MenuMoonSky_ from "../gfx/MenuMoonSky.jpg?texture";
+import MenuMoon_Shadow_ from "../gfx/MenuMoon_Shadow.png?texture";
+import MenuMoon_Shadow2_ from "../gfx/MenuMoon_Shadow2.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
 import Source1_Closed_Lvl1_ from "../gfx/Source1_Closed_Lvl1.png?texture";
@@ -32,6 +37,9 @@ import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
 /** Sounds */
 import Music_ from "../audio/Music.mp3?sound";
 
+/** Fonts */
+import Laffayette_Comic_Pro_ from "../fonts/Laffayette_Comic_Pro.ttf?font";
+
 export const [
 	Ant1_Dead,
 	Ant1_Default,
@@ -41,6 +49,11 @@ export const [
 	Ant3_Default,
 	Ant_BloodStain,
 	Bg,
+	MenuMoon,
+	MenuMoonGlow,
+	MenuMoonSky,
+	MenuMoon_Shadow,
+	MenuMoon_Shadow2,
 	SoundOffTxt,
 	SoundOnTxt,
 	Source1_Closed_Lvl1,
@@ -60,6 +73,7 @@ export const [
 	ShockwaveSheet,
 	{ animations: { Shockwave } },
 	Music,
+	Laffayette_Comic_Pro,
 ] = await Promise.all([
 	Ant1_Dead_,
 	Ant1_Default_,
@@ -69,6 +83,11 @@ export const [
 	Ant3_Default_,
 	Ant_BloodStain_,
 	Bg_,
+	MenuMoon_,
+	MenuMoonGlow_,
+	MenuMoonSky_,
+	MenuMoon_Shadow_,
+	MenuMoon_Shadow2_,
 	SoundOffTxt_,
 	SoundOnTxt_,
 	Source1_Closed_Lvl1_,
@@ -88,4 +107,5 @@ export const [
 	Shockwave_,
 	Shockwave_,
 	Music_,
+	Laffayette_Comic_Pro_,
 ]);

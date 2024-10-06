@@ -1,5 +1,5 @@
 import { Entity } from "./entities";
-import type { Point } from "./utils";
+import { distanceToNearest90, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
 
@@ -9,7 +9,7 @@ export class LevelSelector extends Entity {
 	damping = 2;
 	maxDamping = 100;
 	maxSpeed = 2;
-	center = { x: 1920 / 2, y: 1080 };
+	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
 
 	lastSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
@@ -28,16 +28,18 @@ export class LevelSelector extends Entity {
 			}
 			return;
 		}
+		const dangle = distanceToNearest90(this.rotation);
+		// const damping =
+		// 	Math.abs(this.speed) > this.maxSpeed ?
+		// 		this.maxDamping
+		// 	:	this.damping;
+		// if (this.speed > 0) {
+		// 	this.speed = Math.max(0, this.speed - delta * damping);
+		// } else if (this.speed < 0) {
+		// 	this.speed = Math.min(0, this.speed + delta * damping);
+		// }
+		this.speed = dangle * 10;
 		this.rotation += delta * this.speed;
-		const damping =
-			Math.abs(this.speed) > this.maxSpeed ?
-				this.maxDamping
-			:	this.damping;
-		if (this.speed > 0) {
-			this.speed = Math.max(0, this.speed - delta * damping);
-		} else if (this.speed < 0) {
-			this.speed = Math.min(0, this.speed + delta * damping);
-		}
 	}
 
 	getTouchAngle() {
@@ -76,6 +78,7 @@ export class LevelSelector extends Entity {
 			(this.lt - this.lastSnapshot.lt);
 		// 	),
 		// );
+		// console.log(this.speed);
 		this.nextSnapshot = { lt: this.lt, rotation: this.rotation };
 	}
 }

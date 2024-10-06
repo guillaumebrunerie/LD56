@@ -12,7 +12,8 @@ export const pixiAssetPlugin = (): Plugin => {
 			const isTexture = id.endsWith("?texture");
 			const isSpriteSheet = id.endsWith("?spritesheet");
 			const isSound = id.endsWith("?sound");
-			if (!isTexture && !isSpriteSheet && !isSound) {
+			const isFont = id.endsWith("?font");
+			if (!isTexture && !isSpriteSheet && !isSound && !isFont) {
 				return;
 			}
 			const fileName = id.split("/").pop()?.split("?")[0];
@@ -20,7 +21,10 @@ export const pixiAssetPlugin = (): Plugin => {
 				return;
 			}
 			const baseName = fileName.split(".")[0];
-			const dir = isSound ? "audio" : "gfx";
+			const dir =
+				isSound ? "audio"
+				: isFont ? "fonts"
+				: "gfx";
 
 			if (config.command === "build") {
 				this.emitFile({

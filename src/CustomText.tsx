@@ -1,24 +1,31 @@
-import { TextStyle, type Text } from "pixi.js";
+import { TextStyle, type Text, type TextStyleOptions } from "pixi.js";
 import type { ComponentProps, Ref } from "react";
 
 export const CustomText = ({
 	myRef,
-	color,
+	style,
 	...rest
 }: {
 	myRef?: Ref<Text>;
-	color?: string;
+	style?: Partial<TextStyleOptions>;
 } & ComponentProps<"pixiText">) => {
 	return (
 		<pixiText
 			ref={myRef}
 			style={
 				new TextStyle({
-					// fontFamily: "roboto condensed",
+					fontFamily: "Laffayette Comic Pro",
 					fontSize: 50,
-					fontWeight: "600",
+					fontWeight: "800",
 					letterSpacing: 4,
-					fill: color || "#FFFFFF",
+					lineHeight: 80,
+					stroke: {
+						width: 3,
+						color: "black",
+					},
+					fill: "#FFFFFF",
+					align: "center",
+					...style,
 				})
 			}
 			{...rest}

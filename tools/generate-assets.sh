@@ -49,6 +49,16 @@ do
 done
 
 echo
+echo "/** Fonts */"
+for file in $root/fonts/*.ttf
+do
+	font=$(basename ${file%.*})
+	echo "import ${font}_ from \"../fonts/$font.ttf?font\";"
+	names+=($font)
+	exports+=(${font})
+done
+
+echo
 echo "export const ["
 for export_ in $exports
 do

@@ -19,6 +19,7 @@ export class Game extends Entity {
 	isGameOver = false;
 	isStarting = true;
 	shockwaveCooldown = 0;
+	screen: "levelSelect" | "game" = "levelSelect";
 
 	constructor() {
 		super();
@@ -52,7 +53,12 @@ export class Game extends Entity {
 		this.start();
 	}
 
+	startLevel(level: number) {
+		this.start();
+	}
+
 	start() {
+		this.screen = "game";
 		void Music.play({ loop: true, volume: 0.5 });
 		this.targets.add(
 			new Target(
