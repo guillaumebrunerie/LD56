@@ -169,7 +169,7 @@ export const WinScreen = ({ game }: { game: Game }) => {
 				alpha={0.3}
 				color={0}
 			/>
-			<sprite texture={BtnLevelTxt} anchor={0.5} x={1920 / 2} y={280} />
+			<sprite texture={BtnLevelTxt} anchor={0.5} x={1920 / 2} y={319} />
 			<sprite
 				texture={BtnCompleteTxt}
 				anchor={0.5}
