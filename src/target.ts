@@ -6,7 +6,7 @@ import { distance2, type Point } from "./utils";
 export class Target extends Entity {
 	position: Point;
 	speedPerAnt = 2;
-	state: "appearing" | "idle" = "appearing";
+	state: "appearing" | "idle" | "disappearing" = "appearing";
 	onIdle: (target: this) => void;
 
 	radiusX = 65;

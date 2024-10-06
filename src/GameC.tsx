@@ -20,7 +20,7 @@ import {
 	Source1_Closed_Lvl3,
 	Source1_Closed_Lvl4,
 	Source1_Open,
-	Target1_lvl1,
+	Target1,
 	Target_Shadow,
 	Shockwave as ShockwaveA,
 	MenuMoonSky,
@@ -209,7 +209,7 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 				}}
 			/>
 			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
-			<sprite anchor={0.5} scale={2} texture={Target1_lvl1} />
+			<sprite anchor={0.5} scale={2} texture={Target1} />
 			<container y={150}>
 				<CustomText
 					anchor={0.5}
@@ -453,7 +453,7 @@ const TargetC = ({ target }: { target: Target }) => {
 			/>
 			<sprite
 				anchor={0.5}
-				texture={Target1_lvl1}
+				texture={Target1}
 				alpha={alpha}
 				scale={scale}
 				x={target.position.x}

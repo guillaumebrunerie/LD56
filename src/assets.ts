@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 15:27:46 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 16:36:31 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -25,7 +25,11 @@ import Source1_Closed_Lvl3_ from "../gfx/Source1_Closed_Lvl3.png?texture";
 import Source1_Closed_Lvl4_ from "../gfx/Source1_Closed_Lvl4.png?texture";
 import Source1_Default_ from "../gfx/Source1_Default.png?texture";
 import Source1_Open_ from "../gfx/Source1_Open.png?texture";
-import Target1_lvl1_ from "../gfx/Target1_lvl1.png?texture";
+import Target1_ from "../gfx/Target1.png?texture";
+import Target1_Item_ from "../gfx/Target1_Item.png?texture";
+import Target1_Plate_ from "../gfx/Target1_Plate.png?texture";
+import Target1_PlateShadow_ from "../gfx/Target1_PlateShadow.png?texture";
+import Target1_Shadow_ from "../gfx/Target1_Shadow.png?texture";
 import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 
 /** Spritesheets */
@@ -33,6 +37,7 @@ import Ant1_ from "../gfx/Ant1.png?spritesheet";
 import Ant2_ from "../gfx/Ant2.png?spritesheet";
 import Ant3_ from "../gfx/Ant3.png?spritesheet";
 import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
+import Target1End_ from "../gfx/Target1End.png?spritesheet";
 
 /** Sounds */
 import Music_ from "../audio/Music.mp3?sound";
@@ -62,7 +67,11 @@ export const [
 	Source1_Closed_Lvl4,
 	Source1_Default,
 	Source1_Open,
-	Target1_lvl1,
+	Target1,
+	Target1_Item,
+	Target1_Plate,
+	Target1_PlateShadow,
+	Target1_Shadow,
 	Target_Shadow,
 	Ant1Sheet,
 	{ animations: { Ant1 } },
@@ -72,6 +81,8 @@ export const [
 	{ animations: { Ant3 } },
 	ShockwaveSheet,
 	{ animations: { Shockwave } },
+	Target1EndSheet,
+	{ animations: { Target1End } },
 	Music,
 	Laffayette_Comic_Pro,
 ] = await Promise.all([
@@ -96,7 +107,11 @@ export const [
 	Source1_Closed_Lvl4_,
 	Source1_Default_,
 	Source1_Open_,
-	Target1_lvl1_,
+	Target1_,
+	Target1_Item_,
+	Target1_Plate_,
+	Target1_PlateShadow_,
+	Target1_Shadow_,
 	Target_Shadow_,
 	Ant1_,
 	Ant1_,
@@ -106,6 +121,8 @@ export const [
 	Ant3_,
 	Shockwave_,
 	Shockwave_,
+	Target1End_,
+	Target1End_,
 	Music_,
 	Laffayette_Comic_Pro_,
 ]);
