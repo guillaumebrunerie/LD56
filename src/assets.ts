@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 10:24:55 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Sun Oct  6 10:36:32 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -24,9 +24,13 @@ import Target1_lvl1_ from "../gfx/Target1_lvl1.png?texture";
 import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 
 /** Spritesheets */
+import Ant1_ from "../gfx/Ant1.png?spritesheet";
 import Ant1Walk_ from "../gfx/Ant1Walk.png?spritesheet";
+import Ant2_ from "../gfx/Ant2.png?spritesheet";
 import Ant2Walk_ from "../gfx/Ant2Walk.png?spritesheet";
+import Ant3_ from "../gfx/Ant3.png?spritesheet";
 import Ant3Walk_ from "../gfx/Ant3Walk.png?spritesheet";
+import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
 
 /** Sounds */
 import Music_ from "../audio/Music.mp3?sound";
@@ -50,12 +54,20 @@ export const [
 	Source1_Open,
 	Target1_lvl1,
 	Target_Shadow,
+	Ant1Sheet,
+	{ animations: { Ant1 } },
 	Ant1WalkSheet,
 	{ animations: { Ant1Walk } },
+	Ant2Sheet,
+	{ animations: { Ant2 } },
 	Ant2WalkSheet,
 	{ animations: { Ant2Walk } },
+	Ant3Sheet,
+	{ animations: { Ant3 } },
 	Ant3WalkSheet,
 	{ animations: { Ant3Walk } },
+	ShockwaveSheet,
+	{ animations: { Shockwave } },
 	Music,
 ] = await Promise.all([
 	Ant1_Dead_,
@@ -76,11 +88,19 @@ export const [
 	Source1_Open_,
 	Target1_lvl1_,
 	Target_Shadow_,
+	Ant1_,
+	Ant1_,
 	Ant1Walk_,
 	Ant1Walk_,
+	Ant2_,
+	Ant2_,
 	Ant2Walk_,
 	Ant2Walk_,
+	Ant3_,
+	Ant3_,
 	Ant3Walk_,
 	Ant3Walk_,
+	Shockwave_,
+	Shockwave_,
 	Music_,
 ]);

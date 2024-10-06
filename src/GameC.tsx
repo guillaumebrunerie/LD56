@@ -6,11 +6,11 @@ import {
 import type { Game } from "./game";
 import {
 	Ant1_Dead,
-	Ant1Walk,
+	Ant1,
 	Ant2_Dead,
-	Ant2Walk,
+	Ant2,
 	Ant3_Dead,
-	Ant3Walk,
+	Ant3,
 	Ant_BloodStain,
 	Bg,
 	Source1_Closed_Lvl1,
@@ -158,9 +158,9 @@ const SourceHealth = ({ source }: { source: Source }) => {
 };
 
 const antWalk: Record<number, Texture[]> = {
-	1: Ant1Walk,
-	2: Ant2Walk,
-	3: Ant3Walk,
+	1: Ant1,
+	2: Ant2,
+	3: Ant3,
 };
 
 const antDeadTexture: Record<number, Texture> = {
@@ -213,6 +213,7 @@ const shadowDx = 1;
 const shadowDy = 2;
 
 const AntShadowC = ({ ant }: { ant: Ant }) => {
+	return null;
 	const alpha = ant.state == "appearing" ? ant.lt / ant.appearDuration : 1;
 
 	return (
