@@ -5,7 +5,7 @@ import type { Target } from "./target";
 import { distanceBetween, randomAroundPoint, type Point } from "./utils";
 
 export class Ant extends Entity {
-	position: Point;
+	pos: Point;
 	destination: Point | null;
 	target: Target | null;
 	direction: number;
@@ -30,7 +30,7 @@ export class Ant extends Entity {
 		if (!source) {
 			const x = Math.random() * 1920;
 			const y = Math.random() * 1080;
-			this.position = { x, y };
+			this.pos = { x, y };
 			this.destination = null;
 			this.target = null;
 			this.direction = Math.random() * Math.PI * 2;
@@ -40,12 +40,12 @@ export class Ant extends Entity {
 			const target = targets[0];
 
 			this.state = "appearing";
-			this.position = { x, y };
+			this.pos = { x, y };
 			this.target = target;
 			// destination, point towards the center
 			const roughDirection = Math.atan2(
-				this.target.position.y - this.position.y,
-				this.target.position.x - this.position.x,
+				this.target.position.y - this.pos.y,
+				this.target.position.x - this.pos.x,
 			);
 			const angle =
 				roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
@@ -54,8 +54,8 @@ export class Ant extends Entity {
 				y: 0 * Math.sin(angle),
 			};
 			this.direction = Math.atan2(
-				this.target.position.y - this.destination.y - this.position.y,
-				this.target.position.x - this.destination.x - this.position.x,
+				this.target.position.y - this.destination.y - this.pos.y,
+				this.target.position.x - this.destination.x - this.pos.x,
 			);
 		}
 		this.addTicker((delta) => this.tick(delta));
@@ -65,8 +65,8 @@ export class Ant extends Entity {
 		this.target = target;
 		// destination, point towards the center
 		const roughDirection = Math.atan2(
-			this.target.position.y - this.position.y,
-			this.target.position.x - this.position.x,
+			this.target.position.y - this.pos.y,
+			this.target.position.x - this.pos.x,
 		);
 		const angle = roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
 		this.destination = {
@@ -74,10 +74,10 @@ export class Ant extends Entity {
 			y: 0 * Math.sin(angle),
 		};
 		this.direction = Math.atan2(
-			this.target.position.y - this.destination.y - this.position.y,
-			this.target.position.x - this.destination.x - this.position.x,
+			this.target.position.y - this.destination.y - this.pos.y,
+			this.target.position.x - this.destination.x - this.pos.x,
 		);
-		if (this.isCloseToTarget()) {
+		if (this.distanceToTarget() < 1) {
 			this.die();
 		}
 	}
@@ -118,8 +118,8 @@ export class Ant extends Entity {
 			return { dx: 0, dy: 0, ok: false };
 		}
 		return {
-			dx: this.target.position.x - this.destination.x - this.position.x,
-			dy: this.target.position.y - this.destination.y - this.position.y,
+			dx: this.target.position.x - this.destination.x - this.pos.x,
+			dy: this.target.position.y - this.destination.y - this.pos.y,
 			ok: true,
 		};
 	}
@@ -132,19 +132,17 @@ export class Ant extends Entity {
 		return dx * dx + dy * dy;
 	}
 
-	isCloseToTarget() {
+	distanceToTarget() {
 		if (!this.target || !this.destination) {
-			return false;
+			return Infinity;
 		}
-		const dx =
-			this.target.position.x - this.destination.x - this.position.x;
-		const dy =
-			this.target.position.y - this.destination.y - this.position.y;
+		const dx = this.target.position.x - this.destination.x - this.pos.x;
+		const dy = this.target.position.y - this.destination.y - this.pos.y;
 
 		const dxn = dx / this.target.radiusX;
 		const dyn = dy / this.target.radiusY;
 
-		return dxn * dxn + dyn * dyn < 1;
+		return dxn * dxn + dyn * dyn;
 	}
 
 	die() {
@@ -167,35 +165,39 @@ export class Ant extends Entity {
 		}
 		const speed = ok ? this.speed : this.speed / 3;
 
-		this.position.x += Math.cos(this.direction) * delta * speed;
-		this.position.y += Math.sin(this.direction) * delta * speed;
+		this.pos.x += Math.cos(this.direction) * delta * speed;
+		this.pos.y += Math.sin(this.direction) * delta * speed;
 
 		// stop at the edge
-		if (this.position.x < 0) {
-			this.position.x = 0;
+		if (this.pos.x < 0) {
+			this.pos.x = 0;
 			this.direction = Math.PI - this.direction;
 		}
-		if (this.position.x > 1920) {
-			this.position.x = 1920;
+		if (this.pos.x > 1920) {
+			this.pos.x = 1920;
 			this.direction = Math.PI - this.direction;
 		}
-		if (this.position.y < 0) {
-			this.position.y = 0;
+		if (this.pos.y < 0) {
+			this.pos.y = 0;
 			this.direction = -this.direction;
 		}
-		if (this.position.y > 1080) {
-			this.position.y = 1080;
+		if (this.pos.y > 1080) {
+			this.pos.y = 1080;
 			this.direction = -this.direction;
 		}
 
 		// carry when getting close to destination
-		if (this.isCloseToTarget()) {
+		if (this.distanceToTarget() < 1) {
 			this.state = "carrying";
 		}
 	}
 
 	carry(_delta: number) {
-		if (!this.isCloseToTarget()) {
+		const { dx, dy, ok } = this.deltas;
+		if (ok) {
+			this.direction = Math.atan2(dy, dx);
+		}
+		if (this.distanceToTarget() > 1.05) {
 			this.state = "walking";
 		}
 	}
@@ -209,14 +211,14 @@ export class Ant extends Entity {
 	passedShockwaves = new WeakSet<Shockwave>();
 
 	shockwave(delta: number, shockwaves: Shockwave[]) {
-		if (this.state == "dead") {
+		if (this.state == "dead" || this.state == "appearing") {
 			return;
 		}
 		for (const shockwave of shockwaves) {
-			const { dx, dy } = shockwave.speedAt(this.position);
+			const { dx, dy } = shockwave.speedAt(this.pos);
 
 			// Maybe die
-			const distance = distanceBetween(this.position, shockwave.center);
+			const distance = distanceBetween(this.pos, shockwave.center);
 			if (
 				!this.passedShockwaves.has(shockwave) &&
 				(dx !== 0 || dy !== 0)
@@ -232,8 +234,18 @@ export class Ant extends Entity {
 			}
 
 			const factor = Math.random() / this.level;
-			this.position.x += dx * delta * factor;
-			this.position.y += dy * delta * factor;
+			this.pos.x += dx * delta * factor;
+			this.pos.y += dy * delta * factor;
+		}
+	}
+
+	moveAwayIfTooClose() {
+		if (this.state == "dead") {
+			return;
+		}
+		if (this.distanceToTarget() < 0.95) {
+			this.pos.x -= Math.cos(this.direction) * this.speed * 0.01;
+			this.pos.y -= Math.sin(this.direction) * this.speed * 0.01;
 		}
 	}
 }

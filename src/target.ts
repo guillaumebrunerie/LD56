@@ -1,4 +1,5 @@
 import { Entity } from "./entities";
+import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import { distance2, type Point } from "./utils";
 
@@ -83,5 +84,16 @@ export class Target extends Entity {
 			}
 		}
 		return false;
+	}
+
+	resistance = 10;
+	shockwave(delta: number, shockwaves: Shockwave[]) {
+		for (const shockwave of shockwaves) {
+			const { dx, dy } = shockwave.speedAt(this.position);
+
+			const factor = Math.random() / this.resistance;
+			this.position.x += dx * delta * factor;
+			this.position.y += dy * delta * factor;
+		}
 	}
 }
