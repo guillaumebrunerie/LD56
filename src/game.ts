@@ -46,6 +46,7 @@ export class Game extends Entity {
 		this.ants.clear();
 		this.targets.clear();
 		this.sources.clear();
+		void Music.stop();
 	}
 
 	backToMainMenu() {

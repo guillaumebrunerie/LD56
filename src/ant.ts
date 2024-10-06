@@ -2,7 +2,7 @@ import { Entity } from "./entities";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import type { Target } from "./target";
-import { distanceBetween, randomAroundPoint, type Point } from "./utils";
+import { randomAroundPoint, type Point } from "./utils";
 
 export class Ant extends Entity {
 	pos: Point;
