@@ -1,0 +1,119 @@
+{"frames": {
+
+"Ant3_000.png":
+{
+	"frame": {"x":214,"y":1,"w":38,"h":45},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":27,"w":38,"h":45},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_001.png":
+{
+	"frame": {"x":298,"y":1,"w":40,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":27,"w":40,"h":44},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_002.png":
+{
+	"frame": {"x":382,"y":1,"w":41,"h":43},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":27,"w":41,"h":43},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_003.png":
+{
+	"frame": {"x":254,"y":1,"w":42,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":27,"w":42,"h":44},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_004.png":
+{
+	"frame": {"x":128,"y":1,"w":41,"h":45},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":27,"w":41,"h":45},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_005.png":
+{
+	"frame": {"x":42,"y":1,"w":41,"h":46},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":27,"w":41,"h":46},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_006.png":
+{
+	"frame": {"x":1,"y":1,"w":39,"h":47},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":27,"w":39,"h":47},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_007.png":
+{
+	"frame": {"x":85,"y":1,"w":41,"h":46},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":27,"w":41,"h":46},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_008.png":
+{
+	"frame": {"x":171,"y":1,"w":41,"h":45},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":27,"w":41,"h":45},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_009.png":
+{
+	"frame": {"x":254,"y":1,"w":42,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":27,"w":42,"h":44},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_010.png":
+{
+	"frame": {"x":425,"y":1,"w":41,"h":43},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":27,"w":41,"h":43},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_011.png":
+{
+	"frame": {"x":340,"y":1,"w":40,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":27,"w":40,"h":44},
+	"sourceSize": {"w":100,"h":100}
+},
+"Ant3_012.png":
+{
+	"frame": {"x":214,"y":1,"w":38,"h":45},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":27,"w":38,"h":45},
+	"sourceSize": {"w":100,"h":100}
+}},
+"animations": {
+	"Ant3": ["Ant3_000.png","Ant3_001.png","Ant3_002.png","Ant3_003.png","Ant3_004.png","Ant3_005.png","Ant3_006.png","Ant3_007.png","Ant3_008.png","Ant3_009.png","Ant3_010.png","Ant3_011.png","Ant3_012.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "Ant3Walk.png",
+	"format": "RGBA8888",
+	"size": {"w":467,"h":49},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:89c031b238e4723477a7064bb7db9081:7b61008a4b6820e6883af56164ddbbd4:455000fddeef21400e75363b7f97ca02$"
+}
+}
