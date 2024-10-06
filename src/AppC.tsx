@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { action } from "mobx";
 import { App } from "./app";
 import { GameC } from "./GameC";
+import { SoundButton } from "./SoundButton";
 
 const app = new App();
 
@@ -29,5 +30,10 @@ export const AppC = () => {
 		}
 	});
 
-	return <GameC game={app.game} />;
+	return (
+		<container>
+			<GameC game={app.game} />
+			<SoundButton />
+		</container>
+	);
 };

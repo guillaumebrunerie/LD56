@@ -101,4 +101,6 @@ export class Target extends Entity {
 		this.lt = 0;
 		this.state = "disappearing";
 	}
+
+	disappearDuration = 0.85;
 }

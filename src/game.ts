@@ -215,8 +215,16 @@ export class Game extends Entity {
 		const gameOverTarget = this.targets.entities.find((target) =>
 			target.isCloseToSource(this.sources.entities),
 		);
-		if (gameOverTarget) {
+		if (gameOverTarget && gameOverTarget.state !== "disappearing") {
 			gameOverTarget.disappear();
+		}
+		if (
+			this.targets.entities.some(
+				(target) =>
+					target.state == "disappearing" &&
+					target.lt > target.disappearDuration,
+			)
+		) {
 			this.gameOver();
 		}
 		if (

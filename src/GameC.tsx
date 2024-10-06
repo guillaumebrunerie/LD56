@@ -104,17 +104,21 @@ export const GameC = ({ game }: { game: Game }) => {
 
 const PauseButton = ({ game }: { game: Game }) => {
 	return (
-		<sprite
-			texture={PauseBtn}
-			anchor={0.5}
-			x={1920 - 50}
-			y={50}
-			cursor="pointer"
-			eventMode="static"
-			onPointerDown={() => {
-				game.pause();
-			}}
-		/>
+		<container x={1920 - 50} y={50}>
+			<Rectangle
+				x={-50}
+				y={-50}
+				width={100}
+				height={100}
+				alpha={0}
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					game.pause();
+				}}
+			/>
+			<sprite texture={PauseBtn} anchor={0.5} />
+		</container>
 	);
 };
 

@@ -83,9 +83,6 @@ export class Ant extends Entity {
 			this.target.pos.y - this.destination.y - this.pos.y,
 			this.target.pos.x - this.destination.x - this.pos.x,
 		);
-		if (this.distanceToTarget() < 1) {
-			this.die();
-		}
 	}
 
 	get rotation() {

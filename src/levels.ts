@@ -1,7 +1,7 @@
 export const levels = [
 	{
 		level: 1,
-		name: "Everyone knows the moon\nis made of cheese",
+		name: "That’s it!\nCheeese!",
 		initialAnts: 10,
 		targets: [
 			{ id: 1, pos: { x: (1920 * 2) / 3, y: 1080 * 0.5 }, delta: 100 },

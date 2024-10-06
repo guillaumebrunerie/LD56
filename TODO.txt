@@ -1,16 +1,17 @@
-- Pause + pause menu
-- Game over / level complete screens
-- Fix Target1End animation timing (should happen before)
+- Fix ants appearing dead
+- Level complete posting
 - Different targets
-- Sounds
+- Sound triggers
+
+- Draw polygon for ants
+- Level selection screen: better rotation for short movements
+- Ants on the moon
+- Transition between level select and game
+- Animate game over posting
+- Animate level complete posting
 
 - Balance levels 1 and 2
 - Push
 - Balance levels 3 and 4
 - Bomb
 - Balance levels 5 and 6
-
-- Draw polygon for ants
-- Level selection screen: better rotation for short movements
-- Ants on the moon
-- Transition between level select and game

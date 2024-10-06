@@ -1,10 +1,10 @@
 import { BackdropBlurFilter } from "pixi-filters";
-import { BtnGamePausedTxt } from "./assets";
+import { BtnGamePausedTxt, BtnGameTxt, BtnOverTxt } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
 import { Rectangle } from "./Rectangle";
 
-const buttonsY = 800;
+const buttonsY = 850;
 
 const buttonsXLeft = 1920 / 3;
 const buttonsXRight = (1920 * 2) / 3;
@@ -41,13 +41,17 @@ export const PauseScreen = ({ game }: { game: Game }) => {
 			<MainMenuButton game={game} />
 			<CustomText
 				x={1920 / 2}
-				y={buttonsY + 150}
+				y={980}
 				anchor={0.5}
 				text="(click anywhere to resume)"
 				style={{
 					fontSize: 20,
 					fontFamily: "Heroes Legend",
 					fill: textColor,
+					dropShadow: {
+						angle: 90,
+						distance: 3,
+					},
 				}}
 			/>
 		</container>
@@ -63,7 +67,14 @@ const RestartButton = ({ game }: { game: Game }) => {
 			text="Restart"
 			cursor="pointer"
 			eventMode="static"
-			style={{ fontFamily: "Heroes Legend", fill: textColor }}
+			style={{
+				fontFamily: "Heroes Legend",
+				fill: textColor,
+				dropShadow: {
+					angle: 90,
+					distance: 6,
+				},
+			}}
 			onPointerDown={() => {
 				game.restart();
 			}}
@@ -95,7 +106,14 @@ const MainMenuButton = ({ game }: { game: Game }) => {
 			y={buttonsY}
 			anchor={0.5}
 			text="Main menu"
-			style={{ fontFamily: "Heroes Legend", fill: textColor }}
+			style={{
+				fontFamily: "Heroes Legend",
+				fill: textColor,
+				dropShadow: {
+					angle: 90,
+					distance: 6,
+				},
+			}}
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={() => {
@@ -114,18 +132,16 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				width={1920}
 				height={1080}
 				draw={() => {}}
+				filters={backdropFilter}
 				alpha={0.3}
 				color={0}
 			/>
-			{/* <CustomText */}
-			{/* 	x={1920 / 2} */}
-			{/* 	y={1080 / 2 - 50} */}
-			{/* 	anchor={0.5} */}
-			{/* 	text="Game over!" */}
-			{/* 	style={{ fontFamily: "Heroes Legend" }} */}
-			{/* /> */}
-			<RestartButton game={game} />
-			<MainMenuButton game={game} />
+			<sprite texture={BtnGameTxt} anchor={0.5} x={1920 / 2} y={300} />
+			<sprite texture={BtnOverTxt} anchor={0.5} x={1920 / 2} y={550} />
+			<container y={70}>
+				<RestartButton game={game} />
+				<MainMenuButton game={game} />
+			</container>
 		</container>
 	);
 };
