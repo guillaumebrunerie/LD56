@@ -230,9 +230,7 @@ export class Ant extends Entity {
 			return;
 		}
 		for (const shockwave of shockwaves) {
-			const { dx, dy, strength, nearStrength } = shockwave.speedAt(
-				this.pos,
-			);
+			const { dx, dy, nearStrength } = shockwave.speedAt(this.pos);
 
 			// Maybe die
 			if (
@@ -254,8 +252,9 @@ export class Ant extends Entity {
 		}
 	}
 
-	stunDuration = [0, 0.7, 0.5, 0.3];
+	stunDuration = [0, 0.5, 0.4, 0.3];
 	stun(strength: number) {
+		console.log(strength);
 		this.state = "stunned";
 		this.stunnedCooldown = this.stunDuration[this.level] * strength;
 	}

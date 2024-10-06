@@ -1,4 +1,5 @@
 import { Entity } from "./entities";
+import { levels } from "./levels";
 import { distanceToNearest90, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
@@ -28,7 +29,11 @@ export class LevelSelector extends Entity {
 			}
 			return;
 		}
-		const dangle = distanceToNearest90(this.rotation);
+		const dangle = distanceToNearest90(
+			this.rotation,
+			(-Math.PI / 2) * (levels.length - 1),
+			0,
+		);
 		// const damping =
 		// 	Math.abs(this.speed) > this.maxSpeed ?
 		// 		this.maxDamping
