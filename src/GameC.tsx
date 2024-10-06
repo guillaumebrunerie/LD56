@@ -89,15 +89,33 @@ export const GameC = ({ game }: { game: Game }) => {
 const LevelSelectScreen = ({ game }: { game: Game }) => {
 	return (
 		<container>
-			<sprite
-				texture={Bg}
+			<Rectangle
 				x={0}
 				y={0}
+				width={1920}
+				height={1080}
+				draw={() => {}}
+				alpha={0}
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
-					const { x, y } = e.global;
-					game.shockwave(x, y);
+					game.levelSelector.touchStart({ ...e.global });
 				}}
+				onGlobalPointerMove={(e: FederatedPointerEvent) => {
+					game.levelSelector.touchDrag({ ...e.global });
+				}}
+				onPointerUp={() => {
+					game.levelSelector.touchEnd();
+				}}
+				onPointerUpOutside={() => {
+					game.levelSelector.touchEnd();
+				}}
+			/>
+			<sprite
+				anchor={0.5}
+				texture={Bg}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y}
+				rotation={game.levelSelector.rotation}
 			/>
 		</container>
 	);

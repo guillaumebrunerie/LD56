@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import type { Target } from "./target";
 
 export const mod = (a: number, b: number) => (b + (a % b)) % b;
 
@@ -48,4 +49,20 @@ export const positionAwayFrom = (
 		}
 	}
 	return null;
+};
+
+export const closest = (point: Point, things: Target[]) => {
+	let min = Infinity;
+	let closest: Target | null = null;
+	for (const thing of things) {
+		const d = distance2(point, thing.position);
+		if (d < min) {
+			min = d;
+			closest = thing;
+		}
+	}
+	if (!closest) {
+		throw new Error("No closest");
+	}
+	return closest;
 };

@@ -6,7 +6,7 @@ import { LevelSelector } from "./levelSelector";
 import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
-import { randomAroundPoint, relativePos } from "./utils";
+import { closest, randomAroundPoint, relativePos } from "./utils";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -97,11 +97,7 @@ export class Game extends Entity {
 
 	onTargetIdle(target: Target) {
 		for (const ant of this.ants.entities) {
-			ant.setTarget(
-				this.targets.entities[
-					Math.floor(Math.random() * this.targets.entities.length)
-				],
-			);
+			ant.setTarget(closest(ant.pos, this.targets.entities));
 		}
 		this.shockwaveCooldown = 0;
 		this.shockwave(target.position.x, target.position.y);
@@ -199,7 +195,6 @@ export class Game extends Entity {
 		}
 		const strength =
 			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
-		console.log({ strength });
 		this.shockwaveCooldown = this.shockwaveDelay;
 		this.shockwaves.add(
 			new Shockwave({ x, y }, -300, 100, 5000, 100 * strength),
