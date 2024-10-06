@@ -1,4 +1,3 @@
-- Sound triggers
 - Different targets
 
 - Handle pause during game starting

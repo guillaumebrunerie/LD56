@@ -1,5 +1,13 @@
 import { Ant } from "./ant";
-import { Music, MusicMenu, ShockwaveSound, StartLevel } from "./assets";
+import {
+	CompleteLevel,
+	LoseGame,
+	Music,
+	MusicMenu,
+	ShockwaveSound,
+	StartLevel,
+	TargetFall,
+} from "./assets";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 import { levels } from "./levels";
@@ -81,7 +89,7 @@ export class Game extends Entity {
 
 		setTimeout(() => {
 			Music.singleInstance = true;
-			void Music.play({ loop: true, volume: 0.5 });
+			void Music.play({ loop: true, volume: 0.3 });
 		}, 700);
 
 		const levelData = levels.find((l) => l.level == level);
@@ -112,6 +120,8 @@ export class Game extends Entity {
 	}
 
 	onTargetIdle(target: Target) {
+		TargetFall.singleInstance = true;
+		void TargetFall.play({ volume: 0.5 });
 		for (const ant of this.ants.entities) {
 			ant.pickTarget(this.targets.entities, this.sources.entities);
 		}
@@ -250,6 +260,7 @@ export class Game extends Entity {
 	}
 
 	gameOver() {
+		void LoseGame.play({ volume: 0.5 });
 		this.state = "gameover";
 		for (const ant of this.ants.entities) {
 			ant.win();
@@ -257,6 +268,8 @@ export class Game extends Entity {
 	}
 
 	win() {
+		void Music.pause();
+		void CompleteLevel.play({ volume: 0.5 });
 		this.state = "win";
 	}
 

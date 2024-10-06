@@ -1,3 +1,4 @@
+import { SourceDestroyed } from "./assets";
 import { Entity } from "./entities";
 
 import type { Shockwave } from "./shockwave";
@@ -21,6 +22,11 @@ export class Source extends Entity {
 	}
 
 	destroy() {
+		if (!this.isDestroyed) {
+			setTimeout(() => {
+				void SourceDestroyed.play({ volume: 1 });
+			}, 200);
+		}
 		this.isDestroyed = true;
 		this.healthCurrent = 0;
 	}

@@ -1,3 +1,13 @@
+import {
+	AntCrushed1,
+	AntCrushed2,
+	AntCrushed3,
+	AntCrushed4,
+	AntDie1,
+	AntDie2,
+	AntDie3,
+	AntDie4,
+} from "./assets";
 import { Entity } from "./entities";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
@@ -160,6 +170,17 @@ export class Ant extends Entity {
 	die() {
 		this.state = "dead";
 		this.lt = 0;
+		const AntDyingSounds = [
+			AntDie1,
+			AntDie2,
+			AntDie3,
+			AntDie4,
+			AntCrushed1,
+			AntCrushed2,
+			AntCrushed3,
+			AntCrushed4,
+		];
+		void pick(AntDyingSounds).play({ volume: 0.5 });
 	}
 
 	appearDuration = 0.5;

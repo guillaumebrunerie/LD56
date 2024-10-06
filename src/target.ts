@@ -1,3 +1,4 @@
+import { Music, TargetEnd } from "./assets";
 import { Entity } from "./entities";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
@@ -100,6 +101,8 @@ export class Target extends Entity {
 	disappear() {
 		this.lt = 0;
 		this.state = "disappearing";
+		void Music.pause();
+		void TargetEnd.play({ volume: 0.5 });
 	}
 
 	disappearDuration = 0.85;
