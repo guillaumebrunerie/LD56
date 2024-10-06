@@ -2,6 +2,7 @@ import { Ant } from "./ant";
 import { Music } from "./assets";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
+import { LevelSelector } from "./levelSelector";
 import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
@@ -12,6 +13,7 @@ export class Game extends Entity {
 	targets: EntityArray<Target>;
 	sources: EntityArray<Source>;
 	shockwaves: EntityArray<Shockwave>;
+	levelSelector: LevelSelector;
 	antValue = 0;
 	instabilityLevel = 0;
 	isGameOver = false;
@@ -24,11 +26,13 @@ export class Game extends Entity {
 		this.targets = new EntityArray<Target>();
 		this.sources = new EntityArray<Source>();
 		this.shockwaves = new EntityArray<Shockwave>();
+		this.levelSelector = new LevelSelector();
 		this.addChildren(
 			this.ants,
 			this.targets,
 			this.sources,
 			this.shockwaves,
+			this.levelSelector,
 		);
 		this.addTicker((delta) => this.tick(delta));
 	}

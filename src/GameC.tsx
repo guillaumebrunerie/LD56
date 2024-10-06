@@ -33,6 +33,8 @@ import { Ring } from "./Ring";
 import { getFrame } from "./Animation";
 
 export const GameC = ({ game }: { game: Game }) => {
+	// return <LevelSelectScreen game={game} />;
+
 	return (
 		<container>
 			<sprite
@@ -80,6 +82,23 @@ export const GameC = ({ game }: { game: Game }) => {
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
 			{game.isGameOver && <GameOverScreen game={game} />}
+		</container>
+	);
+};
+
+const LevelSelectScreen = ({ game }: { game: Game }) => {
+	return (
+		<container>
+			<sprite
+				texture={Bg}
+				x={0}
+				y={0}
+				eventMode="static"
+				onPointerDown={(e: FederatedPointerEvent) => {
+					const { x, y } = e.global;
+					game.shockwave(x, y);
+				}}
+			/>
 		</container>
 	);
 };
@@ -220,7 +239,7 @@ const shadowDx = 1;
 const shadowDy = 2;
 
 const AntShadowC = ({ ant }: { ant: Ant }) => {
-	return null;
+	// return null;
 	const alpha = ant.state == "appearing" ? ant.lt / ant.appearDuration : 1;
 
 	return (
@@ -232,7 +251,7 @@ const AntShadowC = ({ ant }: { ant: Ant }) => {
 				x={ant.pos.x + shadowDx}
 				y={ant.pos.y + shadowDy}
 				rotation={ant.direction + Math.PI / 2}
-				alpha={alpha * 0.9}
+				alpha={alpha * 0.6}
 			/>
 		</container>
 	);
