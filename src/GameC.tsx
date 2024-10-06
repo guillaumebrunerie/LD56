@@ -77,7 +77,7 @@ const closedSourceTextures = [
 const SourceC = ({ source }: { source: Source }) => {
 	return (
 		<container>
-			{!source.isDestroyed && (
+			{!source.isDestroyed && false && (
 				<Circle
 					x={source.pos.x}
 					y={source.pos.y}

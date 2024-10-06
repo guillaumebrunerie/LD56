@@ -1,4 +1,5 @@
 import { Entity } from "./entities";
+import type { Shockwave } from "./shockwave";
 import type { Point } from "./utils";
 
 export class Source extends Entity {
@@ -49,5 +50,20 @@ export class Source extends Entity {
 	destroy() {
 		this.isDestroyed = true;
 		this.healthCurrent = 0;
+	}
+
+	shockwave(delta: number, shockwaves: Shockwave[]) {
+		if (this.isDestroyed) {
+			return;
+		}
+		const resistance = 0.05;
+		for (const shockwave of shockwaves) {
+			const { strength } = shockwave.speedAt(this.pos);
+			this.healthCurrent -= strength * delta * resistance;
+		}
+		if (this.healthCurrent <= 0) {
+			this.healthCurrent = 0;
+			this.destroy();
+		}
 	}
 }

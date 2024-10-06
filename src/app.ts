@@ -31,6 +31,7 @@ export class App extends Entity {
 				configurable: true,
 			});
 		}
+		window.cleanup?.();
 
 		// Initialize sound and ticker
 		initSound();
@@ -38,7 +39,6 @@ export class App extends Entity {
 			this.tick_((ticker.deltaTime / 60) * this.speed);
 		});
 		Ticker.shared.add(tick);
-		window.cleanup?.();
 		window.cleanup = () => {
 			Ticker.shared.remove(tick);
 			closeSound();

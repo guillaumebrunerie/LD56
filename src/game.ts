@@ -68,15 +68,15 @@ export class Game extends Entity {
 			new Source(randomAroundPoint(relativePos(0.85, 0.25), 100)),
 		);
 
-		for (let i = 0; i < 5; i++) {
-			const position = positionAwayFrom(
-				this.sources.entities.map((source) => source.pos),
-				200,
-			);
-			if (position) {
-				this.sources.add(new Source(position, true));
-			}
-		}
+		// for (let i = 0; i < 5; i++) {
+		// 	const position = positionAwayFrom(
+		// 		this.sources.entities.map((source) => source.pos),
+		// 		200,
+		// 	);
+		// 	if (position) {
+		// 		this.sources.add(new Source(position, true));
+		// 	}
+		// }
 
 		// Initial ants
 		for (let i = 0; i < 50; i++) {
@@ -138,6 +138,10 @@ export class Game extends Entity {
 		}
 		for (const ant of this.ants.entities) {
 			ant.shockwave(delta, this.shockwaves.entities);
+		}
+
+		for (const source of this.sources.entities) {
+			source.shockwave(delta, this.shockwaves.entities);
 		}
 
 		for (const shockwave of this.shockwaves.entities) {

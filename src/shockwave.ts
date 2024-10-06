@@ -29,21 +29,23 @@ export class Shockwave extends Entity {
 		this.outerRadius += delta * this.speed;
 	}
 
+	minDistance = 50;
 	speedAt(point: Point) {
 		const dx = point.x - this.center.x;
 		const dy = point.y - this.center.y;
-		const distance2 = dx * dx + dy * dy;
+		const distance2 = Math.max(this.minDistance ** 2, dx * dx + dy * dy);
 		if (
 			(this.innerRadius > 0 &&
 				distance2 < this.innerRadius * this.innerRadius) ||
 			this.outerRadius < 0 ||
 			distance2 > this.outerRadius * this.outerRadius
 		) {
-			return { dx: 0, dy: 0 };
+			return { dx: 0, dy: 0, strength: 0 };
 		} else {
 			return {
 				dx: (dx / distance2) * this.strength * this.speed,
 				dy: (dy / distance2) * this.strength * this.speed,
+				strength: (this.strength * this.speed) / Math.sqrt(distance2),
 			};
 		}
 	}
