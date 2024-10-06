@@ -147,8 +147,10 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				alpha={0.3}
 				color={0}
 			/>
-			<sprite texture={BtnGameTxt} anchor={0.5} x={1920 / 2} y={300} />
-			<sprite texture={BtnOverTxt} anchor={0.5} x={1920 / 2} y={550} />
+			<container x={1920 / 2} y={450}>
+				<sprite texture={BtnGameTxt} anchor={0.5} />
+				<sprite texture={BtnOverTxt} anchor={0.5} />
+			</container>
 			<container y={70}>
 				<RestartButton game={game} />
 				<MainMenuButton game={game} />
@@ -169,13 +171,10 @@ export const WinScreen = ({ game }: { game: Game }) => {
 				alpha={0.3}
 				color={0}
 			/>
-			<sprite texture={BtnLevelTxt} anchor={0.5} x={1920 / 2} y={319} />
-			<sprite
-				texture={BtnCompleteTxt}
-				anchor={0.5}
-				x={1920 / 2}
-				y={450}
-			/>
+			<container x={1920 / 2} y={400}>
+				<sprite texture={BtnLevelTxt} anchor={0.5} />
+				<sprite texture={BtnCompleteTxt} anchor={0.5} />
+			</container>
 			<NextLevelButton game={game} />
 			<MainMenuButton game={game} />
 		</container>
