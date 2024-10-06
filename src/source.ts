@@ -1,4 +1,5 @@
 import { Entity } from "./entities";
+
 import type { Shockwave } from "./shockwave";
 import type { Point } from "./utils";
 
@@ -7,6 +8,9 @@ export class Source extends Entity {
 	healthCurrent = 100;
 	healthMax = 100;
 	isDestroyed = false;
+
+	radiusX = 50;
+	radiusY = 50;
 
 	constructor(pos: Point, destroyed = false) {
 		super();

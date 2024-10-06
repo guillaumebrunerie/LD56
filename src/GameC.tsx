@@ -495,8 +495,8 @@ const TargetC = ({ target }: { target: Target }) => {
 				texture={Target_Shadow}
 				alpha={alphaShadow}
 				scale={scaleShadow}
-				x={target.position.x}
-				y={target.position.y}
+				x={target.pos.x}
+				y={target.pos.y}
 			/>
 			<sprite
 				anchor={0.5}
@@ -507,8 +507,8 @@ const TargetC = ({ target }: { target: Target }) => {
 				}
 				alpha={alpha}
 				scale={scale}
-				x={target.position.x}
-				y={target.position.y - dy}
+				x={target.pos.x}
+				y={target.pos.y - dy}
 			/>
 		</container>
 	);

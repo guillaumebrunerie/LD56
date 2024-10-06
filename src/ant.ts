@@ -6,9 +6,9 @@ import { randomAroundPoint, type Point } from "./utils";
 
 export class Ant extends Entity {
 	pos: Point;
-	destination: Point | null;
-	target: Target | null;
-	direction: number;
+	destination: Point | null = null;
+	target: Target | Source | null = null;
+	direction = 0;
 	speed: number;
 	state:
 		| "appearing"
@@ -19,7 +19,7 @@ export class Ant extends Entity {
 		| "stunned";
 	level: number;
 
-	constructor(source: Source | null, targets: Target[]) {
+	constructor(source: Source | null) {
 		super();
 
 		this.level = 1;
@@ -43,26 +43,8 @@ export class Ant extends Entity {
 			this.state = "walking";
 		} else {
 			const { x, y } = randomAroundPoint(source.pos, 20);
-			const target = targets[0];
-
 			this.state = "appearing";
 			this.pos = { x, y };
-			this.target = target;
-			// destination, point towards the center
-			const roughDirection = Math.atan2(
-				this.target.position.y - this.pos.y,
-				this.target.position.x - this.pos.x,
-			);
-			const angle =
-				roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
-			this.destination = {
-				x: 0 * Math.cos(angle),
-				y: 0 * Math.sin(angle),
-			};
-			this.direction = Math.atan2(
-				this.target.position.y - this.destination.y - this.pos.y,
-				this.target.position.x - this.destination.x - this.pos.x,
-			);
 		}
 		this.addTicker((delta) => this.tick(delta));
 	}
@@ -71,8 +53,8 @@ export class Ant extends Entity {
 		this.target = target;
 		// destination, point towards the center
 		const roughDirection = Math.atan2(
-			this.target.position.y - this.pos.y,
-			this.target.position.x - this.pos.x,
+			this.target.pos.y - this.pos.y,
+			this.target.pos.x - this.pos.x,
 		);
 		const angle = roughDirection + ((Math.random() - 0.5) * Math.PI) / 2;
 		this.destination = {
@@ -80,8 +62,8 @@ export class Ant extends Entity {
 			y: 0 * Math.sin(angle),
 		};
 		this.direction = Math.atan2(
-			this.target.position.y - this.destination.y - this.pos.y,
-			this.target.position.x - this.destination.x - this.pos.x,
+			this.target.pos.y - this.destination.y - this.pos.y,
+			this.target.pos.x - this.destination.x - this.pos.x,
 		);
 		if (this.distanceToTarget() < 1) {
 			this.die();
@@ -133,8 +115,8 @@ export class Ant extends Entity {
 			return { dx: 0, dy: 0, ok: false };
 		}
 		return {
-			dx: this.target.position.x - this.destination.x - this.pos.x,
-			dy: this.target.position.y - this.destination.y - this.pos.y,
+			dx: this.target.pos.x - this.destination.x - this.pos.x,
+			dy: this.target.pos.y - this.destination.y - this.pos.y,
 			ok: true,
 		};
 	}
@@ -151,8 +133,8 @@ export class Ant extends Entity {
 		if (!this.target || !this.destination) {
 			return Infinity;
 		}
-		const dx = this.target.position.x - this.destination.x - this.pos.x;
-		const dy = this.target.position.y - this.destination.y - this.pos.y;
+		const dx = this.target.pos.x - this.destination.x - this.pos.x;
+		const dy = this.target.pos.y - this.destination.y - this.pos.y;
 
 		const dxn = dx / this.target.radiusX;
 		const dyn = dy / this.target.radiusY;

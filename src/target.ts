@@ -4,7 +4,7 @@ import type { Source } from "./source";
 import { distance2, type Point } from "./utils";
 
 export class Target extends Entity {
-	position: Point;
+	pos: Point;
 	speedPerAnt = 2;
 	state: "appearing" | "idle" | "disappearing" = "appearing";
 	onIdle: (target: this) => void;
@@ -12,9 +12,9 @@ export class Target extends Entity {
 	radiusX = 65;
 	radiusY = 57;
 
-	constructor(position: Point, onIdle: (target: Target) => void) {
+	constructor(pos: Point, onIdle: (target: Target) => void) {
 		super();
-		this.position = position;
+		this.pos = pos;
 		this.onIdle = onIdle;
 		this.addTicker((delta) => this.tick(delta));
 	}
@@ -47,8 +47,8 @@ export class Target extends Entity {
 
 		const sortedSources = sources.toSorted((a, b) => {
 			const distance = (source: Source) => {
-				const dx = source.pos.x - this.position.x;
-				const dy = source.pos.y - this.position.y;
+				const dx = source.pos.x - this.pos.x;
+				const dy = source.pos.y - this.pos.y;
 				return dx * dx + dy * dy;
 			};
 			return distance(a) - distance(b);
@@ -64,13 +64,13 @@ export class Target extends Entity {
 
 		const destination = sortedSources[destinationIndex];
 		const angle = Math.atan2(
-			destination.pos.y - this.position.y,
-			destination.pos.x - this.position.x,
+			destination.pos.y - this.pos.y,
+			destination.pos.x - this.pos.x,
 		);
 		const dx = Math.cos(angle) * speed * delta;
 		const dy = Math.sin(angle) * speed * delta;
-		this.position.x += dx;
-		this.position.y += dy;
+		this.pos.x += dx;
+		this.pos.y += dy;
 		return { dx, dy };
 	}
 
@@ -78,7 +78,7 @@ export class Target extends Entity {
 		for (const source of sources) {
 			if (
 				!source.isDestroyed &&
-				distance2(source.pos, this.position) < 5 * 5
+				distance2(source.pos, this.pos) < 5 * 5
 			) {
 				return true;
 			}
@@ -89,11 +89,11 @@ export class Target extends Entity {
 	resistance = 0.1;
 	shockwave(delta: number, shockwaves: Shockwave[]) {
 		for (const shockwave of shockwaves) {
-			const { dx, dy } = shockwave.speedAt(this.position);
+			const { dx, dy } = shockwave.speedAt(this.pos);
 
 			const factor = Math.random() / this.resistance;
-			this.position.x += dx * delta * factor;
-			this.position.y += dy * delta * factor;
+			this.pos.x += dx * delta * factor;
+			this.pos.y += dy * delta * factor;
 		}
 	}
 

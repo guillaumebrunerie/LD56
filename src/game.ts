@@ -102,7 +102,7 @@ export class Game extends Entity {
 			ant.setTarget(closest(ant.pos, this.targets.entities));
 		}
 		this.shockwaveCooldown = 0;
-		this.shockwave(target.position.x, target.position.y);
+		this.shockwave(target.pos.x, target.pos.y);
 		this.state = "game";
 	}
 
@@ -129,7 +129,9 @@ export class Game extends Entity {
 					if (source.isDestroyed) {
 						continue;
 					}
-					this.ants.add(new Ant(source, this.targets.entities));
+					const ant = new Ant(source);
+					this.ants.add(ant);
+					ant.setTarget(closest(ant.pos, this.targets.entities));
 				}
 			}
 		}

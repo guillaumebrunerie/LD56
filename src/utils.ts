@@ -55,7 +55,7 @@ export const closest = (point: Point, things: Target[]) => {
 	let min = Infinity;
 	let closest: Target | null = null;
 	for (const thing of things) {
-		const d = distance2(point, thing.position);
+		const d = distance2(point, thing.pos);
 		if (d < min) {
 			min = d;
 			closest = thing;
