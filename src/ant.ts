@@ -217,7 +217,8 @@ export class Ant extends Entity {
 		// stop at the edge
 		if (this.circularEdge) {
 			if (this.pos.x ** 2 + this.pos.y ** 2 > this.edgeRadius ** 2) {
-				this.direction = this.direction + Math.PI;
+				const normal = Math.atan2(this.pos.y, this.pos.x);
+				this.direction = 2 * normal - this.direction + Math.PI;
 			}
 		} else {
 			if (this.pos.x < 0) {

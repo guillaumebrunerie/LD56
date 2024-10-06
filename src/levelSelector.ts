@@ -26,7 +26,7 @@ export class LevelSelector extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 		for (let i = 0; i < 100; i++) {
 			const ant = new Ant();
-			ant.initCircle(900);
+			ant.initCircle(915);
 			this.ants.add(ant);
 		}
 	}

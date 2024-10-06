@@ -1,10 +1,7 @@
-- Different targets
-
 - Power ups
 - Design and balance all levels
 
+- Draw polygon for ants
 - Animate game over posting
 - Animate level complete posting
-- Ants on the moon: proper reflection
 - Transition between level select and game
-- Draw polygon for ants
