@@ -14,14 +14,14 @@ export const CustomText = ({
 			ref={myRef}
 			style={
 				new TextStyle({
-					fontFamily: "Laffayette Comic Pro",
+					fontFamily: "Comix Loud",
 					fontSize: 50,
-					fontWeight: "800",
+					// fontWeight: "800",
 					letterSpacing: 4,
 					lineHeight: 50,
 					stroke: {
 						width: 3,
-						color: "black",
+						color: "#333",
 					},
 					fill: "#FFFFFF",
 					align: "center",

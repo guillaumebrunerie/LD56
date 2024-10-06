@@ -139,6 +139,15 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				x={game.levelSelector.center.x}
 				y={game.levelSelector.center.y}
 			/>
+			<sprite
+				anchor={0.5}
+				scale={2}
+				texture={MenuMoon_Shadow2}
+				blendMode="multiply"
+				alpha={0.85}
+				x={game.levelSelector.center.x}
+				y={game.levelSelector.center.y - 100}
+			/>
 			<container
 				x={game.levelSelector.center.x}
 				y={game.levelSelector.center.y}
@@ -159,7 +168,7 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				scale={2}
 				texture={MenuMoon_Shadow2}
 				blendMode="multiply"
-				alpha={0.85}
+				alpha={0.3}
 				x={game.levelSelector.center.x}
 				y={game.levelSelector.center.y - 100}
 			/>
@@ -185,10 +194,10 @@ type LevelCardProps = {
 };
 
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
-	const levelText = `Level ${level}`;
+	const levelText = `LEVEL ${level}`;
 	const angle = (level - 1) * levelAngle;
-	const minAngle = -mainRotation + levelAngle - Math.PI / 2;
-	const maxAngle = -mainRotation + levelAngle + Math.PI / 2;
+	const minAngle = -mainRotation + levelAngle - Math.PI;
+	const maxAngle = -mainRotation + levelAngle + Math.PI;
 	if (level * levelAngle < minAngle || level * levelAngle > maxAngle) {
 		return null;
 	}
@@ -216,28 +225,36 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 			<container y={150}>
 				<CustomText
 					anchor={0.5}
-					x={5}
+					x={0}
 					y={5}
-					style={{ fill: "#222" }}
+					style={{ fill: "#222", fontSize: 36 }}
 					text={levelText}
 				/>
 				<CustomText
 					anchor={0.5}
-					style={{ fill: "#ff75f1" }}
+					style={{ fill: "#ff75f1", fontSize: 36 }}
 					text={levelText}
 				/>
 			</container>
 			<container y={200}>
 				<CustomText
 					anchor={{ x: 0.5, y: 0 }}
-					x={5}
+					x={0}
 					y={5}
-					style={{ fill: "#222", fontSize: 40 }}
+					style={{
+						fill: "#222",
+						fontSize: 40,
+						fontFamily: "Laffayette Comic Pro",
+					}}
 					text={name}
 				/>
 				<CustomText
 					anchor={{ x: 0.5, y: 0 }}
-					style={{ fill: "#ffdefc", fontSize: 40 }}
+					style={{
+						fill: "#ffdefc",
+						fontSize: 40,
+						fontFamily: "Laffayette Comic Pro",
+					}}
 					text={name}
 				/>
 			</container>
