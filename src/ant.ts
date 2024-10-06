@@ -209,7 +209,7 @@ export class Ant extends Entity {
 	}
 
 	passedShockwaves = new WeakSet<Shockwave>();
-
+	minDistanceShockwave = 50;
 	shockwave(delta: number, shockwaves: Shockwave[]) {
 		if (this.state == "dead" || this.state == "appearing") {
 			return;
@@ -218,7 +218,10 @@ export class Ant extends Entity {
 			const { dx, dy } = shockwave.speedAt(this.pos);
 
 			// Maybe die
-			const distance = distanceBetween(this.pos, shockwave.center);
+			const distance = Math.max(
+				this.minDistanceShockwave,
+				distanceBetween(this.pos, shockwave.center),
+			);
 			if (
 				!this.passedShockwaves.has(shockwave) &&
 				(dx !== 0 || dy !== 0)
