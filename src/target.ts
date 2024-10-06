@@ -5,6 +5,7 @@ import type { Source } from "./source";
 import { distance2, type Point } from "./utils";
 
 export class Target extends Entity {
+	item: number;
 	pos: Point;
 	speedPerAnt = 2;
 	state: "appearing" | "idle" | "disappearing" = "appearing";
@@ -13,8 +14,9 @@ export class Target extends Entity {
 	radiusX = 65;
 	radiusY = 57;
 
-	constructor(pos: Point, onIdle: (target: Target) => void) {
+	constructor(item: number, pos: Point, onIdle: (target: Target) => void) {
 		super();
+		this.item = item;
 		this.pos = pos;
 		this.onIdle = onIdle;
 		this.addTicker((delta) => this.tick(delta));

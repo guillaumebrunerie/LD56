@@ -1,4 +1,5 @@
 import { Ant } from "./ant";
+import { Target1, Target2, Target3, Target4, Target5, Target6 } from "./assets";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 import { levels } from "./levels";

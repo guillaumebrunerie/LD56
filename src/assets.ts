@@ -1,4 +1,4 @@
-/** Generated on Sun Oct  6 23:41:20 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 01:09:51 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -36,6 +36,11 @@ import Target1_Item_ from "../gfx/Target1_Item.png?texture";
 import Target1_Plate_ from "../gfx/Target1_Plate.png?texture";
 import Target1_PlateShadow_ from "../gfx/Target1_PlateShadow.png?texture";
 import Target1_Shadow_ from "../gfx/Target1_Shadow.png?texture";
+import Target2_ from "../gfx/Target2.png?texture";
+import Target3_ from "../gfx/Target3.png?texture";
+import Target4_ from "../gfx/Target4.png?texture";
+import Target5_ from "../gfx/Target5.png?texture";
+import Target6_ from "../gfx/Target6.png?texture";
 import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 
 /** Spritesheets */
@@ -45,6 +50,11 @@ import Ant3_ from "../gfx/Ant3.png?spritesheet";
 import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
 import SmokeFx_ from "../gfx/SmokeFx.png?spritesheet";
 import Target1End_ from "../gfx/Target1End.png?spritesheet";
+import Target2End_ from "../gfx/Target2End.png?spritesheet";
+import Target3End_ from "../gfx/Target3End.png?spritesheet";
+import Target4End_ from "../gfx/Target4End.png?spritesheet";
+import Target5End_ from "../gfx/Target5End.png?spritesheet";
+import Target6End_ from "../gfx/Target6End.png?spritesheet";
 
 /** Sounds */
 import AntCrushed1_ from "../audio/AntCrushed1.mp3?sound";
@@ -108,6 +118,11 @@ export const [
 	Target1_Plate,
 	Target1_PlateShadow,
 	Target1_Shadow,
+	Target2,
+	Target3,
+	Target4,
+	Target5,
+	Target6,
 	Target_Shadow,
 	Ant1Sheet,
 	{ animations: { Ant1 } },
@@ -121,6 +136,16 @@ export const [
 	{ animations: { SmokeFx } },
 	Target1EndSheet,
 	{ animations: { Target1End } },
+	Target2EndSheet,
+	{ animations: { Target2End } },
+	Target3EndSheet,
+	{ animations: { Target3End } },
+	Target4EndSheet,
+	{ animations: { Target4End } },
+	Target5EndSheet,
+	{ animations: { Target5End } },
+	Target6EndSheet,
+	{ animations: { Target6End } },
 	AntCrushed1,
 	AntCrushed2,
 	AntCrushed3,
@@ -179,6 +204,11 @@ export const [
 	Target1_Plate_,
 	Target1_PlateShadow_,
 	Target1_Shadow_,
+	Target2_,
+	Target3_,
+	Target4_,
+	Target5_,
+	Target6_,
 	Target_Shadow_,
 	Ant1_,
 	Ant1_,
@@ -192,6 +222,16 @@ export const [
 	SmokeFx_,
 	Target1End_,
 	Target1End_,
+	Target2End_,
+	Target2End_,
+	Target3End_,
+	Target3End_,
+	Target4End_,
+	Target4End_,
+	Target5End_,
+	Target5End_,
+	Target6End_,
+	Target6End_,
 	AntCrushed1_,
 	AntCrushed2_,
 	AntCrushed3_,

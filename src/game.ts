@@ -92,7 +92,7 @@ export class Game extends Entity {
 			void Music.play({ loop: true, volume: 0.3 });
 		}, 700);
 
-		const levelData = levels.find((l) => l.level == level);
+		const levelData = levels[level - 1];
 		if (!levelData) {
 			console.error("level not found");
 			return;
@@ -101,6 +101,7 @@ export class Game extends Entity {
 		for (const targetData of levelData.targets) {
 			this.targets.add(
 				new Target(
+					targetData.id,
 					randomAroundPoint(targetData.pos, targetData.delta),
 					(target) => this.onTargetIdle(target),
 				),

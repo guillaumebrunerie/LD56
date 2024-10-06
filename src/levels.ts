@@ -1,30 +1,27 @@
 export const levels = [
 	{
-		level: 1,
 		name: "That’s it!\nCheeese!",
 		initialAnts: 10,
 		targets: [
-			{ id: 1, pos: { x: (1920 * 2) / 3, y: 1080 * 0.5 }, delta: 100 },
+			{ id: 2, pos: { x: (1920 * 2) / 3, y: 1080 * 0.5 }, delta: 100 },
 		],
 		sources: [{ pos: { x: (1920 * 1) / 3, y: 1080 * 0.5 }, delta: 100 }],
 	},
 	{
-		level: 2,
 		name: "My sandwich?\nMY SANDWICH?",
 		initialAnts: 20,
-		targets: [{ id: 1, pos: { x: 1920 * 0.4, y: 1080 * 0.6 }, delta: 100 }],
+		targets: [{ id: 3, pos: { x: 1920 * 0.4, y: 1080 * 0.6 }, delta: 100 }],
 		sources: [
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
 		],
 	},
 	{
-		level: 3,
 		name: "What’s this? What’s this?\nThere’s crawlers everywhere!",
 		initialAnts: 50,
 		targets: [
-			{ id: 1, pos: { x: 1920 * 0.4, y: 1080 * 0.5 }, delta: 100 },
-			{ id: 1, pos: { x: 1920 * 0.6, y: 1080 * 0.5 }, delta: 100 },
+			{ id: 5, pos: { x: 1920 * 0.4, y: 1080 * 0.5 }, delta: 100 },
+			{ id: 5, pos: { x: 1920 * 0.6, y: 1080 * 0.5 }, delta: 100 },
 		],
 		sources: [
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
@@ -34,28 +31,39 @@ export const levels = [
 		],
 	},
 	{
-		level: 4,
 		name: "The cake is a lie",
 		initialAnts: 100,
 		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
-		sources: [],
+		sources: [
+			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
+			{ pos: { x: 1920 * 0.15, y: 1080 * 0.75 }, delta: 100 },
+			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
+			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
+		],
 	},
 	{
-		level: 5,
 		name: "Houston, we\nhave a problem",
 		initialAnts: 100,
-		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
-		sources: [],
+		targets: [{ id: 6, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		sources: [
+			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
+			{ pos: { x: 1920 * 0.15, y: 1080 * 0.75 }, delta: 100 },
+			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
+			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
+		],
 	},
 	{
-		level: 6,
 		name: "Cowabunga!",
 		initialAnts: 100,
-		targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
-		sources: [],
+		targets: [{ id: 4, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		sources: [
+			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
+			{ pos: { x: 1920 * 0.15, y: 1080 * 0.75 }, delta: 100 },
+			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
+			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
+		],
 	},
 	// {
-	// 	level: 6,
 	// 	name: "E.T... Phone... Home...",
 	// 	initialAnts: 100,
 	// 	targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],

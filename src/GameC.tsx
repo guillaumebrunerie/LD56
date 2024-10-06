@@ -30,6 +30,16 @@ import {
 	Target1End,
 	PauseBtn,
 	Click,
+	Target2,
+	Target3,
+	Target4,
+	Target5,
+	Target6,
+	Target2End,
+	Target3End,
+	Target4End,
+	Target5End,
+	Target6End,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -217,11 +227,11 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				y={game.levelSelector.center.y}
 				rotation={game.levelSelector.rotation}
 			>
-				{levels.map(({ level, name }) => (
+				{levels.map(({ name }, i) => (
 					<LevelCard
 						game={game}
-						key={level}
-						level={level}
+						key={i}
+						level={i + 1}
 						name={name}
 						mainRotation={game.levelSelector.rotation}
 					/>
@@ -250,6 +260,18 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 	);
 };
 
+const TargetTexture = [
+	Target1,
+	Target1,
+	Target2,
+	Target3,
+	Target4,
+	Target5,
+	Target6,
+];
+
+const angleThreshold = 0.1;
+
 type LevelCardProps = {
 	game: Game;
 	level: number;
@@ -257,14 +279,13 @@ type LevelCardProps = {
 	mainRotation: number;
 };
 
-const angleThreshold = 0.1;
-
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const levelText = `LEVEL ${level}`;
 	const angle = (level - 1) * levelAngle;
 	const minAngle = -mainRotation + levelAngle - Math.PI;
 	const maxAngle = -mainRotation + levelAngle + Math.PI;
 	const isDownRef = useRef(false);
+	const targetId = levels[level - 1].targets[0].id;
 	if (level * levelAngle < minAngle || level * levelAngle > maxAngle) {
 		return null;
 	}
@@ -304,7 +325,7 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 				}}
 			/>
 			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
-			<sprite anchor={0.5} scale={2} texture={Target1} />
+			<sprite anchor={0.5} scale={2} texture={TargetTexture[targetId]} />
 			<container y={150}>
 				<CustomText
 					anchor={0.5}
@@ -522,6 +543,16 @@ const DeadAntBloodStainC = ({ ant }: { ant: Ant }) => {
 	);
 };
 
+const TargetEnd = [
+	Target1End,
+	Target1End,
+	Target2End,
+	Target3End,
+	Target4End,
+	Target5End,
+	Target6End,
+];
+
 const TargetC = ({ target }: { target: Target }) => {
 	const nt =
 		target.state == "idle" || target.state == "disappearing" ? 1
@@ -552,8 +583,13 @@ const TargetC = ({ target }: { target: Target }) => {
 				anchor={0.5}
 				texture={
 					target.state == "disappearing" ?
-						getFrame(Target1End, 20, target.lt, "remove")
-					:	Target1
+						getFrame(
+							TargetEnd[target.item],
+							20,
+							target.lt,
+							"remove",
+						)
+					:	TargetTexture[target.item]
 				}
 				alpha={alpha}
 				scale={scale}
