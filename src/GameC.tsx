@@ -160,11 +160,16 @@ export const GameC = ({ game }: { game: Game }) => {
 	);
 };
 
+const buttonsGap = 250;
+
 const PowerUpButtons = ({ game }: { game: Game }) => {
 	return game.powerUps.map((powerUp, i) => (
 		<container
 			key={i}
-			x={(1920 / (game.powerUps.length + 1)) * (i + 1)}
+			x={
+				(1920 - (game.powerUps.length - 1) * buttonsGap) / 2 +
+				i * buttonsGap
+			}
 			y={950}
 		>
 			<PowerUpButton game={game} powerUp={powerUp} />
@@ -208,7 +213,6 @@ const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
-					void Click.play();
 					game.selectPowerUp(powerUp);
 				}}
 			/>

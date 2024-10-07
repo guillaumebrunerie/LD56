@@ -1,6 +1,7 @@
 import { Ant } from "./ant";
 import {
 	BombPlaced,
+	Click,
 	CompleteLevel,
 	Explosion,
 	FreezeSound,
@@ -175,8 +176,9 @@ export class Game extends Entity {
 	}
 
 	selectPowerUp(powerUp: PowerUp) {
-		if (this.cooldowns[powerUp] == 0) {
+		if (this.cooldowns[powerUp] == 0 && this.activePowerUp != powerUp) {
 			this.activePowerUp = powerUp;
+			void Click.play();
 		}
 	}
 

@@ -61,6 +61,20 @@ export class Target extends Entity {
 				break;
 			}
 		}
+
+		const margin = 30;
+		if (this.pos.x < margin) {
+			this.pos.x = margin;
+		}
+		if (this.pos.x > 1920 - margin) {
+			this.pos.x = 1920 - margin;
+		}
+		if (this.pos.y < margin) {
+			this.pos.y = margin;
+		}
+		if (this.pos.y > 1080 - margin) {
+			this.pos.y = 1080 - margin;
+		}
 	}
 
 	setIdle() {
