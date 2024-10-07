@@ -36,7 +36,7 @@ export class LevelSelector extends Entity {
 
 	tick(delta: number) {
 		for (const ant of this.ants.entities) {
-			ant.tick(delta);
+			ant.tick(delta, []);
 		}
 		if (this.touchPoint) {
 			if (this.lastSnapshot.lt + snapshotDelay < this.lt) {

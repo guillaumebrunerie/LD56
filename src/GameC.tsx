@@ -45,6 +45,7 @@ import {
 	PowerUp2,
 	PowerUp3,
 	PowerUp6,
+	PowerUp4,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -60,6 +61,7 @@ import { useRef } from "react";
 import { GameOverScreen, PauseScreen, WinScreen } from "./Postings";
 import { Circle } from "./Circle";
 import type { Bomb } from "./bomb";
+import type { Freeze } from "./freeze";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.state == "levelSelect") {
@@ -75,7 +77,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
 					const { x, y } = e.global;
-					game.tap(x, y);
+					game.tap({ x, y });
 				}}
 			/>
 			{game.sources.entities.map(
@@ -86,6 +88,11 @@ export const GameC = ({ game }: { game: Game }) => {
 				(source, i) =>
 					!source.isDestroyed && <SourceC key={i} source={source} />,
 			)}
+			{game.freezes.entities.map((freeze, i) => (
+				<container key={i} x={freeze.pos.x} y={freeze.pos.y}>
+					<FreezeC freeze={freeze} />
+				</container>
+			))}
 			{game.ants.entities.map(
 				(ant, i) =>
 					ant.state == "dead" && (
@@ -141,6 +148,7 @@ const PowerUpTexture = {
 	push: PowerUp6,
 	bomb: PowerUp2,
 	hologram: PowerUp3,
+	freeze: PowerUp4,
 };
 
 const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
@@ -749,4 +757,36 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 			/>
 		</container>
 	);
+};
+
+const FreezeC = ({ freeze }: { freeze: Freeze }) => {
+	switch (freeze.state) {
+		case "appearing": {
+			return (
+				<Circle
+					color="blue"
+					radius={
+						freeze.radius *
+						(1 - freeze.timeout / freeze.appearDuration)
+					}
+					draw={() => {}}
+				/>
+			);
+		}
+		case "active": {
+			return (
+				<Circle color="blue" radius={freeze.radius} draw={() => {}} />
+			);
+		}
+		case "disappearing": {
+			return (
+				<Circle
+					color="blue"
+					radius={freeze.radius}
+					alpha={freeze.timeout / freeze.disappearDuration}
+					draw={() => {}}
+				/>
+			);
+		}
+	}
 };

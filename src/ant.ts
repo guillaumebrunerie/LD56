@@ -9,6 +9,7 @@ import {
 	AntDie4,
 } from "./assets";
 import { Entity } from "./entities";
+import type { Freeze } from "./freeze";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import type { Target } from "./target";
@@ -114,18 +115,18 @@ export class Ant extends Entity {
 	}
 
 	stunnedCooldown = 0;
-	tick(delta: number) {
+	tick(delta: number, freezes: Freeze[]) {
 		switch (this.state) {
 			case "appearing": {
 				this.appear(delta);
 				return;
 			}
 			case "walking": {
-				this.walk(delta);
+				this.walk(delta, freezes);
 				return;
 			}
 			case "carrying": {
-				this.carry(delta);
+				this.carry(delta, freezes);
 				return;
 			}
 			case "stunned": {
@@ -204,12 +205,17 @@ export class Ant extends Entity {
 		}
 	}
 
-	walk(delta: number) {
+	freezeFactor = 1 / 4;
+
+	walk(delta: number, freezes: Freeze[]) {
 		const { dx, dy, ok } = this.deltas;
 		if (ok) {
 			this.direction = Math.atan2(dy, dx);
 		}
-		const speed = ok ? this.speed : this.speed / 3;
+		let speed = ok ? this.speed : this.speed / 3;
+		if (freezes.some((freeze) => freeze.containsPoint(this.pos))) {
+			speed *= this.freezeFactor;
+		}
 
 		this.pos.x += Math.cos(this.direction) * delta * speed;
 		this.pos.y += Math.sin(this.direction) * delta * speed;

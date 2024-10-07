@@ -1,5 +1,6 @@
 import { Music, TargetEnd } from "./assets";
 import { Entity } from "./entities";
+import type { Freeze } from "./freeze";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import { distance2, type Point } from "./utils";
@@ -66,11 +67,16 @@ export class Target extends Entity {
 		this.onIdle(this);
 	}
 
-	carry(delta: number, force: number, sources: Source[]) {
+	freezeFactor = 0.25;
+	carry(delta: number, force: number, sources: Source[], freezes: Freeze[]) {
 		if (sources.length == 0) {
 			return { dx: 0, dy: 0 };
 		}
-		const speed = force * this.speedPerAnt;
+		let speed = force * this.speedPerAnt;
+
+		if (freezes.some((freeze) => freeze.containsPoint(this.pos))) {
+			speed *= this.freezeFactor;
+		}
 
 		const sortedSources = sources.toSorted((a, b) => {
 			const distance = (source: Source) => {
