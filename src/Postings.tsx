@@ -6,6 +6,7 @@ import {
 	BtnLevelTxt,
 	BtnOverTxt,
 	Click,
+	Logo,
 } from "./assets";
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
@@ -22,6 +23,19 @@ const buttonsXRight = (1920 * 2) / 3;
 const backdropFilter = new BackdropBlurFilter();
 const lightBackdropFilter = new BackdropBlurFilter({ strength: 0 });
 const textColor = "#DDD";
+
+export const LogoScreen = ({ game }: { game: Game }) => {
+	return (
+		<sprite
+			texture={Logo}
+			cursor="pointer"
+			eventMode="static"
+			onPointerDown={() => {
+				game.skipLogo();
+			}}
+		/>
+	);
+};
 
 const levelIntroDuration = 1.5;
 

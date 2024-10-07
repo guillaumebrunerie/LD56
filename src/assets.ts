@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 23:33:48 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Tue Oct  8 00:39:51 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -18,6 +18,7 @@ import BtnGameTxt_ from "../gfx/BtnGameTxt.png?texture";
 import BtnLevelTxt_ from "../gfx/BtnLevelTxt.png?texture";
 import BtnOverTxt_ from "../gfx/BtnOverTxt.png?texture";
 import FrozenArea_ from "../gfx/FrozenArea.png?texture";
+import Logo_ from "../gfx/Logo.jpg?texture";
 import MenuMoon_ from "../gfx/MenuMoon.png?texture";
 import MenuMoonGlow_ from "../gfx/MenuMoonGlow.png?texture";
 import MenuMoonSky_ from "../gfx/MenuMoonSky.jpg?texture";
@@ -125,6 +126,7 @@ export const [
 	BtnLevelTxt,
 	BtnOverTxt,
 	FrozenArea,
+	Logo,
 	MenuMoon,
 	MenuMoonGlow,
 	MenuMoonSky,
@@ -240,6 +242,7 @@ export const [
 	BtnLevelTxt_,
 	BtnOverTxt_,
 	FrozenArea_,
+	Logo_,
 	MenuMoon_,
 	MenuMoonGlow_,
 	MenuMoonSky_,

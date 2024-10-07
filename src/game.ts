@@ -56,12 +56,13 @@ export class Game extends Entity {
 	startLt = 0;
 
 	state:
+		| "logo"
 		| "levelSelect"
 		| "gameStarting"
 		| "game"
 		| "gameover"
 		| "win"
-		| "pause" = "levelSelect";
+		| "pause" = "logo";
 
 	constructor() {
 		super();
@@ -84,7 +85,8 @@ export class Game extends Entity {
 		this.addTicker((delta) => this.tick(delta));
 	}
 
-	init() {
+	skipLogo() {
+		this.state = "levelSelect";
 		MusicMenu.singleInstance = true;
 		void MusicMenu.play({ loop: true, volume: 0.5 });
 	}

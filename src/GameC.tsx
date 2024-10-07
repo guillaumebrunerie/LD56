@@ -70,12 +70,22 @@ import { getFrame, getNtFrame } from "./Animation";
 import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
 import { useRef } from "react";
-import { GameOverScreen, LevelIntro, PauseScreen, WinScreen } from "./Postings";
+import {
+	GameOverScreen,
+	LevelIntro,
+	LogoScreen,
+	PauseScreen,
+	WinScreen,
+} from "./Postings";
 import { Bomb } from "./bomb";
 import type { Freeze } from "./freeze";
 import { GrayscaleFilter } from "pixi-filters";
 
 export const GameC = ({ game }: { game: Game }) => {
+	if (game.state == "logo") {
+		return <LogoScreen game={game} />;
+	}
+
 	if (game.state == "levelSelect") {
 		return <LevelSelectScreen game={game} />;
 	}
