@@ -203,8 +203,12 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 };
 
 export const WinScreen = ({ game }: { game: Game }) => {
+	const nt = Math.min(game.startLt / 0.5, 1);
+	if (nt < 1) {
+		return null;
+	}
 	return (
-		<container>
+		<container alpha={nt * nt}>
 			<Rectangle
 				x={0}
 				y={0}

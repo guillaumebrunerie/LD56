@@ -225,6 +225,8 @@ export class Game extends Entity {
 	}
 
 	tick(delta: number) {
+		this.startLt += delta;
+
 		if (
 			this.state == "gameover" ||
 			this.state == "pause" ||
@@ -232,8 +234,6 @@ export class Game extends Entity {
 		) {
 			return;
 		}
-
-		this.startLt += delta;
 
 		if (this.state == "game") {
 			this.antValue += delta * 2;
@@ -372,6 +372,7 @@ export class Game extends Entity {
 		void CompleteLevel.play({ volume: 0.5 });
 		this.levelSelector.unlockNextLevel();
 		this.state = "win";
+		this.startLt = 0;
 	}
 
 	tap(pos: Point) {

@@ -1,6 +1,3 @@
-- Closer buttons
-- Pause before level complete posting
-- Polygonal border for ants and targets
 - Handle Pause button during level start
 - Animate game over posting
 - Animate level complete posting
