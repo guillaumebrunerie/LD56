@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 23:16:59 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 23:28:31 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -87,11 +87,16 @@ import AntHappy_ from "../audio/AntHappy.mp3?sound";
 import AntsWalking_ from "../audio/AntsWalking.mp3?sound";
 import Click_ from "../audio/Click.mp3?sound";
 import CompleteLevel_ from "../audio/CompleteLevel.mp3?sound";
+import Explosion_ from "../audio/Explosion.mp3?sound";
+import FreezeSound_ from "../audio/FreezeSound.mp3?sound";
+import HologramSound_ from "../audio/HologramSound.mp3?sound";
 import LoseGame_ from "../audio/LoseGame.mp3?sound";
 import Music_ from "../audio/Music.mp3?sound";
 import MusicMenu_ from "../audio/MusicMenu.mp3?sound";
+import Push_ from "../audio/Push.mp3?sound";
 import ShockwaveSound_ from "../audio/ShockwaveSound.mp3?sound";
 import SourceDestroyed_ from "../audio/SourceDestroyed.mp3?sound";
+import SourceReopen_ from "../audio/SourceReopen.mp3?sound";
 import StartLevel_ from "../audio/StartLevel.mp3?sound";
 import TargetEnd_ from "../audio/TargetEnd.mp3?sound";
 import TargetFall_ from "../audio/TargetFall.mp3?sound";
@@ -199,11 +204,16 @@ export const [
 	AntsWalking,
 	Click,
 	CompleteLevel,
+	Explosion,
+	FreezeSound,
+	HologramSound,
 	LoseGame,
 	Music,
 	MusicMenu,
+	Push,
 	ShockwaveSound,
 	SourceDestroyed,
+	SourceReopen,
 	StartLevel,
 	TargetEnd,
 	TargetFall,
@@ -308,11 +318,16 @@ export const [
 	AntsWalking_,
 	Click_,
 	CompleteLevel_,
+	Explosion_,
+	FreezeSound_,
+	HologramSound_,
 	LoseGame_,
 	Music_,
 	MusicMenu_,
+	Push_,
 	ShockwaveSound_,
 	SourceDestroyed_,
+	SourceReopen_,
 	StartLevel_,
 	TargetEnd_,
 	TargetFall_,

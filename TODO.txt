@@ -1,3 +1,4 @@
+- closer buttons
 - Pause before level complete posting
 - Polygonal border for ants and targets
 - Handle Pause button during level start

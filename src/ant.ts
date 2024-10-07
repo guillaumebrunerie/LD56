@@ -194,7 +194,7 @@ export class Ant extends Entity {
 			AntCrushed3,
 			AntCrushed4,
 		];
-		void pick(AntDyingSounds).play({ volume: 0.5 });
+		void pick(AntDyingSounds).play({ volume: 0.3 });
 	}
 
 	appearDuration = 0.5;

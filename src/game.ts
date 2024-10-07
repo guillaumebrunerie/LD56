@@ -1,9 +1,13 @@
 import { Ant } from "./ant";
 import {
 	CompleteLevel,
+	Explosion,
+	FreezeSound,
+	HologramSound,
 	LoseGame,
 	Music,
 	MusicMenu,
+	Push,
 	ShockwaveSound,
 	StartLevel,
 	TargetFall,
@@ -297,7 +301,7 @@ export class Game extends Entity {
 		for (const bomb of this.bombs.entities) {
 			bomb.tick(delta);
 			if (bomb.timeout == 0) {
-				void ShockwaveSound.play({ volume: 0.3 });
+				void Explosion.play({ volume: 0.5 });
 				this.shockwaves.add(
 					new Shockwave(bomb.pos, -300, 100, 5000, 1, "bomb"),
 				);
@@ -405,7 +409,7 @@ export class Game extends Entity {
 		) {
 			return;
 		}
-		void ShockwaveSound.play({ volume: 0.3 });
+		void Push.play({ volume: 0.5 });
 		this.cooldowns.push = this.delays.push;
 		this.shockwaves.add(new Shockwave(pos, -300, 100, 5000, 1, "push"));
 		this.activePowerUp = "shockwave";
@@ -434,6 +438,7 @@ export class Game extends Entity {
 		}
 		this.cooldowns.hologram = this.delays.hologram;
 		this.activePowerUp = "shockwave";
+		void HologramSound.play({ volume: 0.5 });
 		this.targets.add(
 			new Target(
 				0,
@@ -461,6 +466,7 @@ export class Game extends Entity {
 		) {
 			return;
 		}
+		void FreezeSound.play({ volume: 0.5 });
 		this.freezes.add(new Freeze(pos));
 		this.cooldowns.freeze = this.delays.freeze;
 		this.activePowerUp = "shockwave";
