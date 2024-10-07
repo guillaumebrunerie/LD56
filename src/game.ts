@@ -289,7 +289,7 @@ export class Game extends Entity {
 
 		for (const bomb of this.bombs.entities) {
 			bomb.tick(delta);
-			if (bomb.timer == 0) {
+			if (bomb.timeout == 0) {
 				void ShockwaveSound.play({ volume: 0.3 });
 				this.shockwaves.add(
 					new Shockwave(bomb.pos, -300, 100, 5000, 1, "bomb"),

@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 19:21:40 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 20:50:34 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -17,6 +17,7 @@ import BtnGamePausedTxt_ from "../gfx/BtnGamePausedTxt.png?texture";
 import BtnGameTxt_ from "../gfx/BtnGameTxt.png?texture";
 import BtnLevelTxt_ from "../gfx/BtnLevelTxt.png?texture";
 import BtnOverTxt_ from "../gfx/BtnOverTxt.png?texture";
+import FrozenArea_ from "../gfx/FrozenArea.png?texture";
 import MenuMoon_ from "../gfx/MenuMoon.png?texture";
 import MenuMoonGlow_ from "../gfx/MenuMoonGlow.png?texture";
 import MenuMoonSky_ from "../gfx/MenuMoonSky.jpg?texture";
@@ -29,6 +30,8 @@ import PowerUp3_ from "../gfx/PowerUp3.png?texture";
 import PowerUp4_ from "../gfx/PowerUp4.png?texture";
 import PowerUp5_ from "../gfx/PowerUp5.png?texture";
 import PowerUp6_ from "../gfx/PowerUp6.png?texture";
+import PowerUpSnowflake_ from "../gfx/PowerUpSnowflake.png?texture";
+import PowerUpSnowflakeGlow_ from "../gfx/PowerUpSnowflakeGlow.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
 import Source1_Closed_Lvl1_ from "../gfx/Source1_Closed_Lvl1.png?texture";
@@ -53,6 +56,8 @@ import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 import Ant1_ from "../gfx/Ant1.png?spritesheet";
 import Ant2_ from "../gfx/Ant2.png?spritesheet";
 import Ant3_ from "../gfx/Ant3.png?spritesheet";
+import BombCountdown_ from "../gfx/BombCountdown.png?spritesheet";
+import BombExplosion_ from "../gfx/BombExplosion.png?spritesheet";
 import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
 import SmokeFx_ from "../gfx/SmokeFx.png?spritesheet";
 import Target1End_ from "../gfx/Target1End.png?spritesheet";
@@ -106,6 +111,7 @@ export const [
 	BtnGameTxt,
 	BtnLevelTxt,
 	BtnOverTxt,
+	FrozenArea,
 	MenuMoon,
 	MenuMoonGlow,
 	MenuMoonSky,
@@ -118,6 +124,8 @@ export const [
 	PowerUp4,
 	PowerUp5,
 	PowerUp6,
+	PowerUpSnowflake,
+	PowerUpSnowflakeGlow,
 	SoundOffTxt,
 	SoundOnTxt,
 	Source1_Closed_Lvl1,
@@ -143,6 +151,10 @@ export const [
 	{ animations: { Ant2 } },
 	Ant3Sheet,
 	{ animations: { Ant3 } },
+	BombCountdownSheet,
+	{ animations: { BombCountdown } },
+	BombExplosionSheet,
+	{ animations: { BombExplosion } },
 	ShockwaveSheet,
 	{ animations: { Shockwave } },
 	SmokeFxSheet,
@@ -199,6 +211,7 @@ export const [
 	BtnGameTxt_,
 	BtnLevelTxt_,
 	BtnOverTxt_,
+	FrozenArea_,
 	MenuMoon_,
 	MenuMoonGlow_,
 	MenuMoonSky_,
@@ -211,6 +224,8 @@ export const [
 	PowerUp4_,
 	PowerUp5_,
 	PowerUp6_,
+	PowerUpSnowflake_,
+	PowerUpSnowflakeGlow_,
 	SoundOffTxt_,
 	SoundOnTxt_,
 	Source1_Closed_Lvl1_,
@@ -236,6 +251,10 @@ export const [
 	Ant2_,
 	Ant3_,
 	Ant3_,
+	BombCountdown_,
+	BombCountdown_,
+	BombExplosion_,
+	BombExplosion_,
 	Shockwave_,
 	Shockwave_,
 	SmokeFx_,

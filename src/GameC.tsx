@@ -4,6 +4,7 @@ import {
 	ColorMatrixFilter,
 	Graphics,
 	type FederatedPointerEvent,
+	type TextStyleOptions,
 	type Texture,
 } from "pixi.js";
 import type { Game, PowerUp } from "./game";
@@ -46,6 +47,8 @@ import {
 	PowerUp3,
 	PowerUp6,
 	PowerUp4,
+	BombCountdown,
+	BombExplosion,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -54,13 +57,13 @@ import { CustomText } from "./CustomText";
 import { Rectangle } from "./Rectangle";
 import type { Shockwave } from "./shockwave";
 import { Ring } from "./Ring";
-import { getFrame } from "./Animation";
+import { getFrame, getNtFrame } from "./Animation";
 import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
 import { useRef } from "react";
 import { GameOverScreen, PauseScreen, WinScreen } from "./Postings";
 import { Circle } from "./Circle";
-import type { Bomb } from "./bomb";
+import { Bomb } from "./bomb";
 import type { Freeze } from "./freeze";
 
 export const GameC = ({ game }: { game: Game }) => {
@@ -110,11 +113,11 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.ants.entities.map(
 				(ant, i) => ant.state != "dead" && <AntC key={i} ant={ant} />,
 			)}
-			{game.targets.entities.map((target, i) => (
-				<TargetC key={i} target={target} />
-			))}
 			{game.bombs.entities.map((bomb, i) => (
 				<BombC key={i} bomb={bomb} />
+			))}
+			{game.targets.entities.map((target, i) => (
+				<TargetC key={i} target={target} />
 			))}
 			{game.sources.entities.map((source, i) => (
 				<SourceHealth key={i} source={source} />
@@ -705,21 +708,40 @@ const HologramC = ({ target }: { target: Target }) => {
 };
 
 const BombC = ({ bomb }: { bomb: Bomb }) => {
-	const digit1 = Math.floor(bomb.timer);
-	const digit2 = Math.floor(10 * (bomb.timer - digit1));
-	const digit3 = Math.floor(100 * (bomb.timer - digit1 - digit2 / 10));
+	const digit1 = Math.floor(bomb.timeout);
+	const digit2 = Math.floor(10 * (bomb.timeout - digit1));
+	const digit3 = Math.floor(100 * (bomb.timeout - digit1 - digit2 / 10));
+	const style: Partial<TextStyleOptions> = {
+		stroke: "red",
+		fill: "white",
+		fontWeight: "600",
+		fontFamily: "Digital Display Tfb",
+	};
 	return (
 		<container x={bomb.pos.x} y={bomb.pos.y}>
-			<Circle radius={30} color={0xff0000} draw={() => {}} />
-			<CustomText
-				text={`${digit1}:${digit2}${digit3}`}
+			<sprite texture={Target_Shadow} anchor={0.5} scale={0.6} y={10} />
+			<sprite
+				texture={getNtFrame(
+					BombCountdown,
+					1 - bomb.timeout / bomb.duration,
+				)}
 				anchor={0.5}
-				style={{
-					fill: "blue",
-					fontWeight: "800",
-					fontFamily: "Digital Display Tfb",
-				}}
 			/>
+			<container scale={0.5} y={-5}>
+				<CustomText
+					text={`${digit1}`}
+					anchor={0.5}
+					x={-25}
+					style={style}
+				/>
+				<CustomText text={`:`} anchor={0.5} x={-9} style={style} />
+				<CustomText
+					text={`${digit2}${digit3}`}
+					anchor={0.5}
+					x={18}
+					style={style}
+				/>
+			</container>
 		</container>
 	);
 };
@@ -728,18 +750,26 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 	// return null;
 	const ringsAlpha = 0;
 	return (
-		<container>
+		<container x={shockwave.center.x} y={shockwave.center.y}>
+			{shockwave.type == "bomb" && (
+				<sprite
+					anchor={0.5}
+					texture={getFrame(
+						BombExplosion,
+						20,
+						shockwave.lt,
+						"remove",
+					)}
+				/>
+			)}
 			<sprite
 				anchor={0.5}
 				texture={getFrame(ShockwaveA, 50, shockwave.lt, "remove")}
-				x={shockwave.center.x}
-				y={shockwave.center.y}
+				tint={shockwave.type == "bomb" ? 0xfc9003 : 0xffffff}
 				scale={shockwave.strength + 0.5}
 				alpha={shockwave.strength * 0.7 + 0.3}
 			/>
 			<Ring
-				x={shockwave.center.x}
-				y={shockwave.center.y}
 				radius={shockwave.innerRadius}
 				strokeWidth={10}
 				color={0xff0000}
@@ -747,8 +777,6 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 				draw={() => {}}
 			/>
 			<Ring
-				x={shockwave.center.x}
-				y={shockwave.center.y}
 				radius={shockwave.outerRadius}
 				strokeWidth={10}
 				color={0xff0000}

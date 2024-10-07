@@ -1,22 +1,21 @@
 import { Entity } from "./entities";
 import type { Point } from "./utils";
 
-const bombTimer = 3;
-
 export class Bomb extends Entity {
 	pos: Point;
-	timer: number;
+	timeout: number;
+	duration = 3;
 
 	constructor(pos: Point) {
 		super();
 		this.pos = pos;
-		this.timer = bombTimer;
+		this.timeout = this.duration;
 	}
 
 	tick(delta: number) {
-		this.timer -= delta;
-		if (this.timer < 0) {
-			this.timer = 0;
+		this.timeout -= delta;
+		if (this.timeout < 0) {
+			this.timeout = 0;
 		}
 	}
 }
