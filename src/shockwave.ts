@@ -1,12 +1,15 @@
 import { Entity } from "./entities";
 import type { Point } from "./utils";
 
+type ShockwaveType = "shockwave" | "push" | "bomb";
+
 export class Shockwave extends Entity {
 	center: Point;
 	innerRadius: number;
 	outerRadius: number;
 	speed: number;
 	strength: number;
+	type: ShockwaveType;
 
 	constructor(
 		center: Point,
@@ -14,8 +17,10 @@ export class Shockwave extends Entity {
 		outerRadius: number,
 		speed: number,
 		strength: number,
+		type: ShockwaveType = "shockwave",
 	) {
 		super();
+		this.type = type;
 		this.center = center;
 		this.innerRadius = innerRadius;
 		this.outerRadius = outerRadius;

@@ -34,6 +34,9 @@ export class Source extends Entity {
 	shockwave(delta: number, shockwaves: Shockwave[]) {
 		const damage = this.isDestroyed ? 0.05 : 0.05;
 		for (const shockwave of shockwaves) {
+			if (shockwave.type == "push") {
+				continue;
+			}
 			const { strength } = shockwave.speedAt(this.pos);
 			this.healthCurrent -= strength * shockwave.speed * delta * damage;
 		}

@@ -268,6 +268,9 @@ export class Ant extends Entity {
 			return;
 		}
 		for (const shockwave of shockwaves) {
+			if (shockwave.type == "push") {
+				continue;
+			}
 			const { dx, dy, nearStrength } = shockwave.speedAt(this.pos);
 
 			// Maybe die

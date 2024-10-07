@@ -1,8 +1,8 @@
 import { type ComponentProps, useCallback } from "react";
 
 type RingProps = ComponentProps<"graphics"> & {
-	x: number;
-	y: number;
+	x?: number;
+	y?: number;
 	radius: number;
 	strokeWidth: number;
 	color?: number;
@@ -12,8 +12,8 @@ type RingProps = ComponentProps<"graphics"> & {
 type Draw = ComponentProps<"graphics">["draw"];
 
 export const Ring = ({
-	x,
-	y,
+	x = 0,
+	y = 0,
 	radius,
 	strokeWidth,
 	color = 0xff00ff,

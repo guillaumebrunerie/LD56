@@ -24,8 +24,19 @@ export class Game extends Entity {
 	shockwaves: EntityArray<Shockwave>;
 	levelSelector: LevelSelector;
 	antValue = 0;
-	shockwaveCooldown = 0;
 	level = 0;
+	powerUps = ["shockwave", "push", "bomb"];
+	activePowerUp = "shockwave";
+	cooldowns = {
+		shockwave: 0,
+		push: 0,
+	};
+	delays = {
+		shockwave: 0.7,
+		push: 4,
+	};
+	shockwaveCooldown = 0;
+	pushCooldown = 0;
 
 	state:
 		| "levelSelect"
@@ -126,9 +137,13 @@ export class Game extends Entity {
 		for (const ant of this.ants.entities) {
 			ant.pickTarget(this.targets.entities, this.sources.entities);
 		}
-		this.shockwaveCooldown = 0;
+		this.cooldowns.shockwave = 0;
 		this.shockwave(target.pos.x, target.pos.y);
 		this.state = "game";
+	}
+
+	selectPowerUp(powerUp: string) {
+		this.activePowerUp = powerUp;
 	}
 
 	carryingForce(target: Target) {
@@ -231,9 +246,11 @@ export class Game extends Entity {
 			}
 		}
 
-		this.shockwaveCooldown -= delta;
-		if (this.shockwaveCooldown < 0) {
-			this.shockwaveCooldown = 0;
+		for (const key of ["shockwave", "push"] as const) {
+			this.cooldowns[key] -= delta;
+			if (this.cooldowns[key] < 0) {
+				this.cooldowns[key] = 0;
+			}
 		}
 
 		const gameOverTarget = this.targets.entities.find((target) =>
@@ -274,15 +291,40 @@ export class Game extends Entity {
 		this.state = "win";
 	}
 
-	shockwaveDelay = 0.7;
+	tap(x: number, y: number) {
+		switch (this.activePowerUp) {
+			case "shockwave":
+				this.shockwave(x, y);
+				break;
+			case "push":
+				this.push(x, y);
+				break;
+		}
+	}
+
 	shockwave(x: number, y: number) {
 		if (this.state == "gameover" || this.state == "win") {
 			return;
 		}
 		const strength =
-			(1 - this.shockwaveCooldown / this.shockwaveDelay) ** 2;
+			(1 - this.cooldowns.shockwave / this.delays.shockwave) ** 2;
 		void ShockwaveSound.play({ volume: 0.3 * strength });
-		this.shockwaveCooldown = this.shockwaveDelay;
+		this.cooldowns.shockwave = this.delays.shockwave;
 		this.shockwaves.add(new Shockwave({ x, y }, -300, 100, 5000, strength));
+	}
+
+	push(x: number, y: number) {
+		if (
+			this.state == "gameover" ||
+			this.state == "win" ||
+			this.cooldowns.push > 0
+		) {
+			return;
+		}
+		void ShockwaveSound.play({ volume: 0.3 });
+		this.cooldowns.push = this.delays.push;
+		this.shockwaves.add(
+			new Shockwave({ x, y }, -300, 100, 5000, 1, "push"),
+		);
 	}
 }

@@ -1,8 +1,8 @@
 import { type ComponentProps, useCallback } from "react";
 
 type CircleProps = ComponentProps<"graphics"> & {
-	x: number;
-	y: number;
+	x?: number;
+	y?: number;
 	radius: number;
 	color?: number;
 	alpha?: number;
@@ -11,8 +11,8 @@ type CircleProps = ComponentProps<"graphics"> & {
 type Draw = ComponentProps<"graphics">["draw"];
 
 export const Circle = ({
-	x,
-	y,
+	x = 0,
+	y = 0,
 	radius,
 	color = 0xff00ff,
 	alpha = 1,

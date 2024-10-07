@@ -53,6 +53,7 @@ import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
 import { useRef } from "react";
 import { GameOverScreen, PauseScreen, WinScreen } from "./Postings";
+import { Circle } from "./Circle";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.state == "levelSelect") {
@@ -68,7 +69,7 @@ export const GameC = ({ game }: { game: Game }) => {
 				eventMode="static"
 				onPointerDown={(e: FederatedPointerEvent) => {
 					const { x, y } = e.global;
-					game.shockwave(x, y);
+					game.tap(x, y);
 				}}
 			/>
 			{game.sources.entities.map(
@@ -105,10 +106,45 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.shockwaves.entities.map((shockwave, i) => (
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
+			<PowerUpButtons game={game} />
 			{game.state == "game" && <PauseButton game={game} />}
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
 			{game.state == "pause" && <PauseScreen game={game} />}
+		</container>
+	);
+};
+
+const PowerUpButtons = ({ game }: { game: Game }) => {
+	return game.powerUps.map((powerUp, i) => (
+		<container
+			key={i}
+			x={(1920 / (game.powerUps.length + 1)) * (i + 1)}
+			y={950}
+		>
+			<PowerUpButton game={game} powerUp={powerUp} />
+		</container>
+	));
+};
+
+const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: string }) => {
+	return (
+		<container>
+			{game.activePowerUp == powerUp && (
+				<Circle radius={80} color={0x0000ff} draw={() => {}} />
+			)}
+			<Circle
+				radius={
+					70 * (1 - game.cooldowns[powerUp] / game.delays[powerUp])
+				}
+				draw={() => {}}
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					void Click.play();
+					game.selectPowerUp(powerUp);
+				}}
+			/>
 		</container>
 	);
 };

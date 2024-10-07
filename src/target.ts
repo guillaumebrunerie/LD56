@@ -94,7 +94,10 @@ export class Target extends Entity {
 		for (const shockwave of shockwaves) {
 			const { dx, dy } = shockwave.speedAt(this.pos);
 
-			const factor = Math.random() * this.shockwaveSpeed;
+			let factor = Math.random() * this.shockwaveSpeed;
+			if (shockwave.type == "push") {
+				factor *= 20;
+			}
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;
 		}
