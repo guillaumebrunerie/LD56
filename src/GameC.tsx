@@ -58,6 +58,7 @@ import { levelAngle } from "./levelSelector";
 import { useRef } from "react";
 import { GameOverScreen, PauseScreen, WinScreen } from "./Postings";
 import { Circle } from "./Circle";
+import type { Bomb } from "./bomb";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.state == "levelSelect") {
@@ -103,6 +104,9 @@ export const GameC = ({ game }: { game: Game }) => {
 			)}
 			{game.targets.entities.map((target, i) => (
 				<TargetC key={i} target={target} />
+			))}
+			{game.bombs.entities.map((bomb, i) => (
+				<BombC key={i} bomb={bomb} />
 			))}
 			{game.sources.entities.map((source, i) => (
 				<SourceHealth key={i} source={source} />
@@ -662,6 +666,26 @@ const TargetC = ({ target }: { target: Target }) => {
 				scale={scale}
 				x={target.pos.x}
 				y={target.pos.y - dy}
+			/>
+		</container>
+	);
+};
+
+const BombC = ({ bomb }: { bomb: Bomb }) => {
+	const digit1 = Math.floor(bomb.timer);
+	const digit2 = Math.floor(10 * (bomb.timer - digit1));
+	const digit3 = Math.floor(100 * (bomb.timer - digit1 - digit2 / 10));
+	return (
+		<container x={bomb.pos.x} y={bomb.pos.y}>
+			<Circle radius={30} color={0xff0000} draw={() => {}} />
+			<CustomText
+				text={`${digit1}:${digit2}${digit3}`}
+				anchor={0.5}
+				style={{
+					fill: "blue",
+					fontWeight: "800",
+					fontFamily: "Digital Display Tfb",
+				}}
 			/>
 		</container>
 	);

@@ -8,6 +8,7 @@ import {
 	StartLevel,
 	TargetFall,
 } from "./assets";
+import { Bomb } from "./bomb";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
 import { levels } from "./levels";
@@ -24,6 +25,7 @@ export class Game extends Entity {
 	targets: EntityArray<Target>;
 	sources: EntityArray<Source>;
 	shockwaves: EntityArray<Shockwave>;
+	bombs: EntityArray<Bomb>;
 	levelSelector: LevelSelector;
 	antValue = 0;
 	level = 0;
@@ -54,12 +56,14 @@ export class Game extends Entity {
 		this.targets = new EntityArray<Target>();
 		this.sources = new EntityArray<Source>();
 		this.shockwaves = new EntityArray<Shockwave>();
+		this.bombs = new EntityArray<Bomb>();
 		this.levelSelector = new LevelSelector();
 		this.addChildren(
 			this.ants,
 			this.targets,
 			this.sources,
 			this.shockwaves,
+			this.bombs,
 			this.levelSelector,
 		);
 		this.addTicker((delta) => this.tick(delta));
@@ -76,6 +80,7 @@ export class Game extends Entity {
 		this.targets.clear();
 		this.sources.clear();
 		this.shockwaves.clear();
+		this.bombs.clear();
 		this.cooldowns.shockwave = 0;
 		this.cooldowns.push = 0;
 		this.cooldowns.bomb = 0;
@@ -91,6 +96,7 @@ export class Game extends Entity {
 
 	nextLevel() {
 		this.level++;
+		this.levelSelector.nextLevel();
 		this.restart();
 	}
 
@@ -196,7 +202,11 @@ export class Game extends Entity {
 	}
 
 	tick(delta: number) {
-		if (this.state == "gameover" || this.state == "pause") {
+		if (
+			this.state == "gameover" ||
+			this.state == "pause" ||
+			this.state == "win"
+		) {
 			return;
 		}
 
@@ -250,6 +260,17 @@ export class Game extends Entity {
 		for (const shockwave of this.shockwaves.entities) {
 			if (shockwave.gone) {
 				this.shockwaves.remove(shockwave);
+			}
+		}
+
+		for (const bomb of this.bombs.entities) {
+			bomb.tick(delta);
+			if (bomb.timer == 0) {
+				void ShockwaveSound.play({ volume: 0.3 });
+				this.shockwaves.add(
+					new Shockwave(bomb.pos, -300, 100, 5000, 1, "bomb"),
+				);
+				this.bombs.remove(bomb);
 			}
 		}
 
@@ -347,11 +368,8 @@ export class Game extends Entity {
 		) {
 			return;
 		}
-		void ShockwaveSound.play({ volume: 0.3 });
+		this.bombs.add(new Bomb({ x, y }));
 		this.cooldowns.bomb = this.delays.bomb;
-		this.shockwaves.add(
-			new Shockwave({ x, y }, -300, 100, 5000, 1, "bomb"),
-		);
 		this.activePowerUp = "shockwave";
 	}
 }

@@ -1,6 +1,7 @@
 - Power ups
 - Design and balance all levels
-
+- Pause before level complete posting
+- Level start posting
 - Draw polygon for ants
 - Animate game over posting
 - Animate level complete posting

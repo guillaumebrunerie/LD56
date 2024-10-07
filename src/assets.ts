@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 08:40:36 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 19:21:40 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -88,6 +88,7 @@ import TextFall2_ from "../audio/TextFall2.mp3?sound";
 
 /** Fonts */
 import Comix_Loud_ from "../fonts/Comix_Loud.ttf?font";
+import Digital_Display_Tfb_ from "../fonts/Digital_Display_Tfb.ttf?font";
 import Heroes_Legend_ from "../fonts/Heroes_Legend.ttf?font";
 import Laffayette_Comic_Pro_ from "../fonts/Laffayette_Comic_Pro.ttf?font";
 
@@ -181,6 +182,7 @@ export const [
 	TextFall1,
 	TextFall2,
 	Comix_Loud,
+	Digital_Display_Tfb,
 	Heroes_Legend,
 	Laffayette_Comic_Pro,
 ] = await Promise.all([
@@ -273,6 +275,7 @@ export const [
 	TextFall1_,
 	TextFall2_,
 	Comix_Loud_,
+	Digital_Display_Tfb_,
 	Heroes_Legend_,
 	Laffayette_Comic_Pro_,
 ]);
