@@ -16,9 +16,9 @@ import { LevelSelector } from "./levelSelector";
 import { Shockwave } from "./shockwave";
 import { Source } from "./source";
 import { Target } from "./target";
-import { none, randomAroundPoint } from "./utils";
+import { distanceBetween, none, randomAroundPoint } from "./utils";
 
-export type PowerUp = "shockwave" | "push" | "bomb";
+export type PowerUp = "shockwave" | "push" | "bomb" | "hologram";
 
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
@@ -29,17 +29,19 @@ export class Game extends Entity {
 	levelSelector: LevelSelector;
 	antValue = 0;
 	level = 0;
-	powerUps: PowerUp[] = ["shockwave", "push", "bomb"];
+	powerUps: PowerUp[] = ["shockwave", "push", "bomb", "hologram"];
 	activePowerUp: PowerUp = "shockwave";
 	cooldowns = {
 		shockwave: 0,
 		push: 0,
 		bomb: 0,
+		hologram: 0,
 	};
 	delays = {
 		shockwave: 0.7,
 		push: 3,
-		bomb: 5,
+		bomb: 7,
+		hologram: 5,
 	};
 
 	state:
@@ -84,6 +86,7 @@ export class Game extends Entity {
 		this.cooldowns.shockwave = 0;
 		this.cooldowns.push = 0;
 		this.cooldowns.bomb = 0;
+		this.cooldowns.hologram = 0;
 		this.activePowerUp = "shockwave";
 		void Music.stop();
 	}
@@ -156,7 +159,9 @@ export class Game extends Entity {
 	}
 
 	selectPowerUp(powerUp: PowerUp) {
-		this.activePowerUp = powerUp;
+		if (this.cooldowns[powerUp] == 0) {
+			this.activePowerUp = powerUp;
+		}
 	}
 
 	carryingForce(target: Target) {
@@ -254,7 +259,15 @@ export class Game extends Entity {
 		}
 
 		for (const target of this.targets.entities) {
+			target.tick(delta);
 			target.shockwave(delta, this.shockwaves.entities);
+			if (
+				target.isHologram &&
+				target.state == "disappearing" &&
+				target.lt > target.disappearDuration
+			) {
+				this.targets.remove(target);
+			}
 		}
 
 		for (const shockwave of this.shockwaves.entities) {
@@ -274,15 +287,17 @@ export class Game extends Entity {
 			}
 		}
 
-		for (const key of ["shockwave", "push", "bomb"] as const) {
+		for (const key of ["shockwave", "push", "bomb", "hologram"] as const) {
 			this.cooldowns[key] -= delta;
 			if (this.cooldowns[key] < 0) {
 				this.cooldowns[key] = 0;
 			}
 		}
 
-		const gameOverTarget = this.targets.entities.find((target) =>
-			target.isCloseToSource(this.sources.entities),
+		const gameOverTarget = this.targets.entities.find(
+			(target) =>
+				target.isCloseToSource(this.sources.entities) &&
+				!target.isHologram,
 		);
 		if (gameOverTarget && gameOverTarget.state !== "disappearing") {
 			gameOverTarget.disappear();
@@ -291,7 +306,8 @@ export class Game extends Entity {
 			this.targets.entities.some(
 				(target) =>
 					target.state == "disappearing" &&
-					target.lt > target.disappearDuration,
+					target.lt > target.disappearDuration &&
+					!target.isHologram,
 			)
 		) {
 			this.gameOver();
@@ -329,6 +345,9 @@ export class Game extends Entity {
 				break;
 			case "bomb":
 				this.bomb(x, y);
+				break;
+			case "hologram":
+				this.hologram(x, y);
 				break;
 		}
 	}
@@ -371,5 +390,31 @@ export class Game extends Entity {
 		this.bombs.add(new Bomb({ x, y }));
 		this.cooldowns.bomb = this.delays.bomb;
 		this.activePowerUp = "shockwave";
+	}
+
+	hologram(x: number, y: number) {
+		if (
+			this.state == "gameover" ||
+			this.state == "win" ||
+			this.cooldowns.hologram > 0
+		) {
+			return;
+		}
+		this.cooldowns.hologram = this.delays.hologram;
+		this.activePowerUp = "shockwave";
+		this.targets.add(
+			new Target(
+				0,
+				{ x, y },
+				(target) => {
+					for (const ant of this.ants.entities) {
+						if (distanceBetween(ant.pos, target.pos) < 250) {
+							ant.setTarget(target);
+						}
+					}
+				},
+				true,
+			),
+		);
 	}
 }

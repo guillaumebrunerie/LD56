@@ -44,6 +44,7 @@ import {
 	PowerUp1,
 	PowerUp2,
 	PowerUp3,
+	PowerUp6,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -137,8 +138,9 @@ const PowerUpButtons = ({ game }: { game: Game }) => {
 
 const PowerUpTexture = {
 	shockwave: PowerUp1,
-	push: PowerUp3,
+	push: PowerUp6,
 	bomb: PowerUp2,
+	hologram: PowerUp3,
 };
 
 const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
@@ -625,6 +627,10 @@ const TargetEnd = [
 ];
 
 const TargetC = ({ target }: { target: Target }) => {
+	if (target.isHologram) {
+		return <HologramC target={target} />;
+	}
+
 	const nt =
 		target.state == "idle" || target.state == "disappearing" ? 1
 		: target.lt < target.appearOffset ? 0
@@ -666,6 +672,25 @@ const TargetC = ({ target }: { target: Target }) => {
 				scale={scale}
 				x={target.pos.x}
 				y={target.pos.y - dy}
+			/>
+		</container>
+	);
+};
+
+const HologramC = ({ target }: { target: Target }) => {
+	const alpha =
+		target.state == "appearing" ? (target.lt / target.appearDuration) * 0.5
+		: target.state == "disappearing" ?
+			(1 - target.lt / target.disappearDuration) * 0.5
+		:	0.5;
+	return (
+		<container>
+			<sprite
+				anchor={0.5}
+				texture={TargetTexture[0]}
+				alpha={alpha}
+				x={target.pos.x}
+				y={target.pos.y}
 			/>
 		</container>
 	);

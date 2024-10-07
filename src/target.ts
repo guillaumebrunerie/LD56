@@ -4,32 +4,56 @@ import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import { distance2, type Point } from "./utils";
 
+const hologramDuration = 10;
+
 export class Target extends Entity {
 	item: number;
 	pos: Point;
 	speedPerAnt = 2;
 	state: "appearing" | "idle" | "disappearing" = "appearing";
 	onIdle: (target: this) => void;
+	isHologram: boolean;
+	hologramTimeout = 0;
 
 	radiusX = 65;
 	radiusY = 57;
 
-	constructor(item: number, pos: Point, onIdle: (target: Target) => void) {
+	constructor(
+		item: number,
+		pos: Point,
+		onIdle: (target: Target) => void,
+		hologram = false,
+	) {
 		super();
 		this.item = item;
 		this.pos = pos;
 		this.onIdle = onIdle;
-		this.addTicker((delta) => this.tick(delta));
+		this.isHologram = hologram;
+		if (this.isHologram) {
+			this.speedPerAnt = 0.2;
+			this.hologramTimeout = hologramDuration;
+		}
 	}
 
 	appearOffset = 0.5;
 	appearDuration = 0.7;
 
-	tick(_delta: number) {
+	tick(delta: number) {
+		this.hologramTimeout -= delta;
+		if (this.hologramTimeout < 0) {
+			this.hologramTimeout = 0;
+		}
 		switch (this.state) {
 			case "appearing": {
 				if (this.lt >= this.appearDuration + this.appearOffset) {
 					this.setIdle();
+				}
+				break;
+			}
+			case "idle": {
+				if (this.isHologram && this.hologramTimeout == 0) {
+					this.state = "disappearing";
+					this.lt = 0;
 				}
 				break;
 			}
@@ -97,6 +121,9 @@ export class Target extends Entity {
 			let factor = Math.random() * this.shockwaveSpeed;
 			if (shockwave.type == "push") {
 				factor *= 30;
+			}
+			if (this.isHologram) {
+				factor = 0;
 			}
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;
