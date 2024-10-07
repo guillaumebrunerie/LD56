@@ -65,7 +65,7 @@ import { getFrame, getNtFrame } from "./Animation";
 import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
 import { useRef } from "react";
-import { GameOverScreen, PauseScreen, WinScreen } from "./Postings";
+import { GameOverScreen, LevelIntro, PauseScreen, WinScreen } from "./Postings";
 import { Bomb } from "./bomb";
 import type { Freeze } from "./freeze";
 import { GrayscaleFilter } from "pixi-filters";
@@ -123,13 +123,15 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.targets.entities.map((target, i) => (
 				<TargetC key={i} target={target} />
 			))}
-			{game.sources.entities.map((source, i) => (
-				<SourceHealth key={i} source={source} />
-			))}
+			{game.state !== "gameStarting" &&
+				game.sources.entities.map((source, i) => (
+					<SourceHealth key={i} source={source} />
+				))}
 			{game.shockwaves.entities.map((shockwave, i) => (
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
 			<PowerUpButtons game={game} />
+			{game.state == "gameStarting" && <LevelIntro game={game} />}
 			{game.state == "game" && <PauseButton game={game} />}
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
@@ -371,16 +373,14 @@ type LevelCardProps = {
 const grayscaleFilter = new GrayscaleFilter();
 
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
-	const levelText = `LEVEL ${level}`;
 	const angle = (level - 1) * levelAngle;
 	const minAngle = -mainRotation + levelAngle - Math.PI;
 	const maxAngle = -mainRotation + levelAngle + Math.PI;
 	const isDownRef = useRef(false);
-	const targetId = levels[level - 1].targets[0].id;
 	if (level * levelAngle < minAngle || level * levelAngle > maxAngle) {
 		return null;
 	}
-	const isLocked = level > game.levelSelector.lastLevel;
+
 	return (
 		<container
 			x={800 * Math.sin(angle)}
@@ -416,6 +416,26 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 					isDownRef.current = false;
 				}}
 			/>
+			<LevelCardContents game={game} level={level} name={name} />
+		</container>
+	);
+};
+
+export const LevelCardContents = ({
+	game,
+	level,
+	name,
+}: {
+	game: Game;
+	level: number;
+	name: string;
+}) => {
+	const levelText = `LEVEL ${level}`;
+	const targetId = levels[level - 1].targets[0].id;
+	const isLocked = level > game.levelSelector.lastLevel;
+
+	return (
+		<container>
 			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
 			<sprite
 				anchor={0.5}
@@ -541,7 +561,7 @@ const SourceHealth = ({ source }: { source: Source }) => {
 				y={source.pos.y - height / 2 - dy}
 				width={100}
 				height={height}
-				color={source.isDestroyed ? 0xdddddd : 0xff0000}
+				color={source.isDestroyed ? 0x2a2a2a : 0xd40700}
 				draw={() => {}}
 			/>
 			<Rectangle
@@ -549,7 +569,7 @@ const SourceHealth = ({ source }: { source: Source }) => {
 				y={source.pos.y - height / 2 - dy}
 				width={(100 * source.healthCurrent) / source.healthMax}
 				height={height}
-				color={source.isDestroyed ? 0x00d4ff : 0x00ff00}
+				color={source.isDestroyed ? 0x00d4ff : 0x11c900}
 				draw={() => {}}
 			/>
 		</container>

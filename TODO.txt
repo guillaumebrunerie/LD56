@@ -1,5 +1,3 @@
-- Design and balance all levels
-
 - Handle Pause button during level start
 - Pause before level complete posting
 - Level start posting
@@ -8,3 +6,4 @@
 - Animate game over posting
 - Animate level complete posting
 - Transition between level select and game
+- Design and balance all levels

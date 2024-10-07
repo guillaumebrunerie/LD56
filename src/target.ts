@@ -37,7 +37,7 @@ export class Target extends Entity {
 		}
 	}
 
-	appearOffset = 0.5;
+	appearOffset = 1;
 	appearDuration = 0.7;
 
 	tick(delta: number) {

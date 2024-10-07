@@ -10,6 +10,8 @@ import {
 import { CustomText } from "./CustomText";
 import type { Game } from "./game";
 import { Rectangle } from "./Rectangle";
+import { LevelCardContents } from "./GameC";
+import { levels } from "./levels";
 
 const buttonsY = 850;
 
@@ -17,7 +19,41 @@ const buttonsXLeft = 1920 / 3;
 const buttonsXRight = (1920 * 2) / 3;
 
 const backdropFilter = new BackdropBlurFilter();
+const lightBackdropFilter = new BackdropBlurFilter({ strength: 2 });
 const textColor = "#DDD";
+
+const levelIntroDuration = 1.5;
+
+export const LevelIntro = ({ game }: { game: Game }) => {
+	const level = game.level;
+	return (
+		<container>
+			<Rectangle
+				x={0}
+				y={0}
+				width={1920}
+				height={1080}
+				draw={() => {}}
+				alpha={0.01}
+				color={0}
+				filters={lightBackdropFilter}
+			/>
+			<container
+				x={1920 / 2}
+				y={400}
+				anchor={0}
+				alpha={1 - (game.startLt / levelIntroDuration) ** 2}
+				scale={1.5} // + game.startLt / levelIntroDuration / 2}
+			>
+				<LevelCardContents
+					game={game}
+					level={level}
+					name={levels[level - 1].name}
+				/>
+			</container>
+		</container>
+	);
+};
 
 export const PauseScreen = ({ game }: { game: Game }) => {
 	return (
