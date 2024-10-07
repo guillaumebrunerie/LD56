@@ -101,7 +101,12 @@ export const GameC = ({ game }: { game: Game }) => {
 					!source.isDestroyed && <SourceC key={i} source={source} />,
 			)}
 			{game.freezes.entities.map((freeze, i) => (
-				<container key={i} x={freeze.pos.x} y={freeze.pos.y}>
+				<container
+					key={i}
+					x={freeze.pos.x}
+					y={freeze.pos.y}
+					alpha={0.5}
+				>
 					<FreezeC freeze={freeze} />
 				</container>
 			))}
@@ -122,6 +127,16 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.ants.entities.map(
 				(ant, i) => ant.state != "dead" && <AntC key={i} ant={ant} />,
 			)}
+			{game.freezes.entities.map((freeze, i) => (
+				<container
+					key={i}
+					x={freeze.pos.x}
+					y={freeze.pos.y}
+					alpha={0.5}
+				>
+					<FreezeC freeze={freeze} />
+				</container>
+			))}
 			{game.bombs.entities.map((bomb, i) => (
 				<BombC key={i} bomb={bomb} />
 			))}
