@@ -17,6 +17,8 @@ import { Source } from "./source";
 import { Target } from "./target";
 import { none, randomAroundPoint } from "./utils";
 
+export type PowerUp = "shockwave" | "push" | "bomb";
+
 export class Game extends Entity {
 	ants: EntityArray<Ant>;
 	targets: EntityArray<Target>;
@@ -25,18 +27,18 @@ export class Game extends Entity {
 	levelSelector: LevelSelector;
 	antValue = 0;
 	level = 0;
-	powerUps = ["shockwave", "push", "bomb"];
-	activePowerUp = "shockwave";
+	powerUps: PowerUp[] = ["shockwave", "push", "bomb"];
+	activePowerUp: PowerUp = "shockwave";
 	cooldowns = {
 		shockwave: 0,
 		push: 0,
+		bomb: 0,
 	};
 	delays = {
 		shockwave: 0.7,
-		push: 4,
+		push: 3,
+		bomb: 5,
 	};
-	shockwaveCooldown = 0;
-	pushCooldown = 0;
 
 	state:
 		| "levelSelect"
@@ -73,6 +75,11 @@ export class Game extends Entity {
 		this.ants.clear();
 		this.targets.clear();
 		this.sources.clear();
+		this.shockwaves.clear();
+		this.cooldowns.shockwave = 0;
+		this.cooldowns.push = 0;
+		this.cooldowns.bomb = 0;
+		this.activePowerUp = "shockwave";
 		void Music.stop();
 	}
 
@@ -137,12 +144,12 @@ export class Game extends Entity {
 		for (const ant of this.ants.entities) {
 			ant.pickTarget(this.targets.entities, this.sources.entities);
 		}
-		this.cooldowns.shockwave = 0;
 		this.shockwave(target.pos.x, target.pos.y);
+		this.cooldowns.shockwave = 0;
 		this.state = "game";
 	}
 
-	selectPowerUp(powerUp: string) {
+	selectPowerUp(powerUp: PowerUp) {
 		this.activePowerUp = powerUp;
 	}
 
@@ -246,7 +253,7 @@ export class Game extends Entity {
 			}
 		}
 
-		for (const key of ["shockwave", "push"] as const) {
+		for (const key of ["shockwave", "push", "bomb"] as const) {
 			this.cooldowns[key] -= delta;
 			if (this.cooldowns[key] < 0) {
 				this.cooldowns[key] = 0;
@@ -299,6 +306,9 @@ export class Game extends Entity {
 			case "push":
 				this.push(x, y);
 				break;
+			case "bomb":
+				this.bomb(x, y);
+				break;
 		}
 	}
 
@@ -326,5 +336,22 @@ export class Game extends Entity {
 		this.shockwaves.add(
 			new Shockwave({ x, y }, -300, 100, 5000, 1, "push"),
 		);
+		this.activePowerUp = "shockwave";
+	}
+
+	bomb(x: number, y: number) {
+		if (
+			this.state == "gameover" ||
+			this.state == "win" ||
+			this.cooldowns.bomb > 0
+		) {
+			return;
+		}
+		void ShockwaveSound.play({ volume: 0.3 });
+		this.cooldowns.bomb = this.delays.bomb;
+		this.shockwaves.add(
+			new Shockwave({ x, y }, -300, 100, 5000, 1, "bomb"),
+		);
+		this.activePowerUp = "shockwave";
 	}
 }

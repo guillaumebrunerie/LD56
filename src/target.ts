@@ -96,7 +96,7 @@ export class Target extends Entity {
 
 			let factor = Math.random() * this.shockwaveSpeed;
 			if (shockwave.type == "push") {
-				factor *= 20;
+				factor *= 30;
 			}
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;

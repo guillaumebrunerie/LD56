@@ -2,10 +2,11 @@ import "pixi.js/advanced-blend-modes";
 
 import {
 	ColorMatrixFilter,
+	Graphics,
 	type FederatedPointerEvent,
 	type Texture,
 } from "pixi.js";
-import type { Game } from "./game";
+import type { Game, PowerUp } from "./game";
 import {
 	Ant1_Dead,
 	Ant1,
@@ -40,6 +41,9 @@ import {
 	Target4End,
 	Target5End,
 	Target6End,
+	PowerUp1,
+	PowerUp2,
+	PowerUp3,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -127,16 +131,24 @@ const PowerUpButtons = ({ game }: { game: Game }) => {
 	));
 };
 
-const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: string }) => {
+const PowerUpTexture = {
+	shockwave: PowerUp1,
+	push: PowerUp3,
+	bomb: PowerUp2,
+};
+
+const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
+	game.lt;
+	const ref = useRef<Graphics | null>(null);
+	const maskY = (100 * game.cooldowns[powerUp]) / game.delays[powerUp] - 50;
 	return (
-		<container>
-			{game.activePowerUp == powerUp && (
-				<Circle radius={80} color={0x0000ff} draw={() => {}} />
-			)}
-			<Circle
-				radius={
-					70 * (1 - game.cooldowns[powerUp] / game.delays[powerUp])
-				}
+		<container y={game.activePowerUp == powerUp ? 20 : 0}>
+			<Rectangle
+				x={-75}
+				y={-75}
+				width={150}
+				height={150}
+				alpha={0}
 				draw={() => {}}
 				cursor="pointer"
 				eventMode="static"
@@ -145,6 +157,25 @@ const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: string }) => {
 					game.selectPowerUp(powerUp);
 				}}
 			/>
+			<sprite
+				texture={PowerUpTexture[powerUp]}
+				anchor={0.5}
+				alpha={0.25}
+			/>
+			<sprite
+				texture={PowerUpTexture[powerUp]}
+				anchor={0.5}
+				mask={ref.current}
+			>
+				<Rectangle
+					myRef={ref}
+					x={-200}
+					y={maskY}
+					width={400}
+					height={400}
+					draw={() => {}}
+				/>
+			</sprite>
 		</container>
 	);
 };

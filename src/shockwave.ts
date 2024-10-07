@@ -47,13 +47,17 @@ export class Shockwave extends Entity {
 		) {
 			return { dx: 0, dy: 0, strength: 0, nearStrength: 0 };
 		} else {
+			const bombFactor = this.type == "bomb" ? 7 : 1;
 			return {
-				dx: (dx / distance2) * this.strength * this.speed,
-				dy: (dy / distance2) * this.strength * this.speed,
+				dx: (dx / distance2) * this.strength * this.speed * bombFactor,
+				dy: (dy / distance2) * this.strength * this.speed * bombFactor,
 				strength:
-					(this.strength * this.minDistance) / Math.sqrt(distance2),
+					((this.strength * this.minDistance) /
+						Math.sqrt(distance2)) *
+					bombFactor,
 				nearStrength:
-					(this.strength * this.minDistance ** 2) / distance2,
+					((this.strength * this.minDistance ** 2) / distance2) *
+					bombFactor,
 			};
 		}
 	}

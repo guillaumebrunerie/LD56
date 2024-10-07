@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 01:09:51 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 08:40:36 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -23,6 +23,12 @@ import MenuMoonSky_ from "../gfx/MenuMoonSky.jpg?texture";
 import MenuMoon_Shadow_ from "../gfx/MenuMoon_Shadow.png?texture";
 import MenuMoon_Shadow2_ from "../gfx/MenuMoon_Shadow2.png?texture";
 import PauseBtn_ from "../gfx/PauseBtn.png?texture";
+import PowerUp1_ from "../gfx/PowerUp1.png?texture";
+import PowerUp2_ from "../gfx/PowerUp2.png?texture";
+import PowerUp3_ from "../gfx/PowerUp3.png?texture";
+import PowerUp4_ from "../gfx/PowerUp4.png?texture";
+import PowerUp5_ from "../gfx/PowerUp5.png?texture";
+import PowerUp6_ from "../gfx/PowerUp6.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
 import SoundOnTxt_ from "../gfx/SoundOnTxt.png?texture";
 import Source1_Closed_Lvl1_ from "../gfx/Source1_Closed_Lvl1.png?texture";
@@ -105,6 +111,12 @@ export const [
 	MenuMoon_Shadow,
 	MenuMoon_Shadow2,
 	PauseBtn,
+	PowerUp1,
+	PowerUp2,
+	PowerUp3,
+	PowerUp4,
+	PowerUp5,
+	PowerUp6,
 	SoundOffTxt,
 	SoundOnTxt,
 	Source1_Closed_Lvl1,
@@ -191,6 +203,12 @@ export const [
 	MenuMoon_Shadow_,
 	MenuMoon_Shadow2_,
 	PauseBtn_,
+	PowerUp1_,
+	PowerUp2_,
+	PowerUp3_,
+	PowerUp4_,
+	PowerUp5_,
+	PowerUp6_,
 	SoundOffTxt_,
 	SoundOnTxt_,
 	Source1_Closed_Lvl1_,
