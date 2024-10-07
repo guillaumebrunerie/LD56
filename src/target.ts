@@ -31,7 +31,7 @@ export class Target extends Entity {
 		this.onIdle = onIdle;
 		this.isHologram = hologram;
 		if (this.isHologram) {
-			this.speedPerAnt = 0.2;
+			this.speedPerAnt = 0;
 			this.hologramTimeout = hologramDuration;
 		}
 	}
@@ -67,7 +67,7 @@ export class Target extends Entity {
 		this.onIdle(this);
 	}
 
-	freezeFactor = 0.25;
+	freezeFactor = 1 / 6;
 	carry(delta: number, force: number, sources: Source[], freezes: Freeze[]) {
 		if (sources.length == 0) {
 			return { dx: 0, dy: 0 };

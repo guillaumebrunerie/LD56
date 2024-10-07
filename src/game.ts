@@ -42,7 +42,7 @@ export class Game extends Entity {
 	};
 	delays = {
 		shockwave: 0.7,
-		push: 3,
+		push: 2,
 		bomb: 7,
 		hologram: 5,
 		freeze: 5,
@@ -153,6 +153,8 @@ export class Game extends Entity {
 		for (let i = 0; i < levelData.initialAnts; i++) {
 			this.ants.add(new Ant());
 		}
+
+		this.powerUps = levelData.powerUps;
 	}
 
 	onTargetIdle(target: Target) {
@@ -381,8 +383,7 @@ export class Game extends Entity {
 		if (this.state == "gameover" || this.state == "win") {
 			return;
 		}
-		const strength =
-			(1 - this.cooldowns.shockwave / this.delays.shockwave) ** 2;
+		const strength = 1 - this.cooldowns.shockwave / this.delays.shockwave;
 		void ShockwaveSound.play({ volume: 0.3 * strength });
 		this.cooldowns.shockwave = this.delays.shockwave;
 		this.shockwaves.add(new Shockwave(pos, -300, 100, 5000, strength));

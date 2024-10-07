@@ -205,7 +205,7 @@ export class Ant extends Entity {
 		}
 	}
 
-	freezeFactor = 1 / 4;
+	freezeFactor = 1 / 6;
 
 	walk(delta: number, freezes: Freeze[]) {
 		const { dx, dy, ok } = this.deltas;

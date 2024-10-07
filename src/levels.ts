@@ -1,4 +1,18 @@
-export const levels = [
+import type { PowerUp } from "./game";
+import type { Point } from "./utils";
+
+type TargetData = { id: number; pos: Point; delta: number };
+type SourceData = { pos: Point; delta: number };
+
+type Level = {
+	name: string;
+	initialAnts: number;
+	targets: TargetData[];
+	sources: SourceData[];
+	powerUps: PowerUp[];
+};
+
+export const levels: Level[] = [
 	{
 		name: "That’s it!\nCheeese!",
 		initialAnts: 10,
@@ -6,6 +20,7 @@ export const levels = [
 			{ id: 2, pos: { x: (1920 * 2) / 3, y: 1080 * 0.5 }, delta: 100 },
 		],
 		sources: [{ pos: { x: (1920 * 1) / 3, y: 1080 * 0.5 }, delta: 100 }],
+		powerUps: ["shockwave"],
 	},
 	{
 		name: "My sandwich?\nMY SANDWICH?",
@@ -15,6 +30,7 @@ export const levels = [
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
 		],
+		powerUps: ["shockwave", "push"],
 	},
 	{
 		name: "What’s this? What’s this?\nThere’s crawlers everywhere!",
@@ -29,6 +45,7 @@ export const levels = [
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
 		],
+		powerUps: ["shockwave", "push", "bomb"],
 	},
 	{
 		name: "The cake is a lie",
@@ -40,6 +57,7 @@ export const levels = [
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
 		],
+		powerUps: ["shockwave", "push", "bomb", "hologram"],
 	},
 	{
 		name: "Houston, we\nhave a problem",
@@ -51,6 +69,7 @@ export const levels = [
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
 		],
+		powerUps: ["shockwave", "push", "bomb", "hologram", "freeze"],
 	},
 	{
 		name: "Cowabunga!",
@@ -62,6 +81,7 @@ export const levels = [
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.75 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.25 }, delta: 100 },
 		],
+		powerUps: ["shockwave", "push", "bomb", "hologram", "freeze"],
 	},
 	// {
 	// 	name: "E.T... Phone... Home...",
