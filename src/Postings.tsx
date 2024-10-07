@@ -26,14 +26,22 @@ const textColor = "#DDD";
 
 export const LogoScreen = ({ game }: { game: Game }) => {
 	return (
-		<sprite
-			texture={Logo}
-			cursor="pointer"
-			eventMode="static"
-			onPointerDown={() => {
-				game.skipLogo();
-			}}
-		/>
+		<container>
+			<sprite
+				texture={Logo}
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					game.skipLogo();
+				}}
+			/>
+			<CustomText
+				anchor={0.5}
+				x={1920 / 2}
+				y={900}
+				text="Click to start"
+			/>
+		</container>
 	);
 };
 
