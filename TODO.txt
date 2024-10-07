@@ -1,9 +1,6 @@
-- Handle Pause button during level start
 - Pause before level complete posting
-- Level start posting
-- Locked levels
 - Polygonal border for ants and targets
+- Handle Pause button during level start
 - Animate game over posting
 - Animate level complete posting
 - Transition between level select and game
-- Design and balance all levels

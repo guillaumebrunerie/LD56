@@ -53,6 +53,11 @@ import {
 	PowerUp5,
 	Target7,
 	Target7End,
+	PowerUp1On,
+	PowerUp2On,
+	PowerUp3On,
+	PowerUp4On,
+	PowerUp5On,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -154,18 +159,30 @@ const PowerUpButtons = ({ game }: { game: Game }) => {
 
 const PowerUpTexture = {
 	shockwave: PowerUp1,
-	push: PowerUp5,
-	bomb: PowerUp2,
-	hologram: PowerUp3,
-	freeze: PowerUp4,
+	push: PowerUp2,
+	bomb: PowerUp3,
+	hologram: PowerUp4,
+	freeze: PowerUp5,
+};
+
+const PowerUpTextureOn = {
+	shockwave: PowerUp1On,
+	push: PowerUp2On,
+	bomb: PowerUp3On,
+	hologram: PowerUp4On,
+	freeze: PowerUp5On,
 };
 
 const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
 	game.lt;
 	const ref = useRef<Graphics | null>(null);
 	const maskY = (100 * game.cooldowns[powerUp]) / game.delays[powerUp] - 50;
+	const texture =
+		game.activePowerUp == powerUp ?
+			PowerUpTextureOn[powerUp]
+		:	PowerUpTexture[powerUp];
 	return (
-		<container y={game.activePowerUp == powerUp ? 20 : 0}>
+		<container>
 			<Rectangle
 				x={-75}
 				y={-75}
@@ -180,16 +197,8 @@ const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
 					game.selectPowerUp(powerUp);
 				}}
 			/>
-			<sprite
-				texture={PowerUpTexture[powerUp]}
-				anchor={0.5}
-				alpha={0.25}
-			/>
-			<sprite
-				texture={PowerUpTexture[powerUp]}
-				anchor={0.5}
-				mask={ref.current}
-			>
+			<sprite texture={texture} anchor={0.5} alpha={0.25} />
+			<sprite texture={texture} anchor={0.5} mask={ref.current}>
 				<Rectangle
 					myRef={ref}
 					x={-200}
