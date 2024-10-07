@@ -92,25 +92,18 @@ export const levels: Level[] = [
 	},
 	{
 		name: "Houston, we\nhave a problem",
-		initialAnts: 300,
+		initialAnts: 200,
 		targets: [
-			{ id: 6, pos: { x: 1920 * 0.5, y: 1080 * 0.6 }, delta: 100 },
-			{ id: 6, pos: { x: 1920 * 0.5, y: 1080 * 0.4 }, delta: 100 },
+			{ id: 6, pos: { x: 1920 * 0.5, y: 1080 * 0.55 }, delta: 100 },
+			{ id: 6, pos: { x: 1920 * 0.5, y: 1080 * 0.45 }, delta: 100 },
 		],
 		sources: [
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.2 }, delta: 100 },
-			{ pos: { x: 1920 * 0.25, y: 1080 * 0.45 }, delta: 100 },
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.7 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.7 }, delta: 100 },
-			{ pos: { x: 1920 * 0.75, y: 1080 * 0.45 }, delta: 100 },
+			{ pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 },
 			{ pos: { x: 1920 * 0.85, y: 1080 * 0.2 }, delta: 100 },
 		],
 		powerUps: ["shockwave", "push", "bomb", "hologram", "freeze"],
 	},
-	// {
-	// 	name: "E.T... Phone... Home...",
-	// 	initialAnts: 100,
-	// 	targets: [{ id: 1, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
-	// 	sources: [],
-	// },
 ];

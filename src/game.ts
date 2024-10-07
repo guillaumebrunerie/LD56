@@ -47,6 +47,7 @@ export class Game extends Entity {
 		hologram: 5,
 		freeze: 5,
 	};
+	startLt = 0;
 
 	state:
 		| "levelSelect"
@@ -120,6 +121,7 @@ export class Game extends Entity {
 		void StartLevel.play({ volume: 0.5 });
 		this.level = level;
 		this.state = "gameStarting";
+		this.startLt = 0;
 
 		setTimeout(() => {
 			Music.singleInstance = true;
@@ -223,6 +225,8 @@ export class Game extends Entity {
 		) {
 			return;
 		}
+
+		this.startLt += delta;
 
 		if (this.state == "game") {
 			this.antValue += delta * 2;

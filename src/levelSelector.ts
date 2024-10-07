@@ -5,7 +5,7 @@ import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
 export const levelAngle = 2 * Math.PI * 0.21;
-const initialLevel = 1;
+const initialLevel = 7;
 
 export class LevelSelector extends Entity {
 	rotation = -levelAngle * (initialLevel - 1);
@@ -13,7 +13,7 @@ export class LevelSelector extends Entity {
 	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
 	ants: EntityArray<Ant>;
-	lastLevel = 1;
+	lastLevel = 7;
 
 	lastSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
 	nextSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
