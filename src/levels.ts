@@ -81,7 +81,7 @@ export const levels: Level[] = [
 	{
 		name: "Humans are\ninteresting",
 		initialAnts: 100,
-		targets: [{ id: 4, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
+		targets: [{ id: 7, pos: { x: 1920 * 0.5, y: 1080 * 0.5 }, delta: 100 }],
 		sources: [
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.25 }, delta: 100 },
 			{ pos: { x: 1920 * 0.15, y: 1080 * 0.75 }, delta: 100 },

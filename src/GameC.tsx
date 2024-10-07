@@ -45,12 +45,14 @@ import {
 	PowerUp1,
 	PowerUp2,
 	PowerUp3,
-	PowerUp6,
 	PowerUp4,
 	BombCountdown,
 	BombExplosion,
 	FrozenArea,
 	Hologram,
+	PowerUp5,
+	Target7,
+	Target7End,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -150,7 +152,7 @@ const PowerUpButtons = ({ game }: { game: Game }) => {
 
 const PowerUpTexture = {
 	shockwave: PowerUp1,
-	push: PowerUp6,
+	push: PowerUp5,
 	bomb: PowerUp2,
 	hologram: PowerUp3,
 	freeze: PowerUp4,
@@ -354,6 +356,7 @@ const TargetTexture = [
 	Target4,
 	Target5,
 	Target6,
+	Target7,
 ];
 
 const angleThreshold = 0.1;
@@ -675,6 +678,7 @@ const TargetEnd = [
 	Target4End,
 	Target5End,
 	Target6End,
+	Target7End,
 ];
 
 const TargetC = ({ target }: { target: Target }) => {

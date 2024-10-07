@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 21:16:11 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 22:29:58 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -29,7 +29,6 @@ import PowerUp2_ from "../gfx/PowerUp2.png?texture";
 import PowerUp3_ from "../gfx/PowerUp3.png?texture";
 import PowerUp4_ from "../gfx/PowerUp4.png?texture";
 import PowerUp5_ from "../gfx/PowerUp5.png?texture";
-import PowerUp6_ from "../gfx/PowerUp6.png?texture";
 import PowerUpSnowflake_ from "../gfx/PowerUpSnowflake.png?texture";
 import PowerUpSnowflakeGlow_ from "../gfx/PowerUpSnowflakeGlow.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
@@ -50,6 +49,7 @@ import Target3_ from "../gfx/Target3.png?texture";
 import Target4_ from "../gfx/Target4.png?texture";
 import Target5_ from "../gfx/Target5.png?texture";
 import Target6_ from "../gfx/Target6.png?texture";
+import Target7_ from "../gfx/Target7.png?texture";
 import Target_Shadow_ from "../gfx/Target_Shadow.png?texture";
 
 /** Spritesheets */
@@ -67,6 +67,7 @@ import Target3End_ from "../gfx/Target3End.png?spritesheet";
 import Target4End_ from "../gfx/Target4End.png?spritesheet";
 import Target5End_ from "../gfx/Target5End.png?spritesheet";
 import Target6End_ from "../gfx/Target6End.png?spritesheet";
+import Target7End_ from "../gfx/Target7End.png?spritesheet";
 
 /** Sounds */
 import AntCrushed1_ from "../audio/AntCrushed1.mp3?sound";
@@ -124,7 +125,6 @@ export const [
 	PowerUp3,
 	PowerUp4,
 	PowerUp5,
-	PowerUp6,
 	PowerUpSnowflake,
 	PowerUpSnowflakeGlow,
 	SoundOffTxt,
@@ -145,6 +145,7 @@ export const [
 	Target4,
 	Target5,
 	Target6,
+	Target7,
 	Target_Shadow,
 	Ant1Sheet,
 	{ animations: { Ant1 } },
@@ -174,6 +175,8 @@ export const [
 	{ animations: { Target5End } },
 	Target6EndSheet,
 	{ animations: { Target6End } },
+	Target7EndSheet,
+	{ animations: { Target7End } },
 	AntCrushed1,
 	AntCrushed2,
 	AntCrushed3,
@@ -226,7 +229,6 @@ export const [
 	PowerUp3_,
 	PowerUp4_,
 	PowerUp5_,
-	PowerUp6_,
 	PowerUpSnowflake_,
 	PowerUpSnowflakeGlow_,
 	SoundOffTxt_,
@@ -247,6 +249,7 @@ export const [
 	Target4_,
 	Target5_,
 	Target6_,
+	Target7_,
 	Target_Shadow_,
 	Ant1_,
 	Ant1_,
@@ -276,6 +279,8 @@ export const [
 	Target5End_,
 	Target6End_,
 	Target6End_,
+	Target7End_,
+	Target7End_,
 	AntCrushed1_,
 	AntCrushed2_,
 	AntCrushed3_,
