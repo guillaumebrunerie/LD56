@@ -1,5 +1,6 @@
 import { Ant } from "./ant";
 import {
+	BombPlaced,
 	CompleteLevel,
 	Explosion,
 	FreezeSound,
@@ -423,6 +424,8 @@ export class Game extends Entity {
 		) {
 			return;
 		}
+
+		void BombPlaced.play({ volume: 0.7 });
 		this.bombs.add(new Bomb(pos));
 		this.cooldowns.bomb = this.delays.bomb;
 		this.activePowerUp = "shockwave";

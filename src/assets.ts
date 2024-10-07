@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 23:28:31 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 23:33:48 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -85,6 +85,7 @@ import AntDie3_ from "../audio/AntDie3.mp3?sound";
 import AntDie4_ from "../audio/AntDie4.mp3?sound";
 import AntHappy_ from "../audio/AntHappy.mp3?sound";
 import AntsWalking_ from "../audio/AntsWalking.mp3?sound";
+import BombPlaced_ from "../audio/BombPlaced.mp3?sound";
 import Click_ from "../audio/Click.mp3?sound";
 import CompleteLevel_ from "../audio/CompleteLevel.mp3?sound";
 import Explosion_ from "../audio/Explosion.mp3?sound";
@@ -202,6 +203,7 @@ export const [
 	AntDie4,
 	AntHappy,
 	AntsWalking,
+	BombPlaced,
 	Click,
 	CompleteLevel,
 	Explosion,
@@ -316,6 +318,7 @@ export const [
 	AntDie4_,
 	AntHappy_,
 	AntsWalking_,
+	BombPlaced_,
 	Click_,
 	CompleteLevel_,
 	Explosion_,
