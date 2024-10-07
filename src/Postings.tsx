@@ -19,7 +19,7 @@ const buttonsXLeft = 1920 / 3;
 const buttonsXRight = (1920 * 2) / 3;
 
 const backdropFilter = new BackdropBlurFilter();
-const lightBackdropFilter = new BackdropBlurFilter({ strength: 2 });
+const lightBackdropFilter = new BackdropBlurFilter({ strength: 0 });
 const textColor = "#DDD";
 
 const levelIntroDuration = 1.5;

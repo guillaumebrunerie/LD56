@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 22:29:58 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 23:16:59 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -25,10 +25,15 @@ import MenuMoon_Shadow_ from "../gfx/MenuMoon_Shadow.png?texture";
 import MenuMoon_Shadow2_ from "../gfx/MenuMoon_Shadow2.png?texture";
 import PauseBtn_ from "../gfx/PauseBtn.png?texture";
 import PowerUp1_ from "../gfx/PowerUp1.png?texture";
+import PowerUp1On_ from "../gfx/PowerUp1On.png?texture";
 import PowerUp2_ from "../gfx/PowerUp2.png?texture";
+import PowerUp2On_ from "../gfx/PowerUp2On.png?texture";
 import PowerUp3_ from "../gfx/PowerUp3.png?texture";
+import PowerUp3On_ from "../gfx/PowerUp3On.png?texture";
 import PowerUp4_ from "../gfx/PowerUp4.png?texture";
+import PowerUp4On_ from "../gfx/PowerUp4On.png?texture";
 import PowerUp5_ from "../gfx/PowerUp5.png?texture";
+import PowerUp5On_ from "../gfx/PowerUp5On.png?texture";
 import PowerUpSnowflake_ from "../gfx/PowerUpSnowflake.png?texture";
 import PowerUpSnowflakeGlow_ from "../gfx/PowerUpSnowflakeGlow.png?texture";
 import SoundOffTxt_ from "../gfx/SoundOffTxt.png?texture";
@@ -121,10 +126,15 @@ export const [
 	MenuMoon_Shadow2,
 	PauseBtn,
 	PowerUp1,
+	PowerUp1On,
 	PowerUp2,
+	PowerUp2On,
 	PowerUp3,
+	PowerUp3On,
 	PowerUp4,
+	PowerUp4On,
 	PowerUp5,
+	PowerUp5On,
 	PowerUpSnowflake,
 	PowerUpSnowflakeGlow,
 	SoundOffTxt,
@@ -225,10 +235,15 @@ export const [
 	MenuMoon_Shadow2_,
 	PauseBtn_,
 	PowerUp1_,
+	PowerUp1On_,
 	PowerUp2_,
+	PowerUp2On_,
 	PowerUp3_,
+	PowerUp3On_,
 	PowerUp4_,
+	PowerUp4On_,
 	PowerUp5_,
+	PowerUp5On_,
 	PowerUpSnowflake_,
 	PowerUpSnowflakeGlow_,
 	SoundOffTxt_,
