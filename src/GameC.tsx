@@ -50,6 +50,7 @@ import {
 	BombCountdown,
 	BombExplosion,
 	FrozenArea,
+	Hologram,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -691,15 +692,15 @@ const TargetC = ({ target }: { target: Target }) => {
 
 const HologramC = ({ target }: { target: Target }) => {
 	const alpha =
-		target.state == "appearing" ? (target.lt / target.appearDuration) * 0.5
+		target.state == "appearing" ? target.lt / target.appearDuration
 		: target.state == "disappearing" ?
-			(1 - target.lt / target.disappearDuration) * 0.5
-		:	0.5;
+			1 - target.lt / target.disappearDuration
+		:	1;
 	return (
 		<container>
 			<sprite
 				anchor={0.5}
-				texture={TargetTexture[0]}
+				texture={getFrame(Hologram, 20, target.gt)}
 				alpha={alpha}
 				x={target.pos.x}
 				y={target.pos.y}

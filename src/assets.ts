@@ -1,4 +1,4 @@
-/** Generated on Mon Oct  7 20:50:34 CEST 2024 by 'tools/generate-assets.sh' */
+/** Generated on Mon Oct  7 21:16:11 CEST 2024 by 'tools/generate-assets.sh' */
 
 /* eslint-disable */
 // @ts-nocheck
@@ -58,6 +58,7 @@ import Ant2_ from "../gfx/Ant2.png?spritesheet";
 import Ant3_ from "../gfx/Ant3.png?spritesheet";
 import BombCountdown_ from "../gfx/BombCountdown.png?spritesheet";
 import BombExplosion_ from "../gfx/BombExplosion.png?spritesheet";
+import Hologram_ from "../gfx/Hologram.png?spritesheet";
 import Shockwave_ from "../gfx/Shockwave.png?spritesheet";
 import SmokeFx_ from "../gfx/SmokeFx.png?spritesheet";
 import Target1End_ from "../gfx/Target1End.png?spritesheet";
@@ -155,6 +156,8 @@ export const [
 	{ animations: { BombCountdown } },
 	BombExplosionSheet,
 	{ animations: { BombExplosion } },
+	HologramSheet,
+	{ animations: { Hologram } },
 	ShockwaveSheet,
 	{ animations: { Shockwave } },
 	SmokeFxSheet,
@@ -255,6 +258,8 @@ export const [
 	BombCountdown_,
 	BombExplosion_,
 	BombExplosion_,
+	Hologram_,
+	Hologram_,
 	Shockwave_,
 	Shockwave_,
 	SmokeFx_,

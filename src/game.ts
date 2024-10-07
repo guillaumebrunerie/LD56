@@ -432,7 +432,10 @@ export class Game extends Entity {
 				pos,
 				(target) => {
 					for (const ant of this.ants.entities) {
-						if (distanceBetween(ant.pos, target.pos) < 250) {
+						if (
+							Math.random() <
+							100 / distanceBetween(ant.pos, target.pos)
+						) {
 							ant.setTarget(target);
 						}
 					}

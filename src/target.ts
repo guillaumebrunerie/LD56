@@ -15,6 +15,7 @@ export class Target extends Entity {
 	onIdle: (target: this) => void;
 	isHologram: boolean;
 	hologramTimeout = 0;
+	gt = 0;
 
 	radiusX = 65;
 	radiusY = 57;
@@ -40,6 +41,7 @@ export class Target extends Entity {
 	appearDuration = 0.7;
 
 	tick(delta: number) {
+		this.gt += delta;
 		this.hologramTimeout -= delta;
 		if (this.hologramTimeout < 0) {
 			this.hologramTimeout = 0;
