@@ -1,0 +1,223 @@
+{"frames": {
+
+"BombCountdown_000.png":
+{
+	"frame": {"x":991,"y":1,"w":62,"h":132},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":149,"w":62,"h":132},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_001.png":
+{
+	"frame": {"x":778,"y":1,"w":69,"h":139},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":142,"w":69,"h":139},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_002.png":
+{
+	"frame": {"x":542,"y":149,"w":92,"h":144},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":137,"w":92,"h":144},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_003.png":
+{
+	"frame": {"x":689,"y":1,"w":87,"h":143},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":138,"w":87,"h":143},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_004.png":
+{
+	"frame": {"x":123,"y":1,"w":126,"h":152},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":190,"y":129,"w":126,"h":152},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_005.png":
+{
+	"frame": {"x":1,"y":1,"w":120,"h":161},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":181,"y":120,"w":120,"h":161},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_006.png":
+{
+	"frame": {"x":271,"y":155,"w":98,"h":138},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":143,"w":98,"h":138},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_007.png":
+{
+	"frame": {"x":849,"y":1,"w":69,"h":137},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":144,"w":69,"h":137},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_008.png":
+{
+	"frame": {"x":373,"y":1,"w":92,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":135,"w":92,"h":146},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_009.png":
+{
+	"frame": {"x":114,"y":164,"w":87,"h":155},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":126,"w":87,"h":155},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_010.png":
+{
+	"frame": {"x":561,"y":1,"w":126,"h":143},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":190,"y":138,"w":126,"h":143},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_011.png":
+{
+	"frame": {"x":251,"y":1,"w":120,"h":152},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":181,"y":129,"w":120,"h":152},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_012.png":
+{
+	"frame": {"x":411,"y":149,"w":98,"h":129},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":152,"w":98,"h":129},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_013.png":
+{
+	"frame": {"x":1175,"y":1,"w":68,"h":128},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":153,"w":68,"h":128},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_014.png":
+{
+	"frame": {"x":920,"y":1,"w":69,"h":137},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":144,"w":69,"h":137},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_015.png":
+{
+	"frame": {"x":467,"y":1,"w":92,"h":146},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":135,"w":92,"h":146},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_016.png":
+{
+	"frame": {"x":984,"y":140,"w":84,"h":121},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":160,"w":84,"h":121},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_017.png":
+{
+	"frame": {"x":1055,"y":1,"w":118,"h":129},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":194,"y":152,"w":118,"h":129},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_018.png":
+{
+	"frame": {"x":688,"y":146,"w":109,"h":135},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":146,"w":109,"h":135},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_019.png":
+{
+	"frame": {"x":1,"y":164,"w":89,"h":111},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":170,"w":89,"h":111},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_020.png":
+{
+	"frame": {"x":919,"y":140,"w":63,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":172,"w":63,"h":109},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_021.png":
+{
+	"frame": {"x":1180,"y":157,"w":75,"h":116},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":75,"h":116},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_022.png":
+{
+	"frame": {"x":1107,"y":132,"w":71,"h":121},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":160,"w":71,"h":121},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_023.png":
+{
+	"frame": {"x":825,"y":142,"w":92,"h":110},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":171,"w":92,"h":110},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_024.png":
+{
+	"frame": {"x":1245,"y":1,"w":62,"h":77},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":204,"w":62,"h":77},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombCountdown_025.png":
+{
+	"frame": {"x":1245,"y":80,"w":62,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":206,"w":62,"h":75},
+	"sourceSize": {"w":500,"h":500}
+}},
+"animations": {
+	"BombCountdown": ["BombCountdown_000.png","BombCountdown_001.png","BombCountdown_002.png","BombCountdown_003.png","BombCountdown_004.png","BombCountdown_005.png","BombCountdown_006.png","BombCountdown_007.png","BombCountdown_008.png","BombCountdown_009.png","BombCountdown_010.png","BombCountdown_011.png","BombCountdown_012.png","BombCountdown_013.png","BombCountdown_014.png","BombCountdown_015.png","BombCountdown_016.png","BombCountdown_017.png","BombCountdown_018.png","BombCountdown_019.png","BombCountdown_020.png","BombCountdown_021.png","BombCountdown_022.png","BombCountdown_023.png","BombCountdown_024.png","BombCountdown_025.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "BombCountdown.png",
+	"format": "RGBA8888",
+	"size": {"w":1308,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2d580613dbac4078a20924344da4732f:f797f90280062f3e1a12fd5ae2c56436:e5d3cb14873e0a8e6836873d46756def$"
+}
+}
