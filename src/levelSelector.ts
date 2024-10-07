@@ -1,12 +1,11 @@
 import { Ant } from "./ant";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
-import { levels } from "./levels";
 import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
 export const levelAngle = 2 * Math.PI * 0.21;
-const initialLevel = 1;
+const initialLevel = 4;
 
 export class LevelSelector extends Entity {
 	rotation = -levelAngle * (initialLevel - 1);
@@ -14,6 +13,7 @@ export class LevelSelector extends Entity {
 	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
 	ants: EntityArray<Ant>;
+	lastLevel = 6;
 
 	lastSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
 	nextSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
@@ -30,7 +30,8 @@ export class LevelSelector extends Entity {
 		}
 	}
 
-	nextLevel() {
+	unlockNextLevel() {
+		this.lastLevel++;
 		this.rotation -= levelAngle;
 	}
 
@@ -48,7 +49,7 @@ export class LevelSelector extends Entity {
 		const dangle = distanceToNearestIncrement(
 			this.rotation,
 			levelAngle,
-			-levelAngle * (levels.length - 1),
+			-levelAngle * (this.lastLevel - 1),
 			0,
 			this.speed,
 		);

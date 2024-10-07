@@ -126,7 +126,7 @@ export class Ant extends Entity {
 				return;
 			}
 			case "carrying": {
-				this.carry(delta, freezes);
+				this.carry(delta);
 				return;
 			}
 			case "stunned": {
@@ -269,7 +269,7 @@ export class Ant extends Entity {
 
 	passedShockwaves = new WeakSet<Shockwave>();
 	minDistanceShockwave = 50;
-	shockwave(delta: number, shockwaves: Shockwave[]) {
+	shockwave(delta: number, shockwaves: Shockwave[], freezes: Freeze[]) {
 		if (this.state == "dead" || this.state == "appearing") {
 			return;
 		}
@@ -293,7 +293,11 @@ export class Ant extends Entity {
 				}
 			}
 
-			const factor = [0, 100, 50, 25][this.level] * Math.random();
+			let factor = [0, 100, 50, 25][this.level] * Math.random();
+			for (const freeze of freezes) {
+				factor *= this.freezeFactor ** freeze.freezeFactor(this.pos);
+			}
+
 			this.pos.x += dx * delta * factor;
 			this.pos.y += dy * delta * factor;
 		}

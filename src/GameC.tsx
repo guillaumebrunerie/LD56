@@ -64,9 +64,9 @@ import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
 import { useRef } from "react";
 import { GameOverScreen, PauseScreen, WinScreen } from "./Postings";
-import { Circle } from "./Circle";
 import { Bomb } from "./bomb";
 import type { Freeze } from "./freeze";
+import { GrayscaleFilter } from "pixi-filters";
 
 export const GameC = ({ game }: { game: Game }) => {
 	if (game.state == "levelSelect") {
@@ -365,6 +365,8 @@ type LevelCardProps = {
 	mainRotation: number;
 };
 
+const grayscaleFilter = new GrayscaleFilter();
+
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const levelText = `LEVEL ${level}`;
 	const angle = (level - 1) * levelAngle;
@@ -375,6 +377,7 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	if (level * levelAngle < minAngle || level * levelAngle > maxAngle) {
 		return null;
 	}
+	const isLocked = level > game.levelSelector.lastLevel;
 	return (
 		<container
 			x={800 * Math.sin(angle)}
@@ -411,8 +414,40 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 				}}
 			/>
 			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
-			<sprite anchor={0.5} scale={2} texture={TargetTexture[targetId]} />
-			<container y={150}>
+			<sprite
+				anchor={0.5}
+				scale={2}
+				texture={TargetTexture[targetId]}
+				filters={isLocked ? grayscaleFilter : undefined}
+			/>
+			{isLocked && (
+				<container>
+					<CustomText
+						anchor={0.5}
+						angle={-25}
+						y={3}
+						text="LOCKED"
+						style={{
+							fill: "#222",
+							fontSize: 30,
+							letterSpacing: 10,
+							fontFamily: "Comix Loud",
+						}}
+					/>
+					<CustomText
+						anchor={0.5}
+						angle={-25}
+						text="LOCKED"
+						style={{
+							fill: "#db402c",
+							fontSize: 30,
+							letterSpacing: 10,
+							fontFamily: "Comix Loud",
+						}}
+					/>
+				</container>
+			)}
+			<container y={150} filters={isLocked ? grayscaleFilter : undefined}>
 				<CustomText
 					anchor={0.5}
 					x={0}
@@ -434,7 +469,10 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 					text={levelText}
 				/>
 			</container>
-			<container y={200}>
+			<container
+				y={200}
+				filters={level > 1 ? grayscaleFilter : undefined}
+			>
 				<CustomText
 					anchor={{ x: 0.5, y: 0 }}
 					x={0}
@@ -790,30 +828,29 @@ const ShockwaveC = ({ shockwave }: { shockwave: Shockwave }) => {
 };
 
 const FreezeC = ({ freeze }: { freeze: Freeze }) => {
+	const baseScale = freeze.radius / 150;
+	const baseAlpha = 0.7;
 	switch (freeze.state) {
 		case "appearing": {
 			return (
 				<sprite
 					texture={FrozenArea}
 					anchor={0.5}
-					scale={1 - freeze.timeout / freeze.appearDuration}
+					alpha={baseAlpha}
+					scale={
+						(1 - freeze.timeout / freeze.appearDuration) * baseScale
+					}
 				/>
 			);
 		}
 		case "active": {
 			return (
 				<container>
-					<Circle
-						color={0x0000ff}
-						alpha={0}
-						radius={freeze.radius}
-						draw={() => {}}
-					/>
 					<sprite
 						texture={FrozenArea}
 						anchor={0.5}
-						scale={freeze.radius / 150}
-						alpha={0.7}
+						scale={baseScale}
+						alpha={baseAlpha}
 						blendMode="normal"
 					/>
 				</container>
@@ -824,7 +861,10 @@ const FreezeC = ({ freeze }: { freeze: Freeze }) => {
 				<sprite
 					texture={FrozenArea}
 					anchor={0.5}
-					alpha={freeze.timeout / freeze.disappearDuration}
+					alpha={
+						(freeze.timeout / freeze.disappearDuration) * baseAlpha
+					}
+					scale={baseScale}
 				/>
 			);
 		}

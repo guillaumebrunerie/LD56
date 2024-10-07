@@ -107,7 +107,6 @@ export class Game extends Entity {
 
 	nextLevel() {
 		this.level++;
-		this.levelSelector.nextLevel();
 		this.restart();
 	}
 
@@ -256,7 +255,11 @@ export class Game extends Entity {
 			if (ant.gone) {
 				this.ants.remove(ant);
 			}
-			ant.shockwave(delta, this.shockwaves.entities);
+			ant.shockwave(
+				delta,
+				this.shockwaves.entities,
+				this.freezes.entities,
+			);
 			ant.moveAwayIfTooClose();
 			if (this.state == "game") {
 				ant.pickTarget(this.targets.entities, this.sources.entities);
@@ -266,7 +269,7 @@ export class Game extends Entity {
 		for (const source of this.sources.entities) {
 			source.shockwave(delta, this.shockwaves.entities);
 			const healingForce = this.healingForce(source);
-			source.heal(delta, healingForce);
+			source.heal(delta, healingForce, this.freezes.entities);
 		}
 
 		for (const target of this.targets.entities) {
@@ -356,6 +359,7 @@ export class Game extends Entity {
 	win() {
 		void Music.pause();
 		void CompleteLevel.play({ volume: 0.5 });
+		this.levelSelector.unlockNextLevel();
 		this.state = "win";
 	}
 

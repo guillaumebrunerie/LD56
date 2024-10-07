@@ -1,9 +1,10 @@
-- Power ups
 - Design and balance all levels
 
+- Handle Pause button during level start
 - Pause before level complete posting
 - Level start posting
-- Draw polygon for ants
+- Locked levels
+- Polygonal border for ants and targets
 - Animate game over posting
 - Animate level complete posting
 - Transition between level select and game

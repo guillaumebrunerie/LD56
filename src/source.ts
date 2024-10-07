@@ -1,5 +1,6 @@
 import { SourceDestroyed } from "./assets";
 import { Entity } from "./entities";
+import type { Freeze } from "./freeze";
 
 import type { Shockwave } from "./shockwave";
 import type { Point } from "./utils";
@@ -46,7 +47,12 @@ export class Source extends Entity {
 		}
 	}
 
-	heal(delta: number, healingForce: number) {
+	freezeFactor = 1 / 6;
+	heal(delta: number, healingForce: number, freezes: Freeze[]) {
+		for (const freeze of freezes) {
+			healingForce *= this.freezeFactor ** freeze.freezeFactor(this.pos);
+		}
+
 		this.healthCurrent += healingForce * delta;
 		if (this.healthCurrent > this.healthMax) {
 			this.healthCurrent = this.healthMax;

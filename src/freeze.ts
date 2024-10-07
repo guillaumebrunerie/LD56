@@ -1,4 +1,3 @@
-import { FrozenArea } from "./assets";
 import { Entity } from "./entities";
 import { distanceBetween, type Point } from "./utils";
 
@@ -8,7 +7,7 @@ export class Freeze extends Entity {
 	appearDuration = 0.3;
 	activeDuration = 5;
 	disappearDuration = 1.5;
-	radius = 200;
+	radius = 250;
 
 	timeout = this.appearDuration;
 
