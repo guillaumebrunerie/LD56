@@ -16,6 +16,7 @@ import { levels } from "./levels";
 const buttonsY = 850;
 
 const buttonsXLeft = 1920 / 3;
+const buttonsXCenter = 1920 / 2;
 const buttonsXRight = (1920 * 2) / 3;
 
 const backdropFilter = new BackdropBlurFilter();
@@ -128,6 +129,9 @@ const RestartButton = ({ game }: { game: Game }) => {
 };
 
 const NextLevelButton = ({ game }: { game: Game }) => {
+	if (game.level == levels.length) {
+		return null;
+	}
 	return (
 		<CustomText
 			x={buttonsXRight}
@@ -156,6 +160,31 @@ const MainMenuButton = ({ game }: { game: Game }) => {
 	return (
 		<CustomText
 			x={buttonsXLeft}
+			y={buttonsY}
+			anchor={0.5}
+			text="Main menu"
+			style={{
+				fontFamily: "Heroes Legend",
+				fill: textColor,
+				dropShadow: {
+					angle: 90,
+					distance: 6,
+				},
+			}}
+			cursor="pointer"
+			eventMode="static"
+			onPointerDown={() => {
+				void Click.play();
+				game.backToMainMenu();
+			}}
+		/>
+	);
+};
+
+const MainMenuButton2 = ({ game }: { game: Game }) => {
+	return (
+		<CustomText
+			x={game.level == levels.length ? buttonsXCenter : buttonsXLeft}
 			y={buttonsY}
 			anchor={0.5}
 			text="Main menu"
@@ -223,7 +252,7 @@ export const WinScreen = ({ game }: { game: Game }) => {
 				<sprite texture={BtnCompleteTxt} anchor={0.5} />
 			</container>
 			<NextLevelButton game={game} />
-			<MainMenuButton game={game} />
+			<MainMenuButton2 game={game} />
 		</container>
 	);
 };

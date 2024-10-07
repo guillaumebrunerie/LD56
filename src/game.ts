@@ -365,6 +365,11 @@ export class Game extends Entity {
 		for (const ant of this.ants.entities) {
 			ant.win();
 		}
+		this.cooldowns.shockwave = 0;
+		this.cooldowns.push = 0;
+		this.cooldowns.bomb = 0;
+		this.cooldowns.hologram = 0;
+		this.cooldowns.freeze = 0;
 	}
 
 	win() {
@@ -373,6 +378,11 @@ export class Game extends Entity {
 		this.levelSelector.unlockNextLevel();
 		this.state = "win";
 		this.startLt = 0;
+		this.cooldowns.shockwave = 0;
+		this.cooldowns.push = 0;
+		this.cooldowns.bomb = 0;
+		this.cooldowns.hologram = 0;
+		this.cooldowns.freeze = 0;
 	}
 
 	tap(pos: Point) {
