@@ -49,6 +49,7 @@ import {
 	PowerUp4,
 	BombCountdown,
 	BombExplosion,
+	FrozenArea,
 } from "./assets";
 import type { Source } from "./source";
 import type { Ant } from "./ant";
@@ -791,28 +792,38 @@ const FreezeC = ({ freeze }: { freeze: Freeze }) => {
 	switch (freeze.state) {
 		case "appearing": {
 			return (
-				<Circle
-					color="blue"
-					radius={
-						freeze.radius *
-						(1 - freeze.timeout / freeze.appearDuration)
-					}
-					draw={() => {}}
+				<sprite
+					texture={FrozenArea}
+					anchor={0.5}
+					scale={1 - freeze.timeout / freeze.appearDuration}
 				/>
 			);
 		}
 		case "active": {
 			return (
-				<Circle color="blue" radius={freeze.radius} draw={() => {}} />
+				<container>
+					<Circle
+						color={0x0000ff}
+						alpha={0}
+						radius={freeze.radius}
+						draw={() => {}}
+					/>
+					<sprite
+						texture={FrozenArea}
+						anchor={0.5}
+						scale={freeze.radius / 150}
+						alpha={0.7}
+						blendMode="normal"
+					/>
+				</container>
 			);
 		}
 		case "disappearing": {
 			return (
-				<Circle
-					color="blue"
-					radius={freeze.radius}
+				<sprite
+					texture={FrozenArea}
+					anchor={0.5}
 					alpha={freeze.timeout / freeze.disappearDuration}
-					draw={() => {}}
 				/>
 			);
 		}

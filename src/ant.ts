@@ -213,8 +213,8 @@ export class Ant extends Entity {
 			this.direction = Math.atan2(dy, dx);
 		}
 		let speed = ok ? this.speed : this.speed / 3;
-		if (freezes.some((freeze) => freeze.containsPoint(this.pos))) {
-			speed *= this.freezeFactor;
+		for (const freeze of freezes) {
+			speed *= this.freezeFactor ** freeze.freezeFactor(this.pos);
 		}
 
 		this.pos.x += Math.cos(this.direction) * delta * speed;

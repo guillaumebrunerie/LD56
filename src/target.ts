@@ -74,8 +74,8 @@ export class Target extends Entity {
 		}
 		let speed = force * this.speedPerAnt;
 
-		if (freezes.some((freeze) => freeze.containsPoint(this.pos))) {
-			speed *= this.freezeFactor;
+		for (const freeze of freezes) {
+			speed *= this.freezeFactor ** freeze.freezeFactor(this.pos);
 		}
 
 		const sortedSources = sources.toSorted((a, b) => {

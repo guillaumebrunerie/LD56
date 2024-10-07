@@ -1,13 +1,14 @@
+import { FrozenArea } from "./assets";
 import { Entity } from "./entities";
 import { distanceBetween, type Point } from "./utils";
 
 export class Freeze extends Entity {
 	pos: Point;
 
-	appearDuration = 0.5;
+	appearDuration = 0.3;
 	activeDuration = 5;
-	disappearDuration = 1;
-	radius = 300;
+	disappearDuration = 1.5;
+	radius = 200;
 
 	timeout = this.appearDuration;
 
@@ -38,10 +39,16 @@ export class Freeze extends Entity {
 		}
 	}
 
-	containsPoint(pos: Point) {
-		if (this.state !== "active") {
-			return false;
+	freezeFactor(pos: Point) {
+		if (distanceBetween(pos, this.pos) >= this.radius) {
+			return 0;
 		}
-		return distanceBetween(pos, this.pos) < this.radius;
+		switch (this.state) {
+			case "active":
+				return 1;
+			case "disappearing":
+				return this.timeout / this.disappearDuration;
+		}
+		return 0;
 	}
 }
