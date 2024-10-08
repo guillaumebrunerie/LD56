@@ -94,7 +94,8 @@ export class Target extends Entity {
 			speed *= this.freezeFactor ** freeze.freezeFactor(this.pos);
 		}
 
-		const sortedSources = sources.toSorted((a, b) => {
+		const sortedSources = [...sources];
+		sortedSources.sort((a, b) => {
 			const distance = (source: Source) => {
 				const dx = source.pos.x - this.pos.x;
 				const dy = source.pos.y - this.pos.y;
