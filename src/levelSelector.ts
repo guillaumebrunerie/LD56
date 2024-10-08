@@ -1,6 +1,7 @@
 import { Ant } from "./ant";
 import { Entity } from "./entities";
 import { EntityArray } from "./entitiesArray";
+import { levels } from "./levels";
 import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
@@ -30,8 +31,11 @@ export class LevelSelector extends Entity {
 		}
 	}
 
-	unlockNextLevel() {
-		this.lastLevel++;
+	unlockNextLevel(level: number) {
+		this.lastLevel = Math.max(
+			this.lastLevel,
+			Math.min(levels.length, level + 1),
+		);
 		this.rotation -= levelAngle;
 	}
 

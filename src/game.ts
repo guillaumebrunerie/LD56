@@ -377,7 +377,7 @@ export class Game extends Entity {
 	win() {
 		void Music.pause();
 		void CompleteLevel.play({ volume: 0.5 });
-		this.levelSelector.unlockNextLevel();
+		this.levelSelector.unlockNextLevel(this.level);
 		this.state = "win";
 		this.startLt = 0;
 		this.cooldowns.shockwave = 0;

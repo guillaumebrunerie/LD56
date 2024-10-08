@@ -162,6 +162,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			))}
 			<PowerUpButtons game={game} />
 			{game.state == "gameStarting" && <LevelIntro game={game} />}
+			{/* {game.state == "game" && <LevelIndicator game={game} />} */}
 			{game.state == "game" && <PauseButton game={game} />}
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
@@ -259,6 +260,34 @@ const PauseButton = ({ game }: { game: Game }) => {
 				draw={() => {}}
 			/>
 			<sprite texture={PauseBtn} anchor={0.5} />
+		</container>
+	);
+};
+
+const LevelIndicator = ({ game }: { game: Game }) => {
+	const levelText = `LEVEL ${game.level}`;
+	return (
+		<container x={1920 - 120} y={42} scale={0.7}>
+			<CustomText
+				anchor={{ x: 1, y: 0.5 }}
+				x={0}
+				y={5}
+				style={{
+					fill: "#222",
+					fontSize: 36,
+					fontFamily: "Comix Loud",
+				}}
+				text={levelText}
+			/>
+			<CustomText
+				anchor={{ x: 1, y: 0.5 }}
+				style={{
+					fill: "#ff75f1",
+					fontSize: 36,
+					fontFamily: "Comix Loud",
+				}}
+				text={levelText}
+			/>
 		</container>
 	);
 };
