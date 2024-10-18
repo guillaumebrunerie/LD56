@@ -1,4 +1,0 @@
-- Handle Pause button during level start
-- Animate game over posting
-- Animate level complete posting
-- Transition between level select and game
