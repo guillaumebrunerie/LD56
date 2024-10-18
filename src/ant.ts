@@ -224,7 +224,13 @@ export class Ant extends Entity {
 		if (this.circularEdge) {
 			if (this.pos.x ** 2 + this.pos.y ** 2 > this.edgeRadius ** 2) {
 				const normal = Math.atan2(this.pos.y, this.pos.x);
-				this.direction = 2 * normal - this.direction + Math.PI;
+				if (
+					Math.cos(this.direction) * Math.cos(normal) +
+						Math.sin(this.direction) * Math.sin(normal) >
+					0
+				) {
+					this.direction = 2 * normal - this.direction + Math.PI;
+				}
 			}
 		} else {
 			if (this.pos.x < 0) {

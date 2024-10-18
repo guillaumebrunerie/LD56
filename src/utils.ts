@@ -25,7 +25,7 @@ export const distance2 = (p1: Point, p2: Point) => {
 };
 
 export const randomAroundPoint = (p: Point, r: number): Point => {
-	const d = Math.random() * r;
+	const d = Math.sqrt(Math.random()) * r;
 	const angle = Math.random() * Math.PI * 2;
 	return {
 		x: p.x + d * Math.cos(angle),
