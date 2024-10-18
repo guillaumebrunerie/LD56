@@ -45,3 +45,5 @@ export class App extends Entity {
 		};
 	}
 }
+
+export const app = new App();

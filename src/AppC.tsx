@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { action } from "mobx";
-import { App } from "./app";
+import { app } from "./app";
 import { GameC } from "./GameC";
 import { SoundButton } from "./SoundButton";
-
-const app = new App();
 
 export const AppC = () => {
 	useEffect(() => {

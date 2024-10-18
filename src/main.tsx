@@ -5,6 +5,7 @@ import { Application, extend } from "@pixi/react";
 import { Container, Sprite, Text, Graphics, NineSliceSprite } from "pixi.js";
 
 import { AppC } from "./AppC";
+import { app } from "./app";
 
 extend({ Container, Sprite, Text, Graphics, NineSliceSprite });
 
@@ -21,3 +22,9 @@ root.render(
 		</Application>
 	</StrictMode>,
 );
+
+document.addEventListener("deviceready", () => {
+	document.addEventListener("pause", () => {
+		app.game.pause();
+	});
+});

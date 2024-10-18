@@ -180,6 +180,7 @@ export class Game extends Entity {
 	selectPowerUp(powerUp: PowerUp) {
 		if (this.cooldowns[powerUp] == 0 && this.activePowerUp != powerUp) {
 			this.activePowerUp = powerUp;
+			navigator?.vibrate(50);
 			void Click.play();
 		}
 	}
@@ -306,6 +307,7 @@ export class Game extends Entity {
 		for (const bomb of this.bombs.entities) {
 			bomb.tick(delta);
 			if (bomb.timeout == 0) {
+				navigator?.vibrate([50, 50, 300]);
 				void Explosion.play({ volume: 0.5 });
 				this.shockwaves.add(
 					new Shockwave(bomb.pos, -300, 100, 5000, 1, "bomb"),
@@ -412,6 +414,7 @@ export class Game extends Entity {
 			return;
 		}
 		const strength = 1 - this.cooldowns.shockwave / this.delays.shockwave;
+		navigator?.vibrate(50 * strength);
 		void ShockwaveSound.play({ volume: 0.3 * strength });
 		this.cooldowns.shockwave = this.delays.shockwave;
 		this.shockwaves.add(new Shockwave(pos, -300, 100, 5000, strength));
@@ -426,6 +429,7 @@ export class Game extends Entity {
 			return;
 		}
 		void Push.play({ volume: 0.5 });
+		navigator?.vibrate(100);
 		this.cooldowns.push = this.delays.push;
 		this.shockwaves.add(new Shockwave(pos, -300, 100, 5000, 1, "push"));
 		this.activePowerUp = "shockwave";
@@ -440,6 +444,7 @@ export class Game extends Entity {
 			return;
 		}
 
+		navigator?.vibrate(50);
 		void BombPlaced.play({ volume: 0.7 });
 		this.bombs.add(new Bomb(pos));
 		this.cooldowns.bomb = this.delays.bomb;
@@ -456,6 +461,7 @@ export class Game extends Entity {
 		}
 		this.cooldowns.hologram = this.delays.hologram;
 		this.activePowerUp = "shockwave";
+		navigator?.vibrate([150, 50, 150]);
 		void HologramSound.play({ volume: 0.5 });
 		this.targets.add(
 			new Target(
@@ -484,6 +490,7 @@ export class Game extends Entity {
 		) {
 			return;
 		}
+		navigator?.vibrate([300]);
 		void FreezeSound.play({ volume: 0.5 });
 		this.freezes.add(new Freeze(pos));
 		this.cooldowns.freeze = this.delays.freeze;
