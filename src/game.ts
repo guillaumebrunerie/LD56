@@ -409,6 +409,13 @@ export class Game extends Entity {
 		}
 	}
 
+	isAlmostWon() {
+		return (
+			this.ants.entities.length <= 5 &&
+			this.sources.entities.every((source) => source.isDestroyed)
+		);
+	}
+
 	shockwave(pos: Point) {
 		if (this.state == "gameover" || this.state == "win") {
 			return;
@@ -417,7 +424,10 @@ export class Game extends Entity {
 		navigator?.vibrate(50 * strength);
 		void ShockwaveSound.play({ volume: 0.3 * strength });
 		this.cooldowns.shockwave = this.delays.shockwave;
-		this.shockwaves.add(new Shockwave(pos, -300, 100, 5000, strength));
+		const adjustedStrength = this.isAlmostWon() ? strength * 5 : strength;
+		this.shockwaves.add(
+			new Shockwave(pos, -300, 100, 5000, adjustedStrength),
+		);
 	}
 
 	push(pos: Point) {
