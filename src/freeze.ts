@@ -1,7 +1,6 @@
-import { Entity } from "./entities";
 import { distanceBetween, type Point } from "./utils";
 
-export class Freeze extends Entity {
+export class Freeze {
 	pos: Point;
 
 	appearDuration = 0.3;
@@ -14,7 +13,6 @@ export class Freeze extends Entity {
 	state: "appearing" | "active" | "disappearing" | "gone";
 
 	constructor(pos: Point) {
-		super();
 		this.pos = pos;
 		this.state = "appearing";
 	}

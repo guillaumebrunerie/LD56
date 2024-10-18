@@ -1,4 +1,3 @@
-import { Entity } from "./entities";
 import { Game } from "./game";
 import { Ticker } from "pixi.js";
 import { action } from "mobx";
@@ -12,13 +11,11 @@ declare global {
 	}
 }
 
-export class App extends Entity {
+export class App {
 	speed = 1;
 	game = new Game();
 
 	constructor() {
-		super();
-		this.addChildren(this.game);
 		this.init();
 	}
 
@@ -36,7 +33,8 @@ export class App extends Entity {
 		// Initialize sound and ticker
 		initSound();
 		const tick = action((ticker: Ticker) => {
-			this.tick_((ticker.deltaTime / 60) * this.speed);
+			const delta = (ticker.deltaTime / 60) * this.speed;
+			this.game.tick(delta);
 		});
 		Ticker.shared.add(tick);
 		window.cleanup = () => {

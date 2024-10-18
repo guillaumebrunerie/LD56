@@ -1,9 +1,9 @@
-import { Entity } from "./entities";
 import type { Point } from "./utils";
 
 type ShockwaveType = "shockwave" | "push" | "bomb";
 
-export class Shockwave extends Entity {
+export class Shockwave {
+	lt = 0;
 	center: Point;
 	innerRadius: number;
 	outerRadius: number;
@@ -19,17 +19,16 @@ export class Shockwave extends Entity {
 		strength: number,
 		type: ShockwaveType = "shockwave",
 	) {
-		super();
 		this.type = type;
 		this.center = center;
 		this.innerRadius = innerRadius;
 		this.outerRadius = outerRadius;
 		this.speed = speed;
 		this.strength = strength;
-		this.addTicker((delta) => this.tick(delta));
 	}
 
 	tick(delta: number) {
+		this.lt += delta;
 		this.innerRadius += delta * this.speed;
 		this.outerRadius += delta * this.speed;
 	}

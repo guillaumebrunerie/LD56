@@ -102,15 +102,15 @@ export const GameC = ({ game }: { game: Game }) => {
 					game.tap({ x, y });
 				}}
 			/>
-			{game.sources.entities.map(
+			{game.sources.map(
 				(source, i) =>
 					source.isDestroyed && <SourceC key={i} source={source} />,
 			)}
-			{game.sources.entities.map(
+			{game.sources.map(
 				(source, i) =>
 					!source.isDestroyed && <SourceC key={i} source={source} />,
 			)}
-			{game.freezes.entities.map((freeze, i) => (
+			{game.freezes.map((freeze, i) => (
 				<container
 					key={i}
 					x={freeze.pos.x}
@@ -120,24 +120,24 @@ export const GameC = ({ game }: { game: Game }) => {
 					<FreezeC freeze={freeze} />
 				</container>
 			))}
-			{game.ants.entities.map(
+			{game.ants.map(
 				(ant, i) =>
 					ant.state == "dead" && (
 						<DeadAntBloodStainC key={i} ant={ant} />
 					),
 			)}
-			{game.ants.entities.map(
+			{game.ants.map(
 				(ant, i) =>
 					ant.state == "dead" && <DeadAntC key={i} ant={ant} />,
 			)}
-			{game.ants.entities.map(
+			{game.ants.map(
 				(ant, i) =>
 					ant.state != "dead" && <AntShadowC key={i} ant={ant} />,
 			)}
-			{game.ants.entities.map(
+			{game.ants.map(
 				(ant, i) => ant.state != "dead" && <AntC key={i} ant={ant} />,
 			)}
-			{game.freezes.entities.map((freeze, i) => (
+			{game.freezes.map((freeze, i) => (
 				<container
 					key={i}
 					x={freeze.pos.x}
@@ -147,17 +147,17 @@ export const GameC = ({ game }: { game: Game }) => {
 					<FreezeC freeze={freeze} />
 				</container>
 			))}
-			{game.bombs.entities.map((bomb, i) => (
+			{game.bombs.map((bomb, i) => (
 				<BombC key={i} bomb={bomb} />
 			))}
-			{game.targets.entities.map((target, i) => (
+			{game.targets.map((target, i) => (
 				<TargetC key={i} target={target} />
 			))}
 			{game.state !== "gameStarting" &&
-				game.sources.entities.map((source, i) => (
+				game.sources.map((source, i) => (
 					<SourceHealth key={i} source={source} />
 				))}
-			{game.shockwaves.entities.map((shockwave, i) => (
+			{game.shockwaves.map((shockwave, i) => (
 				<ShockwaveC key={i} shockwave={shockwave} />
 			))}
 			<PowerUpButtons game={game} />
@@ -166,7 +166,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			{game.state == "game" && <PauseButton game={game} />}
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
-			{game.state == "pause" && <PauseScreen game={game} />}
+			{game.isPaused && <PauseScreen game={game} />}
 		</container>
 	);
 };
@@ -205,7 +205,6 @@ const PowerUpTextureOn = {
 };
 
 const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
-	game.lt;
 	const ref = useRef<Graphics | null>(null);
 	const maskY = (100 * game.cooldowns[powerUp]) / game.delays[powerUp] - 50;
 	const texture =
@@ -228,16 +227,15 @@ const PowerUpButton = ({ game, powerUp }: { game: Game; powerUp: PowerUp }) => {
 				}}
 			/>
 			<sprite texture={texture} anchor={0.5} alpha={0.25} />
-			<sprite texture={texture} anchor={0.5} mask={ref.current}>
-				<Rectangle
-					myRef={ref}
-					x={-200}
-					y={maskY}
-					width={400}
-					height={400}
-					draw={() => {}}
-				/>
-			</sprite>
+			<sprite texture={texture} anchor={0.5} mask={ref.current} />
+			<Rectangle
+				myRef={ref}
+				x={-200}
+				y={maskY}
+				width={400}
+				height={400}
+				draw={() => {}}
+			/>
 		</container>
 	);
 };
@@ -355,10 +353,10 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				rotation={game.levelSelector.rotation}
 			>
 				<sprite anchor={0.5} scale={2} texture={MenuMoon} />
-				{game.levelSelector.ants.entities.map((ant, i) => (
+				{game.levelSelector.ants.map((ant, i) => (
 					<AntShadowC key={i} ant={ant} />
 				))}
-				{game.levelSelector.ants.entities.map((ant, i) => (
+				{game.levelSelector.ants.map((ant, i) => (
 					<AntC key={i} ant={ant} />
 				))}
 			</container>

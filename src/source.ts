@@ -1,11 +1,10 @@
 import { SourceDestroyed } from "./assets";
-import { Entity } from "./entities";
 import type { Freeze } from "./freeze";
 
 import type { Shockwave } from "./shockwave";
 import type { Point } from "./utils";
 
-export class Source extends Entity {
+export class Source {
 	pos: Point;
 	healthCurrent = 100;
 	healthMax = 100;
@@ -15,7 +14,6 @@ export class Source extends Entity {
 	radiusY = 50;
 
 	constructor(pos: Point, destroyed = false) {
-		super();
 		this.pos = pos;
 		if (destroyed) {
 			this.destroy();

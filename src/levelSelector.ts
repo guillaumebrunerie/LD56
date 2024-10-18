@@ -1,6 +1,4 @@
 import { Ant } from "./ant";
-import { Entity } from "./entities";
-import { EntityArray } from "./entitiesArray";
 import { levels } from "./levels";
 import { distanceToNearestIncrement, type Point } from "./utils";
 
@@ -8,26 +6,23 @@ const snapshotDelay = 0.1;
 export const levelAngle = 2 * Math.PI * 0.21;
 const initialLevel = 1;
 
-export class LevelSelector extends Entity {
+export class LevelSelector {
+	lt = 0;
 	rotation = -levelAngle * (initialLevel - 1);
 	speed = 0;
 	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
-	ants: EntityArray<Ant>;
+	ants: Ant[] = [];
 	lastLevel = 1;
 
 	lastSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
 	nextSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
 
 	constructor() {
-		super();
-		this.ants = new EntityArray<Ant>();
-		this.addChildren(this.ants);
-		this.addTicker((delta) => this.tick(delta));
 		for (let i = 0; i < 100; i++) {
 			const ant = new Ant();
 			ant.initCircle(915);
-			this.ants.add(ant);
+			this.ants.push(ant);
 		}
 	}
 
@@ -40,7 +35,8 @@ export class LevelSelector extends Entity {
 	}
 
 	tick(delta: number) {
-		for (const ant of this.ants.entities) {
+		this.lt += delta;
+		for (const ant of this.ants) {
 			ant.tick(delta, []);
 		}
 		if (this.touchPoint) {

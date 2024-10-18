@@ -8,14 +8,14 @@ import {
 	AntDie3,
 	AntDie4,
 } from "./assets";
-import { Entity } from "./entities";
 import type { Freeze } from "./freeze";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
 import type { Target } from "./target";
 import { pick, randomAroundPoint, type Point } from "./utils";
 
-export class Ant extends Entity {
+export class Ant {
+	lt = 0;
 	pos: Point;
 	destination: Point | null = null;
 	target: Target | Source | null = null;
@@ -33,8 +33,6 @@ export class Ant extends Entity {
 	edgeRadius = 0;
 
 	constructor(source?: Source) {
-		super();
-
 		this.level = 1;
 		if (Math.random() < 0.2) {
 			this.level = 2;
@@ -116,6 +114,7 @@ export class Ant extends Entity {
 
 	stunnedCooldown = 0;
 	tick(delta: number, freezes: Freeze[]) {
+		this.lt += delta;
 		switch (this.state) {
 			case "appearing": {
 				this.appear(delta);

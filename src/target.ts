@@ -1,5 +1,4 @@
 import { Music, TargetEnd } from "./assets";
-import { Entity } from "./entities";
 import type { Freeze } from "./freeze";
 import type { Shockwave } from "./shockwave";
 import type { Source } from "./source";
@@ -7,7 +6,8 @@ import { distance2, type Point } from "./utils";
 
 const hologramDuration = 10;
 
-export class Target extends Entity {
+export class Target {
+	lt = 0;
 	item: number;
 	pos: Point;
 	speedPerAnt = 2;
@@ -26,7 +26,6 @@ export class Target extends Entity {
 		onIdle: (target: Target) => void,
 		hologram = false,
 	) {
-		super();
 		this.item = item;
 		this.pos = pos;
 		this.onIdle = onIdle;
@@ -41,6 +40,7 @@ export class Target extends Entity {
 	appearDuration = 0.7;
 
 	tick(delta: number) {
+		this.lt += delta;
 		this.gt += delta;
 		this.hologramTimeout -= delta;
 		if (this.hologramTimeout < 0) {
