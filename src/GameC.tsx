@@ -291,7 +291,7 @@ const LevelIndicator = ({ game }: { game: Game }) => {
 };
 
 const LevelSelectScreen = ({ game }: { game: Game }) => {
-	const skyScale = 1.6;
+	const skyScale = 1.62;
 	return (
 		<container>
 			<Rectangle

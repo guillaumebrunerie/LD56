@@ -6,16 +6,16 @@ import type { Point } from "./utils";
 
 export class Source {
 	pos: Point;
-	healthCurrent = 100;
 	healthMax = 100;
+	healthCurrent = this.healthMax;
 	isDestroyed = false;
 
 	radiusX = 50;
 	radiusY = 50;
 
-	constructor(pos: Point, destroyed = false) {
+	constructor(pos: Point, isDestroyed = false) {
 		this.pos = pos;
-		if (destroyed) {
+		if (isDestroyed) {
 			this.destroy();
 		}
 	}
@@ -36,11 +36,10 @@ export class Source {
 			if (shockwave.type == "push") {
 				continue;
 			}
-			const { strength } = shockwave.speedAt(this.pos);
-			this.healthCurrent -= strength * shockwave.speed * delta * damage;
+			const strength = shockwave.strengthAt(this.pos, delta);
+			this.healthCurrent -= strength * damage;
 		}
-		if (this.healthCurrent <= 0) {
-			this.healthCurrent = 0;
+		if (this.healthCurrent < 0) {
 			this.destroy();
 		}
 	}

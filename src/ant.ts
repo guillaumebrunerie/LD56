@@ -107,17 +107,12 @@ export class Ant {
 		);
 	}
 
-	get rotation() {
-		const { dx, dy } = this.deltas;
-		return Math.atan2(dy, dx);
-	}
-
 	stunnedCooldown = 0;
 	tick(delta: number, freezes: Freeze[]) {
 		this.lt += delta;
 		switch (this.state) {
 			case "appearing": {
-				this.appear(delta);
+				this.appear();
 				return;
 			}
 			case "walking": {
@@ -125,7 +120,7 @@ export class Ant {
 				return;
 			}
 			case "carrying": {
-				this.carry(delta);
+				this.carry();
 				return;
 			}
 			case "stunned": {
@@ -144,11 +139,11 @@ export class Ant {
 
 	dieDuration = 10;
 
-	get gone() {
+	isGone() {
 		return this.state == "dead" && this.lt > this.dieDuration;
 	}
 
-	get deltas() {
+	getDeltas() {
 		if (!this.target || !this.destination) {
 			return { dx: 0, dy: 0, ok: false };
 		}
@@ -160,7 +155,7 @@ export class Ant {
 	}
 
 	get distance2() {
-		const { dx, dy, ok } = this.deltas;
+		const { dx, dy, ok } = this.getDeltas();
 		if (!ok) {
 			return Infinity;
 		}
@@ -174,10 +169,14 @@ export class Ant {
 		const dx = this.target.pos.x - this.destination.x - this.pos.x;
 		const dy = this.target.pos.y - this.destination.y - this.pos.y;
 
-		const dxn = dx / this.target.radiusX;
-		const dyn = dy / this.target.radiusY;
-
-		return dxn * dxn + dyn * dyn;
+		const theta = Math.atan2(dy, dx);
+		const a =
+			(this.target.radiusX * this.target.radiusY) /
+			Math.sqrt(
+				(this.target.radiusX * Math.sin(theta)) ** 2 +
+					(this.target.radiusY * Math.cos(theta)) ** 2,
+			);
+		return Math.sqrt(dx ** 2 + dy ** 2) - a;
 	}
 
 	die() {
@@ -198,7 +197,7 @@ export class Ant {
 
 	appearDuration = 0.5;
 
-	appear(_delta: number) {
+	appear() {
 		if (this.lt > this.appearDuration) {
 			this.state = "walking";
 		}
@@ -207,7 +206,7 @@ export class Ant {
 	freezeFactor = 1 / 6;
 
 	walk(delta: number, freezes: Freeze[]) {
-		const { dx, dy, ok } = this.deltas;
+		const { dx, dy, ok } = this.getDeltas();
 		if (ok) {
 			this.direction = Math.atan2(dy, dx);
 		}
@@ -216,8 +215,10 @@ export class Ant {
 			speed *= this.freezeFactor ** freeze.freezeFactor(this.pos);
 		}
 
-		this.pos.x += Math.cos(this.direction) * delta * speed;
-		this.pos.y += Math.sin(this.direction) * delta * speed;
+		const factor = Math.min(delta * speed, this.distanceToTarget() + 2);
+
+		this.pos.x += Math.cos(this.direction) * factor;
+		this.pos.y += Math.sin(this.direction) * factor;
 
 		// stop at the edge
 		if (this.circularEdge) {
@@ -251,17 +252,17 @@ export class Ant {
 		}
 
 		// carry when getting close to destination
-		if (this.distanceToTarget() < 1) {
+		if (this.distanceToTarget() <= 0) {
 			this.state = "carrying";
 		}
 	}
 
-	carry(_delta: number) {
-		const { dx, dy, ok } = this.deltas;
+	carry() {
+		const { dx, dy, ok } = this.getDeltas();
 		if (ok) {
 			this.direction = Math.atan2(dy, dx);
 		}
-		if (this.distanceToTarget() > 1.05) {
+		if (this.distanceToTarget() >= 2) {
 			this.state = "walking";
 		}
 	}
@@ -282,13 +283,12 @@ export class Ant {
 			if (shockwave.type == "push") {
 				continue;
 			}
-			const { dx, dy, nearStrength } = shockwave.speedAt(this.pos);
+			const { dx, dy } = shockwave.speedAt(this.pos, delta);
+			const nearStrength = shockwave.nearStrengthAt(this.pos);
+			const isPassed = shockwave.passedPoint(this.pos);
 
 			// Maybe die
-			if (
-				!this.passedShockwaves.has(shockwave) &&
-				(dx !== 0 || dy !== 0)
-			) {
+			if (!this.passedShockwaves.has(shockwave) && isPassed) {
 				this.passedShockwaves.add(shockwave);
 				this.stun(nearStrength);
 				const dieProbability = [0, 0.6, 0.55, 0.5];
@@ -303,24 +303,30 @@ export class Ant {
 				factor *= this.freezeFactor ** freeze.freezeFactor(this.pos);
 			}
 
-			this.pos.x += dx * delta * factor;
-			this.pos.y += dy * delta * factor;
+			this.pos.x += dx * factor;
+			this.pos.y += dy * factor;
 		}
 	}
 
-	stunDuration = [0, 0.5, 0.4, 0.3];
+	baseStunDuration = [0, 0.5, 0.4, 0.3];
 	stun(strength: number) {
 		this.state = "stunned";
-		this.stunnedCooldown = this.stunDuration[this.level] * strength;
+		this.stunnedCooldown = this.baseStunDuration[this.level] * strength;
 	}
 
-	moveAwayIfTooClose() {
+	moveAwayIfTooClose(delta: number) {
 		if (this.state == "dead") {
 			return;
 		}
-		if (this.distanceToTarget() < 0.95) {
-			this.pos.x -= Math.cos(this.direction) * this.speed * 0.01;
-			this.pos.y -= Math.sin(this.direction) * this.speed * 0.01;
+		const distance = this.distanceToTarget();
+		if (distance <= -2) {
+			const moveAwaySpeed = 0.6;
+			const factor = Math.min(
+				-distance,
+				this.speed * moveAwaySpeed * delta,
+			);
+			this.pos.x -= Math.cos(this.direction) * factor;
+			this.pos.y -= Math.sin(this.direction) * factor;
 		}
 	}
 }

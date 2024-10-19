@@ -139,7 +139,7 @@ export class Target {
 	shockwaveSpeed = 5;
 	shockwave(delta: number, shockwaves: Shockwave[]) {
 		for (const shockwave of shockwaves) {
-			const { dx, dy } = shockwave.speedAt(this.pos);
+			const { dx, dy } = shockwave.speedAt(this.pos, delta);
 
 			let factor = Math.random() * this.shockwaveSpeed;
 			if (shockwave.type == "push") {
@@ -148,8 +148,8 @@ export class Target {
 			if (this.isHologram) {
 				factor = 0;
 			}
-			this.pos.x += dx * delta * factor;
-			this.pos.y += dy * delta * factor;
+			this.pos.x += dx * factor;
+			this.pos.y += dy * factor;
 		}
 	}
 

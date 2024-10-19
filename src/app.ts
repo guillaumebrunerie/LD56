@@ -36,6 +36,8 @@ export class App {
 			const delta = (ticker.deltaTime / 60) * this.speed;
 			this.game.tick(delta);
 		});
+		// Ticker.shared.minFPS = 10;
+		// Ticker.shared.maxFPS = 10;
 		Ticker.shared.add(tick);
 		window.cleanup = () => {
 			Ticker.shared.remove(tick);

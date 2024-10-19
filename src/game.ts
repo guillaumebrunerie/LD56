@@ -216,11 +216,12 @@ export class Game {
 			return;
 		}
 		this.lt += delta;
-
 		this.startLt += delta;
 
+		// Level selector
 		this.levelSelector.tick(delta);
 
+		// Create new ants
 		if (this.state == "game") {
 			this.antValue += delta * 2;
 			for (; this.antValue >= 1; this.antValue--) {
@@ -235,6 +236,7 @@ export class Game {
 			}
 		}
 
+		// Targets
 		for (const target of this.targets) {
 			const carryingForce = this.carryingForce(target);
 			target.carry(
@@ -243,26 +245,15 @@ export class Game {
 				this.sources.filter((source) => !source.isDestroyed),
 				this.freezes,
 			);
-		}
-		this.ants = this.ants.filter((ant) => !ant.gone);
-		for (const ant of this.ants) {
-			ant.tick(delta, this.freezes);
-			ant.shockwave(delta, this.shockwaves, this.freezes);
-			ant.moveAwayIfTooClose();
-			if (this.state == "game") {
-				ant.pickTarget(this.targets, this.sources);
-			}
-		}
-
-		for (const source of this.sources) {
-			source.shockwave(delta, this.shockwaves);
-			const healingForce = this.healingForce(source);
-			source.heal(delta, healingForce, this.freezes);
-		}
-
-		for (const target of this.targets) {
 			target.tick(delta);
 			target.shockwave(delta, this.shockwaves);
+			if (
+				target.isCloseToSource(this.sources) &&
+				!target.isHologram &&
+				target.state != "disappearing"
+			) {
+				target.disappear();
+			}
 		}
 		this.targets = this.targets.filter(
 			(target) =>
@@ -273,6 +264,25 @@ export class Game {
 				),
 		);
 
+		// Ants
+		this.ants = this.ants.filter((ant) => !ant.isGone());
+		for (const ant of this.ants) {
+			ant.tick(delta, this.freezes);
+			ant.shockwave(delta, this.shockwaves, this.freezes);
+			ant.moveAwayIfTooClose(delta);
+			if (this.state == "game") {
+				ant.pickTarget(this.targets, this.sources);
+			}
+		}
+
+		// Sources
+		for (const source of this.sources) {
+			source.shockwave(delta, this.shockwaves);
+			const healingForce = this.healingForce(source);
+			source.heal(delta, healingForce, this.freezes);
+		}
+
+		// Shockwaves
 		this.shockwaves = this.shockwaves.filter(
 			(shockwave) => !shockwave.gone,
 		);
@@ -280,6 +290,7 @@ export class Game {
 			shockwave.tick(delta);
 		}
 
+		// Bombs
 		for (const bomb of this.bombs) {
 			bomb.tick(delta);
 			if (bomb.timeout == 0) {
@@ -292,31 +303,21 @@ export class Game {
 		}
 		this.bombs = this.bombs.filter((bomb) => bomb.timeout > 0);
 
+		// Freezes
 		for (const freeze of this.freezes) {
 			freeze.tick(delta);
 		}
 		this.freezes = this.freezes.filter((freeze) => freeze.state != "gone");
 
-		for (const key of [
-			"shockwave",
-			"push",
-			"bomb",
-			"hologram",
-			"freeze",
-		] as const) {
+		// Cooldowns
+		for (const key of this.powerUps) {
 			this.cooldowns[key] -= delta;
 			if (this.cooldowns[key] < 0) {
 				this.cooldowns[key] = 0;
 			}
 		}
 
-		const gameOverTarget = this.targets.find(
-			(target) =>
-				target.isCloseToSource(this.sources) && !target.isHologram,
-		);
-		if (gameOverTarget && gameOverTarget.state !== "disappearing") {
-			gameOverTarget.disappear();
-		}
+		// Game over
 		if (
 			this.targets.some(
 				(target) =>
@@ -327,6 +328,8 @@ export class Game {
 		) {
 			this.gameOver();
 		}
+
+		// Win
 		if (
 			this.ants.every((ant) => ant.state == "dead") &&
 			this.sources.every((source) => source.isDestroyed) &&
