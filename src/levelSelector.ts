@@ -54,7 +54,8 @@ export class LevelSelector {
 			this.speed,
 		);
 		this.speed = dangle * 10;
-		this.rotation += delta * this.speed;
+		const nextSpeed = (dangle - delta * this.speed) * 10;
+		this.rotation += (delta * (this.speed + nextSpeed)) / 2;
 	}
 
 	getTouchAngle() {
