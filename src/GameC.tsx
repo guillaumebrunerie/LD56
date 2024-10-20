@@ -72,6 +72,7 @@ import { levelAngle } from "./levelSelector";
 import { useEffect, useRef } from "react";
 import {
 	GameOverScreen,
+	LevelCardContents,
 	LevelIntro,
 	LevelSelectPauseScreen,
 	LogoScreen,
@@ -80,7 +81,6 @@ import {
 } from "./Postings";
 import { Bomb } from "./bomb";
 import type { Freeze } from "./freeze";
-import { GrayscaleFilter } from "pixi-filters";
 import { useWindowEventListener } from "./useWindowEventListener";
 
 export const GameC = ({ game }: { game: Game }) => {
@@ -466,8 +466,6 @@ type LevelCardProps = {
 	mainRotation: number;
 };
 
-const grayscaleFilter = new GrayscaleFilter();
-
 const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 	const angle = (level - 1) * levelAngle;
 	const minAngle = -mainRotation + levelAngle - Math.PI;
@@ -513,106 +511,6 @@ const LevelCard = ({ game, level, name, mainRotation }: LevelCardProps) => {
 				}}
 			/>
 			<LevelCardContents game={game} level={level} name={name} />
-		</container>
-	);
-};
-
-export const LevelCardContents = ({
-	game,
-	level,
-	name,
-}: {
-	game: Game;
-	level: number;
-	name: string;
-}) => {
-	const levelText = `LEVEL ${level}`;
-	const targetId = levels[level - 1].targets[0].id;
-	const isLocked = level > game.levelSelector.lastLevel;
-
-	return (
-		<container>
-			<sprite anchor={0.5} scale={2} texture={Target_Shadow} />
-			<sprite
-				anchor={0.5}
-				scale={2}
-				texture={TargetTexture[targetId]}
-				filters={isLocked ? grayscaleFilter : undefined}
-			/>
-			{isLocked && (
-				<container>
-					<CustomText
-						anchor={0.5}
-						angle={-25}
-						y={3}
-						text="LOCKED"
-						style={{
-							fill: "#222",
-							fontSize: 30,
-							letterSpacing: 10,
-							fontFamily: "Comix Loud",
-						}}
-					/>
-					<CustomText
-						anchor={0.5}
-						angle={-25}
-						text="LOCKED"
-						style={{
-							fill: "#db402c",
-							fontSize: 30,
-							letterSpacing: 10,
-							fontFamily: "Comix Loud",
-						}}
-					/>
-				</container>
-			)}
-			<container y={150} filters={isLocked ? grayscaleFilter : undefined}>
-				<CustomText
-					anchor={0.5}
-					x={0}
-					y={5}
-					style={{
-						fill: "#222",
-						fontSize: 36,
-						fontFamily: "Comix Loud",
-					}}
-					text={levelText}
-				/>
-				<CustomText
-					anchor={0.5}
-					style={{
-						fill: "#ff75f1",
-						fontSize: 36,
-						fontFamily: "Comix Loud",
-					}}
-					text={levelText}
-				/>
-			</container>
-			<container
-				y={200}
-				filters={level > 1 ? grayscaleFilter : undefined}
-			>
-				<CustomText
-					anchor={{ x: 0.5, y: 0 }}
-					x={0}
-					y={5}
-					style={{
-						fill: "#222",
-						fontSize: 40,
-						fontFamily: "Laffayette Comic Pro",
-					}}
-					text={name}
-				/>
-				<CustomText
-					anchor={{ x: 0.5, y: 0 }}
-					style={{
-						fill: "#ffdefc",
-						fontSize: 40,
-						fontFamily: "Laffayette Comic Pro",
-					}}
-					text={name}
-				/>
-			</container>
 		</container>
 	);
 };

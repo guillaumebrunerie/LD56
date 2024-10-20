@@ -11,7 +11,7 @@ module.exports = {
 		"plugin:@typescript-eslint/strict-type-checked",
 		"plugin:@typescript-eslint/stylistic-type-checked",
 	],
-	ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
+	ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts", "cordova_app"],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		ecmaFeatures: {
