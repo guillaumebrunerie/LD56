@@ -1,5 +1,6 @@
 import { Ant } from "./ant";
 import { levels } from "./levels";
+import { retrieveLastUnlockedLevel, storeLastUnlockedLevel } from "./storage";
 import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
@@ -13,7 +14,7 @@ export class LevelSelector {
 	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
 	ants: Ant[] = [];
-	lastLevel = 1;
+	lastLevel = retrieveLastUnlockedLevel(levels.length);
 
 	lastSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
 	nextSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
@@ -31,6 +32,7 @@ export class LevelSelector {
 			this.lastLevel,
 			Math.min(levels.length, level + 1),
 		);
+		storeLastUnlockedLevel(this.lastLevel);
 		this.rotation -= levelAngle;
 	}
 
