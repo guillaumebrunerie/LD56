@@ -118,6 +118,7 @@ export class Game {
 		this.level = level;
 		this.state = "gameStarting";
 		this.startLt = 0;
+		this.activePowerUp = "shockwave";
 
 		setTimeout(() => {
 			Music.singleInstance = true;
@@ -163,6 +164,12 @@ export class Game {
 		this.shockwave(target.pos);
 		this.cooldowns.shockwave = 0;
 		this.state = "game";
+	}
+
+	selectPowerUpByIndex(n: number) {
+		if (n <= this.powerUps.length) {
+			this.selectPowerUp(this.powerUps[n - 1]);
+		}
 	}
 
 	selectPowerUp(powerUp: PowerUp) {

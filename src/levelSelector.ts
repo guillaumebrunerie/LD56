@@ -5,16 +5,15 @@ import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
 export const levelAngle = 2 * Math.PI * 0.21;
-const initialLevel = 1;
 
 export class LevelSelector {
 	lt = 0;
-	rotation = -levelAngle * (initialLevel - 1);
+	lastLevel = retrieveLastUnlockedLevel(levels.length);
+	rotation = -levelAngle * (this.lastLevel - 1);
 	speed = 0;
 	center = { x: 1920 / 2, y: 1300 };
 	touchPoint: Point | null = null;
 	ants: Ant[] = [];
-	lastLevel = retrieveLastUnlockedLevel(levels.length);
 
 	lastSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };
 	nextSnapshot: { lt: number; rotation: number } = { lt: 0, rotation: 0 };

@@ -80,8 +80,29 @@ import {
 import { Bomb } from "./bomb";
 import type { Freeze } from "./freeze";
 import { GrayscaleFilter } from "pixi-filters";
+import { useWindowEventListener } from "./useWindowEventListener";
 
 export const GameC = ({ game }: { game: Game }) => {
+	useWindowEventListener("keydown", (event) => {
+		switch (event.code) {
+			case "Digit1":
+				game.selectPowerUpByIndex(1);
+				break;
+			case "Digit2":
+				game.selectPowerUpByIndex(2);
+				break;
+			case "Digit3":
+				game.selectPowerUpByIndex(3);
+				break;
+			case "Digit4":
+				game.selectPowerUpByIndex(4);
+				break;
+			case "Digit5":
+				game.selectPowerUpByIndex(5);
+				break;
+		}
+	});
+
 	if (game.state == "logo") {
 		return <LogoScreen game={game} />;
 	}

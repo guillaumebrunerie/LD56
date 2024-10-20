@@ -1,30 +1,29 @@
-import { useEffect } from "react";
-import { action } from "mobx";
 import { app } from "./app";
 import { GameC } from "./GameC";
 import { SoundButton } from "./SoundButton";
+import { useWindowEventListener } from "./useWindowEventListener";
 
 export const AppC = () => {
-	useEffect(() => {
-		const callback = action((event: KeyboardEvent) => {
-			if (event.key == "ArrowUp") {
+	useWindowEventListener("keydown", (event) => {
+		if (!import.meta.env.DEV) {
+			return;
+		}
+		switch (event.code) {
+			case "ArrowUp":
 				app.speed *= 2;
-			} else if (event.key == "ArrowDown") {
+				break;
+			case "ArrowDown":
 				app.speed *= 1 / 2;
 				if (app.speed == 0) {
 					app.speed = 1 / 64;
 				}
-			} else if (event.key == "ArrowLeft") {
+				break;
+			case "ArrowLeft":
 				app.speed = 0;
-			} else if (event.key == "ArrowRight") {
+				break;
+			case "ArrowRight":
 				app.speed = 1;
-			}
-		});
-		if (import.meta.env.DEV) {
-			window.addEventListener("keydown", callback);
-			return () => {
-				window.removeEventListener("keydown", callback);
-			};
+				break;
 		}
 	});
 
