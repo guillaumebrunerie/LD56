@@ -138,6 +138,9 @@ export class Target {
 
 	shockwaveSpeed = 5;
 	shockwave(delta: number, shockwaves: Shockwave[]) {
+		if (this.state == "disappearing") {
+			return;
+		}
 		for (const shockwave of shockwaves) {
 			const { dx, dy } = shockwave.speedAt(this.pos, delta);
 
