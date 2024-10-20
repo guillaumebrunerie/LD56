@@ -25,11 +25,8 @@ root.render(
 
 document.addEventListener("visibilitychange", () => {
 	if (document.visibilityState == "hidden") {
-		app.game.pause();
-	} else if (
-		document.visibilityState == "visible" &&
-		app.game.state == "levelSelect"
-	) {
-		app.game.resume();
+		app.game.autoPause();
+	} else if (document.visibilityState == "visible") {
+		app.game.autoResume();
 	}
 });

@@ -69,7 +69,7 @@ import { Ring } from "./Ring";
 import { getFrame, getNtFrame } from "./Animation";
 import { levels } from "./levels";
 import { levelAngle } from "./levelSelector";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
 	GameOverScreen,
 	LevelIntro,
@@ -313,6 +313,13 @@ const LevelIndicator = ({ game }: { game: Game }) => {
 };
 
 const LevelSelectScreen = ({ game }: { game: Game }) => {
+	useEffect(() => {
+		document.body.className = "levelSelect";
+		return () => {
+			document.body.className = "";
+		};
+	}, []);
+
 	const skyScale = 1.62;
 	return (
 		<container>
