@@ -11,7 +11,10 @@
 		"lint": "eslint . --ext ts,tsx --max-warnings 0",
 		"typecheck": "tsc",
 		"preview": "vite preview --host",
-		"cordova_prepare": "npm run build && npm run pack && rm -rf cordova_app/www/* && unzip MoonPicnic.zip -d cordova_app/www && git add cordova_app/www"
+		"cordova_prepare": "npm run build && npm run pack && rm -rf cordova_app/www/* && unzip MoonPicnic.zip -d cordova_app/www && git add cordova_app/www",
+		"cordova_build": "cd cordova_app; cordova build",
+		"cordova_run": "cd cordova_app; cordova run",
+		"adb_install": "adb install \"./cordova_app/platforms/android/app/build/outputs/apk/debug/app-debug.apk\""
 	},
 	"dependencies": {
 		"@babel/cli": "^7.25.6",
