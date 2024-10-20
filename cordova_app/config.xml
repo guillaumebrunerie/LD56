@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.itch.latcarf.moonpicnic" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Moon Picnic</name>
+    <description>A casual survival game where you have to protect your food from ants.</description>
+    <author email="guillaume.brunerie+moonpicnic@gmail.com" href="https://latcarf.itch.io">
+        Guillaume Brunerie
+    </author>
+    <content src="index.html" />
+    <!-- <allow-intent href="http://*/*" /> -->
+    <!-- <allow-intent href="https://*/*" /> -->
+    <preference name="orientation" value="landscape" />
+</widget>

@@ -1,0 +1,71 @@
+{"frames": {
+
+"BombExplosion_000.png":
+{
+	"frame": {"x":389,"y":843,"w":62,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":210,"w":62,"h":71},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombExplosion_001.png":
+{
+	"frame": {"x":1,"y":843,"w":386,"h":381},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":51,"w":386,"h":381},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombExplosion_002.png":
+{
+	"frame": {"x":453,"y":834,"w":389,"h":383},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":53,"y":48,"w":389,"h":383},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombExplosion_003.png":
+{
+	"frame": {"x":422,"y":450,"w":382,"h":402},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":57,"y":49,"w":382,"h":402},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombExplosion_004.png":
+{
+	"frame": {"x":1,"y":441,"w":400,"h":419},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":50,"y":46,"w":400,"h":419},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombExplosion_005.png":
+{
+	"frame": {"x":447,"y":1,"w":426,"h":447},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":37,"y":32,"w":426,"h":447},
+	"sourceSize": {"w":500,"h":500}
+},
+"BombExplosion_006.png":
+{
+	"frame": {"x":1,"y":1,"w":438,"h":444},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":31,"y":34,"w":438,"h":444},
+	"sourceSize": {"w":500,"h":500}
+}},
+"animations": {
+	"BombExplosion": ["BombExplosion_000.png","BombExplosion_001.png","BombExplosion_002.png","BombExplosion_003.png","BombExplosion_004.png","BombExplosion_005.png","BombExplosion_006.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "BombExplosion.png",
+	"format": "RGBA8888",
+	"size": {"w":874,"h":1225},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:70afcd284920acfa69f752959fd05cf1:598ea439e506b1909d61ea9f241e8093:95f28ff06220f8d3237c6ab6342d5982$"
+}
+}

@@ -10,7 +10,8 @@
 		"pack": "cd dist; sed -i 's#/assets#assets#' index.html; zip -r MoonPicnic.zip *; mv MoonPicnic.zip ..",
 		"lint": "eslint . --ext ts,tsx --max-warnings 0",
 		"typecheck": "tsc",
-		"preview": "vite preview --host"
+		"preview": "vite preview --host",
+		"cordova_prepare": "npm run build && npm run pack && rm -rf cordova_app/www/* && unzip MoonPicnic.zip -d cordova_app/www && git add cordova_app/www"
 	},
 	"dependencies": {
 		"@babel/cli": "^7.25.6",

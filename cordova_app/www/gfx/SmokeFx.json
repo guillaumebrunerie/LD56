@@ -1,0 +1,127 @@
+{"frames": {
+
+"SmokeFx_000.png":
+{
+	"frame": {"x":1619,"y":816,"w":325,"h":190},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":342,"y":197,"w":325,"h":190},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_001.png":
+{
+	"frame": {"x":1375,"y":1,"w":351,"h":210},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":335,"y":191,"w":351,"h":210},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_002.png":
+{
+	"frame": {"x":1619,"y":553,"w":412,"h":261},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":303,"y":167,"w":412,"h":261},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_003.png":
+{
+	"frame": {"x":1619,"y":283,"w":420,"h":268},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":301,"y":161,"w":420,"h":268},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_004.png":
+{
+	"frame": {"x":1619,"y":1,"w":426,"h":280},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":300,"y":154,"w":426,"h":280},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_005.png":
+{
+	"frame": {"x":1326,"y":453,"w":435,"h":291},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":297,"y":148,"w":435,"h":291},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_006.png":
+{
+	"frame": {"x":1065,"y":1,"w":450,"h":308},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":291,"y":138,"w":450,"h":308},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_007.png":
+{
+	"frame": {"x":666,"y":543,"w":465,"h":319},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":283,"y":131,"w":465,"h":319},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_008.png":
+{
+	"frame": {"x":337,"y":546,"w":492,"h":327},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":263,"y":126,"w":492,"h":327},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_009.png":
+{
+	"frame": {"x":1,"y":546,"w":506,"h":334},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":257,"y":122,"w":506,"h":334},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_010.png":
+{
+	"frame": {"x":987,"y":539,"w":527,"h":337},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":242,"y":121,"w":527,"h":337},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_011.png":
+{
+	"frame": {"x":716,"y":1,"w":536,"h":347},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":114,"w":536,"h":347},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_012.png":
+{
+	"frame": {"x":361,"y":1,"w":540,"h":353},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":233,"y":109,"w":540,"h":353},
+	"sourceSize": {"w":1000,"h":563}
+},
+"SmokeFx_013.png":
+{
+	"frame": {"x":1,"y":1,"w":543,"h":358},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":104,"w":543,"h":358},
+	"sourceSize": {"w":1000,"h":563}
+}},
+"animations": {
+	"SmokeFx": ["SmokeFx_000.png","SmokeFx_001.png","SmokeFx_002.png","SmokeFx_003.png","SmokeFx_004.png","SmokeFx_005.png","SmokeFx_006.png","SmokeFx_007.png","SmokeFx_008.png","SmokeFx_009.png","SmokeFx_010.png","SmokeFx_011.png","SmokeFx_012.png","SmokeFx_013.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "SmokeFx.png",
+	"format": "RGBA8888",
+	"size": {"w":2046,"h":1067},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:132358f513de13267d28424c932fed6f:6e83279a17b81f928c8c30cea58a0c7c:6d57916e5f69bf1065efcc6778183031$"
+}
+}

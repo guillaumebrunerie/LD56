@@ -1,0 +1,27 @@
+{
+  "name": "io.itch.latcarf.moonpicnic",
+  "displayName": "Moon Picnic",
+  "version": "1.0.0",
+  "description": "A casual survival game where you have to protect your food from ants.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Guillaume Brunerie & Filip Grudziel",
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-vibration": {}
+    }
+  },
+  "devDependencies": {
+    "cordova-android": "^13.0.0",
+    "cordova-plugin-vibration": "^3.1.1",
+    "es6-promise-plugin": "^4.2.2"
+  }
+}
