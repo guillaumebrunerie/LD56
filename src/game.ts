@@ -369,6 +369,9 @@ export class Game {
 	}
 
 	gameOver() {
+		if (this.state == "gameover") {
+			return;
+		}
 		void LoseGame.play({ volume: 0.5 });
 		this.state = "gameover";
 		for (const ant of this.ants) {

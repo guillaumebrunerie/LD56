@@ -23,8 +23,13 @@ root.render(
 	</StrictMode>,
 );
 
-document.addEventListener("deviceready", () => {
-	document.addEventListener("pause", () => {
+document.addEventListener("visibilitychange", () => {
+	if (document.visibilityState == "hidden") {
 		app.game.pause();
-	});
+	} else if (
+		document.visibilityState == "visible" &&
+		app.game.state == "levelSelect"
+	) {
+		app.game.resume();
+	}
 });
