@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from "react";
+// import { useSyncExternalStore } from "react";
 import { app } from "./app";
 import { GameC } from "./GameC";
 import { SoundButton } from "./SoundButton";

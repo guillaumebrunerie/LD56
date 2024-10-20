@@ -31,6 +31,9 @@ module.exports = {
 		react: {
 			version: "detect",
 		},
+		"import/resolver": {
+			typescript: true,
+		},
 	},
 	rules: {
 		"react-refresh/only-export-components": ["warn"],
