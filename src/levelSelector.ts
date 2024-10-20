@@ -1,6 +1,10 @@
 import { Ant } from "./ant";
 import { levels } from "./levels";
-import { retrieveLastUnlockedLevel, storeLastUnlockedLevel } from "./storage";
+import {
+	clearStorageLastUnlockedLevel,
+	retrieveLastUnlockedLevel,
+	storeLastUnlockedLevel,
+} from "./storage";
 import { distanceToNearestIncrement, type Point } from "./utils";
 
 const snapshotDelay = 0.1;
@@ -24,6 +28,11 @@ export class LevelSelector {
 			ant.initCircle(915);
 			this.ants.push(ant);
 		}
+	}
+
+	resetLastLevel() {
+		clearStorageLastUnlockedLevel();
+		this.lastLevel = 1;
 	}
 
 	unlockNextLevel(level: number) {

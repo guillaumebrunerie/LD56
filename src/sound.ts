@@ -17,7 +17,6 @@ export const useSetVolumeAll = () => {
 		sound.volumeAll,
 		(setter: (volume: number) => number) => {
 			const newVolume = setter(sound.volumeAll);
-			console.log(`Setting volume to ${newVolume}.`);
 			sound.volumeAll = newVolume;
 			forceUpdate();
 		},

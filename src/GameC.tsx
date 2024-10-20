@@ -73,6 +73,7 @@ import { useRef } from "react";
 import {
 	GameOverScreen,
 	LevelIntro,
+	LevelSelectPauseScreen,
 	LogoScreen,
 	PauseScreen,
 	WinScreen,
@@ -184,7 +185,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			<PowerUpButtons game={game} />
 			{game.state == "gameStarting" && <LevelIntro game={game} />}
 			{/* {game.state == "game" && <LevelIndicator game={game} />} */}
-			{game.state == "game" && <PauseButton game={game} />}
+			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
 			{game.isPaused && <PauseScreen game={game} />}
@@ -422,6 +423,8 @@ const LevelSelectScreen = ({ game }: { game: Game }) => {
 				x={game.levelSelector.center.x}
 				y={game.levelSelector.center.y - 100}
 			/>
+			<PauseButton game={game} />
+			{game.isPaused && <LevelSelectPauseScreen game={game} />}
 			{/* <sprite */}
 			{/* 	anchor={0.5} */}
 			{/* 	scale={2} */}

@@ -125,6 +125,53 @@ export const PauseScreen = ({ game }: { game: Game }) => {
 	);
 };
 
+export const LevelSelectPauseScreen = ({ game }: { game: Game }) => {
+	return (
+		<container>
+			<Rectangle
+				x={0}
+				y={0}
+				width={1920}
+				height={1080}
+				draw={() => {}}
+				alpha={0.01}
+				color={0}
+				filters={backdropFilter}
+				cursor="pointer"
+				eventMode="static"
+				onPointerDown={() => {
+					void Click.play();
+					game.resume();
+				}}
+			/>
+			<sprite
+				texture={BtnGamePausedTxt}
+				anchor={0.5}
+				x={1920 / 2}
+				y={450}
+				scale={1.5}
+			/>
+			<MainMenuButton game={game} />
+			<WipeSaveButton game={game} />
+			<CustomText
+				x={1920 / 2}
+				y={980}
+				anchor={0.5}
+				text="(click anywhere to resume)"
+				style={{
+					fontSize: 20,
+					fontFamily: "Heroes Legend",
+					fill: textColor,
+					dropShadow: {
+						angle: 90,
+						distance: 3,
+					},
+				}}
+			/>
+		</container>
+	);
+};
+
 const RestartButton = ({ game }: { game: Game }) => {
 	return (
 		<CustomText
@@ -228,6 +275,32 @@ const MainMenuButton2 = ({ game }: { game: Game }) => {
 	);
 };
 
+const WipeSaveButton = ({ game }: { game: Game }) => {
+	return (
+		<CustomText
+			x={buttonsXRight}
+			y={buttonsY}
+			anchor={0.5}
+			text="Wipe save (!)"
+			style={{
+				fontFamily: "Heroes Legend",
+				fill: "#D44",
+				dropShadow: {
+					angle: 90,
+					distance: 6,
+				},
+			}}
+			cursor="pointer"
+			eventMode="static"
+			onPointerDown={() => {
+				void Click.play();
+				game.resetLastUnlockedLevel();
+				game.resume();
+			}}
+		/>
+	);
+};
+
 export const GameOverScreen = ({ game }: { game: Game }) => {
 	return (
 		<container>
@@ -240,6 +313,7 @@ export const GameOverScreen = ({ game }: { game: Game }) => {
 				filters={backdropFilter}
 				alpha={0.3}
 				color={0}
+				eventMode="static"
 			/>
 			<container x={1920 / 2} y={450}>
 				<sprite texture={BtnGameTxt} anchor={0.5} />
@@ -268,6 +342,7 @@ export const WinScreen = ({ game }: { game: Game }) => {
 				draw={() => {}}
 				alpha={0.3}
 				color={0}
+				eventMode="static"
 			/>
 			<container x={1920 / 2} y={400}>
 				<sprite texture={BtnLevelTxt} anchor={0.5} />

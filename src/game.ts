@@ -73,6 +73,10 @@ export class Game {
 		this.levelSelector = new LevelSelector();
 	}
 
+	resetLastUnlockedLevel() {
+		this.levelSelector.resetLastLevel();
+	}
+
 	skipLogo() {
 		this.state = "levelSelect";
 		MusicMenu.singleInstance = true;
@@ -93,6 +97,7 @@ export class Game {
 		this.cooldowns.hologram = 0;
 		this.cooldowns.freeze = 0;
 		this.activePowerUp = "shockwave";
+		this.isPaused = false;
 		void Music.stop();
 	}
 
@@ -167,7 +172,7 @@ export class Game {
 	}
 
 	selectPowerUpByIndex(n: number) {
-		if (n <= this.powerUps.length) {
+		if (n <= this.powerUps.length && !this.isPaused) {
 			this.selectPowerUp(this.powerUps[n - 1]);
 		}
 	}
@@ -210,11 +215,16 @@ export class Game {
 
 	pause() {
 		void Music.pause();
+		void MusicMenu.pause();
 		this.isPaused = true;
 	}
 
 	resume() {
-		void Music.resume();
+		if (this.state == "levelSelect") {
+			void MusicMenu.resume();
+		} else {
+			void Music.resume();
+		}
 		this.isPaused = false;
 	}
 
