@@ -744,7 +744,7 @@ const AntShadowC = ({ ant }: { ant: Ant }) => {
 	return (
 		<container>
 			<sprite
-				filters={[darkFilter]}
+				filters={darkFilter}
 				anchor={0.5}
 				texture={getFrame(antWalk[ant.level], 20, ant.lt)}
 				x={ant.pos.x + shadowDx}

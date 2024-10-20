@@ -13,10 +13,22 @@ declare global {
 
 export class App {
 	speed = 1;
+	lt = 0;
 	game = new Game();
+	listener: (() => void) | undefined;
 
 	constructor() {
 		this.init();
+	}
+
+	subscribe(listener: () => void) {
+		if (this.listener) {
+			console.error("Multiple subscriptions are not supported");
+		}
+		this.listener = listener;
+		return () => {
+			this.listener = undefined;
+		};
 	}
 
 	init() {
@@ -34,7 +46,9 @@ export class App {
 		initSound();
 		const tick = action((ticker: Ticker) => {
 			const delta = (ticker.deltaTime / 60) * this.speed;
+			this.lt += delta;
 			this.game.tick(delta);
+			this.listener?.();
 		});
 		// Ticker.shared.minFPS = 10;
 		// Ticker.shared.maxFPS = 10;

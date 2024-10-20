@@ -314,7 +314,9 @@ export class Game {
 		);
 
 		// Ants
-		this.ants = this.ants.filter((ant) => !ant.isGone());
+		if (this.ants.some((ant) => ant.isGone())) {
+			this.ants = this.ants.filter((ant) => !ant.isGone());
+		}
 		for (const ant of this.ants) {
 			ant.tick(delta, this.freezes);
 			ant.shockwave(delta, this.shockwaves, this.freezes);

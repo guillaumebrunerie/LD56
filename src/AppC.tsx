@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from "react";
 import { app } from "./app";
 import { GameC } from "./GameC";
 import { SoundButton } from "./SoundButton";
@@ -26,6 +27,11 @@ export const AppC = () => {
 				break;
 		}
 	});
+
+	// useSyncExternalStore(
+	// 	(listener) => app.subscribe(listener),
+	// 	() => app.lt,
+	// );
 
 	return (
 		<container>
