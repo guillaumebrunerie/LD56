@@ -299,7 +299,7 @@ export class Game {
 			if (
 				target.isCloseToSource(this.sources) &&
 				!target.isHologram &&
-				target.state != "disappearing"
+				target.state == "idle"
 			) {
 				target.disappear();
 			}
