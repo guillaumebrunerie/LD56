@@ -32,6 +32,7 @@ export const LogoScreen = ({ game }: { game: Game }) => {
 				cursor="pointer"
 				eventMode="static"
 				onPointerDown={() => {
+					void Click.play();
 					game.skipLogo();
 				}}
 			/>

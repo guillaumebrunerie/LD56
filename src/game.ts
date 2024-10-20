@@ -255,6 +255,18 @@ export class Game {
 		this.lt += delta;
 		this.startLt += delta;
 
+		if (this.state == "gameover") {
+			// Tick the targets, in case another one started to be eaten
+			for (const target of this.targets) {
+				target.tick(delta);
+			}
+			// Tick the shockwaves to not stop with half a shockwave
+			for (const shockwave of this.shockwaves) {
+				shockwave.tick(delta);
+			}
+			return;
+		}
+
 		// Level selector
 		this.levelSelector.tick(delta);
 

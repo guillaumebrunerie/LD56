@@ -184,7 +184,7 @@ export const GameC = ({ game }: { game: Game }) => {
 			))}
 			<PowerUpButtons game={game} />
 			{game.state == "gameStarting" && <LevelIntro game={game} />}
-			{/* {game.state == "game" && <LevelIndicator game={game} />} */}
+			<LevelIndicator game={game} />
 			<PauseButton game={game} />
 			{game.state == "gameover" && <GameOverScreen game={game} />}
 			{game.state == "win" && <WinScreen game={game} />}
@@ -287,23 +287,23 @@ const PauseButton = ({ game }: { game: Game }) => {
 const LevelIndicator = ({ game }: { game: Game }) => {
 	const levelText = `LEVEL ${game.level}`;
 	return (
-		<container x={1920 - 120} y={42} scale={0.7}>
+		<container x={1920 / 2} y={20} scale={0.7}>
 			<CustomText
-				anchor={{ x: 1, y: 0.5 }}
+				anchor={{ x: 0.5, y: 0 }}
 				x={0}
 				y={5}
 				style={{
 					fill: "#222",
-					fontSize: 36,
+					fontSize: 30,
 					fontFamily: "Comix Loud",
 				}}
 				text={levelText}
 			/>
 			<CustomText
-				anchor={{ x: 1, y: 0.5 }}
+				anchor={{ x: 0.5, y: 0 }}
 				style={{
 					fill: "#ff75f1",
-					fontSize: 36,
+					fontSize: 30,
 					fontFamily: "Comix Loud",
 				}}
 				text={levelText}

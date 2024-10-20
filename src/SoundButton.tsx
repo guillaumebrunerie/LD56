@@ -14,8 +14,8 @@ export const SoundButton = (_: ComponentProps<"sprite">) => {
 			cursor="pointer"
 			eventMode="static"
 			onPointerDown={toggleSound}
-			x={10}
-			y={5}
+			x={15}
+			y={15}
 			style={{
 				fontSize: 25,
 				fontFamily: "Heroes Legend",

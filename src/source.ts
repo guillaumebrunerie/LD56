@@ -54,6 +54,7 @@ export class Source {
 		if (this.healthCurrent > this.healthMax) {
 			this.healthCurrent = this.healthMax;
 			this.isDestroyed = false;
+			// void SourceReopen.play({ volume: 0.5 });
 		}
 	}
 }
