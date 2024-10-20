@@ -73,12 +73,18 @@ export class Game {
 		this.levelSelector = new LevelSelector();
 	}
 
+	updateGameGlow() {
+		document.body.className =
+			this.state == "levelSelect" ? "levelSelector" : "";
+	}
+
 	resetLastUnlockedLevel() {
 		this.levelSelector.resetLastLevel();
 	}
 
 	skipLogo() {
 		this.state = "levelSelect";
+		this.updateGameGlow();
 		MusicMenu.singleInstance = true;
 		void MusicMenu.play({ loop: true, volume: 0.5 });
 	}
@@ -104,6 +110,7 @@ export class Game {
 	backToMainMenu() {
 		this.reset();
 		this.state = "levelSelect";
+		this.updateGameGlow();
 		void MusicMenu.resume();
 	}
 
@@ -124,6 +131,7 @@ export class Game {
 		this.state = "gameStarting";
 		this.startLt = 0;
 		this.activePowerUp = "shockwave";
+		this.updateGameGlow();
 
 		setTimeout(() => {
 			Music.singleInstance = true;
@@ -172,7 +180,11 @@ export class Game {
 	}
 
 	selectPowerUpByIndex(n: number) {
-		if (n <= this.powerUps.length && !this.isPaused) {
+		if (
+			n <= this.powerUps.length &&
+			!this.isPaused &&
+			(this.state == "game" || this.state == "gameStarting")
+		) {
 			this.selectPowerUp(this.powerUps[n - 1]);
 		}
 	}
